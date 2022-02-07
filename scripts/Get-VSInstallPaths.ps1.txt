@@ -1,0 +1,62 @@
+<#
+  ╓──────────────────────────────────────────────────────────────────────────────────────
+  ║   Get-VSInstallPaths          
+  ║   
+  ║   Get Visual Studio Install Paths, using vswhere, or if not present, the registry
+  ╙──────────────────────────────────────────────────────────────────────────────────────
+ #>
+
+
+function Get-VSInstallPaths{  
+   [CmdletBinding(SupportsShouldProcess)]
+    Param
+    (
+        [Parameter(Mandatory=$false)]
+        [switch]$PreRelease
+    )     
+ 
+  try{
+      $DetectedInstallataionPaths = [System.Collections.ArrayList]::new()
+      $vswhere = 'C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe'
+      if(Test-Path $vswhere){
+         $JsonData = ''
+         if($PreRelease){
+            $JsonData = &"$vswhere" "-legacy" "-prerelease" "-format" "json"
+         }else{
+            $JsonData = &"$vswhere" "-legacy" "-format" "json"
+         }
+         $JsonData = &"$vswhere" "-legacy" "-prerelease" "-format" "json"
+         $InstallPaths = @($JsonData | convertFrom-Json).installationPath
+         $count=$InstallPaths.Count
+         Write-Verbose  "Found $count VS entries"
+         foreach($vse in $InstallPaths){
+            Write-Verbose "installation found:"
+            Write-Verbose "$vse"
+            $null=$DetectedInstallataionPaths.Add($vse)
+         }
+      }else{
+       # use the registry
+       $RegBasePath = "HKLM:\Software\Microsoft\VisualStudio"
+       
+       $VSRegEntries=(Get-Item "$RegBasePath\*").PSChildName
+       $count=$VSRegEntries.Count
+       Write-Verbose  "Found $count VS entries"
+       foreach($vse in $VSRegEntries){
+           Write-Verbose "Checking $vse..."
+           $VSRegData=Get-ItemProperty "$RegBasePath\$vse" -ErrorAction Ignore
+           if($VSRegData){
+               $VSLocation=$VSRegData.InstallDir    
+               Write-Verbose "installation found $VSLocation"
+               $null=$DetectedInstallataionPaths.Add($VSLocation)
+           }else{
+               Write-Verbose "No installation found"
+           }
+       }
+      }
+      return $DetectedInstallataionPaths
+  }catch{
+   Write-Host -n -f DarkRed "[error] "
+   Write-Host -f DarkYellow "$_"
+   return
+  }
+}

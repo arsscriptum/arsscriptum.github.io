@@ -19,6 +19,7 @@ function Get-VSInstallPaths{
       $DetectedInstallataionPaths = [System.Collections.ArrayList]::new()
       $vswhere = 'C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe'
       if(Test-Path $vswhere){
+         Write-Verbose "use vswhere"
          $JsonData = ''
          if($PreRelease){
             $JsonData = &"$vswhere" "-legacy" "-prerelease" "-format" "json"
@@ -35,22 +36,12 @@ function Get-VSInstallPaths{
             $null=$DetectedInstallataionPaths.Add($vse)
          }
       }else{
-       # use the registry
-       $RegBasePath = "HKLM:\Software\Microsoft\VisualStudio"
-       
-       $VSRegEntries=(Get-Item "$RegBasePath\*").PSChildName
-       $count=$VSRegEntries.Count
-       Write-Verbose  "Found $count VS entries"
-       foreach($vse in $VSRegEntries){
-           Write-Verbose "Checking $vse..."
-           $VSRegData=Get-ItemProperty "$RegBasePath\$vse" -ErrorAction Ignore
-           if($VSRegData){
-               $VSLocation=$VSRegData.InstallDir    
-               Write-Verbose "installation found $VSLocation"
-               $null=$DetectedInstallataionPaths.Add($VSLocation)
-           }else{
-               Write-Verbose "No installation found"
-           }
+       # use the CimInstance
+       Write-Verbose "use CimInstance"
+       $VSLocations = (Get-CimInstance MSFT_VSInstance).InstallLocation
+       foreach($VSLocation in $VSLocations){
+          $null=$DetectedInstallataionPaths.Add($VSLocation)
+          Write-Verbose "installation found $VSLocation"
        }
       }
       return $DetectedInstallataionPaths

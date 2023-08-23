@@ -1,0 +1,43 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+     {
+      "login": "guillaume",
+      "name": "Guillaume Plante",
+      "avatar_url": "/assets/img/authors/guillaume_face.png",
+      "profile": "https://arsscriptum.github.io",
+      "contributions": [
+        "code"
+       ]
+      },
+      {
+      "login": "cybercastor",
+      "name": "cybercastor",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68538713?v=4",
+      "profile": "https://arsscriptum.github.io",
+      "contributions": [
+        "code"
+      ]
+    },
+      {
+      "login": "johndoe",
+      "name": "johndoe",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68538713?v=4",
+      "profile": "https://arsscriptum.github.io",
+      "contributions": [
+        "code"
+      ]
+    }
+
+  ],
+  "contributorsPerLine": 2,
+  "projectName": "arsscriptum.github.io",
+  "projectOwner": "guillaume",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}

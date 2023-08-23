@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProjectPreferences xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <InputFileName>c:\Module.psm1</InputFileName>
+   <DestinationPath>c:\Module.dll</DestinationPath>
+   <AssemblyTitle>Title</AssemblyTitle>
+   <AssemblyDescription>Desc</AssemblyDescription>
+   <AssemblyCompany>ArsScriptum</AssemblyCompany>
+   <AssemblyProduct>n/a</AssemblyProduct>
+   <AssemblyCopyright>Guillaume Plante</AssemblyCopyright>
+   <AssemblyVersionMajor>1</AssemblyVersionMajor>
+   <AssemblyVersionMinor>0</AssemblyVersionMinor>
+   <AssemblyVersionBuild>0</AssemblyVersionBuild>
+   <AssemblyVersionRevision>0</AssemblyVersionRevision>
+   <LicenseEnabled>false</LicenseEnabled>
+   <LicenseRegistredTo />
+   <LicenseExpiredDateEnabled>false</LicenseExpiredDateEnabled>
+   <LicenseExpiredDate>07.27.2023</LicenseExpiredDate>
+   <OtherShowLoadingMessageEnabled>false</OtherShowLoadingMessageEnabled>
+   <OtherScriptBlockLoggingSettings>0</OtherScriptBlockLoggingSettings>
+   <OtherShowLoadingMessage></OtherShowLoadingMessage>
+   <OtherTargetFrameworkSettings>0</OtherTargetFrameworkSettings>
+</ProjectPreferences>

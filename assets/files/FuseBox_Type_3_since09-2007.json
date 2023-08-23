@@ -1,0 +1,447 @@
+[
+  {
+    "FuseId": "F1 ",
+    "Amperage": "10",
+    "Description": "Rear wiper and washer"
+  },
+  {
+    "FuseId": "F2 ",
+    "Amperage": "5",
+    "Description": "Instrument cluster "
+  },
+  {
+    "FuseId": "F3 ",
+    "Amperage": "20",
+    "Description": "Passenger seat heating"
+  },
+  {
+    "FuseId": "F4 ",
+    "Amperage": "10",
+    "Description": "Engine control module "
+  },
+  {
+    "FuseId": "F6",
+    "Amperage": "5",
+    "Description": "AUC sensor "
+  },
+  {
+    "FuseId": "F7",
+    "Amperage": "20",
+    "Description": "Roof function center "
+  },
+  {
+    "FuseId": "F8",
+    "Amperage": "20",
+    "Description": "Cigar lighters "
+  },
+  {
+    "FuseId": "F9",
+    "Amperage": "5",
+    "Description": "Driver door switch cluster "
+  },
+  {
+    "FuseId": "F10",
+    "Amperage": "5",
+    "Description": "Front seat heating"
+  },
+  {
+    "FuseId": "F11 ",
+    "Amperage": "20",
+    "Description": "Crankshaft sensor "
+  },
+  {
+    "FuseId": "F12 ",
+    "Amperage": "15",
+    "Description": "Vacuum pump relay"
+  },
+  {
+    "FuseId": "F13 ",
+    "Amperage": "5",
+    "Description": "Telephone "
+  },
+  {
+    "FuseId": "F14 ",
+    "Amperage": "10",
+    "Description": "Radio"
+  },
+  {
+    "FuseId": "F15 ",
+    "Amperage": "20",
+    "Description": "Amplifier"
+  },
+  {
+    "FuseId": "F16 ",
+    "Amperage": "10",
+    "Description": "EAC sensor "
+  },
+  {
+    "FuseId": "F17 ",
+    "Amperage": "10",
+    "Description": "Engine control module "
+  },
+  {
+    "FuseId": "F18 ",
+    "Amperage": "10",
+    "Description": "Digital tuner "
+  },
+  {
+    "FuseId": "F19 ",
+    "Amperage": "5",
+    "Description": "CD changer "
+  },
+  {
+    "FuseId": "F20",
+    "Amperage": "10",
+    "Description": "Seat control"
+  },
+  {
+    "FuseId": "F21",
+    "Amperage": "10",
+    "Description": "Active cruise control"
+  },
+  {
+    "FuseId": "F22",
+    "Amperage": "15",
+    "Description": "Automatic transmission control module"
+  },
+  {
+    "FuseId": "F23",
+    "Amperage": "20",
+    "Description": "Auxiliary heater control"
+  },
+  {
+    "FuseId": "F24",
+    "Amperage": "15",
+    "Description": "Towing module"
+  },
+  {
+    "FuseId": "F25",
+    "Amperage": "20",
+    "Description": "Convertible top module "
+  },
+  {
+    "FuseId": "F26",
+    "Amperage": "5",
+    "Description": "Dynamic stability control "
+  },
+  {
+    "FuseId": "F27",
+    "Amperage": "5",
+    "Description": "iDrive controller"
+  },
+  {
+    "FuseId": "F28",
+    "Amperage": "5",
+    "Description": "Cooling fan cut"
+  },
+  {
+    "FuseId": "F29",
+    "Amperage": "5",
+    "Description": "Sunroof"
+  },
+  {
+    "FuseId": "F30",
+    "Amperage": "10",
+    "Description": "Seat belt positioner controllers"
+  },
+  {
+    "FuseId": "F31",
+    "Amperage": "30",
+    "Description": "Trailer module"
+  },
+  {
+    "FuseId": "F32",
+    "Amperage": "30",
+    "Description": "Trailer module"
+  },
+  {
+    "FuseId": "F33",
+    "Amperage": "40",
+    "Description": "Electric coolant pump"
+  },
+  {
+    "FuseId": "F34",
+    "Amperage": "5",
+    "Description": "CD changer "
+  },
+  {
+    "FuseId": "F35",
+    "Amperage": "30",
+    "Description": "DSC"
+  },
+  {
+    "FuseId": "F36",
+    "Amperage": "40",
+    "Description": "Car access system "
+  },
+  {
+    "FuseId": "F37",
+    "Amperage": "30",
+    "Description": "Camshaft sensors "
+  },
+  {
+    "FuseId": "F38",
+    "Amperage": "30",
+    "Description": "Crankcase breather heating "
+  },
+  {
+    "FuseId": "F39",
+    "Amperage": "30",
+    "Description": "Fuel injectors "
+  },
+  {
+    "FuseId": "F40",
+    "Amperage": "30",
+    "Description": "Transfer case control"
+  },
+  {
+    "FuseId": "F41",
+    "Amperage": "30",
+    "Description": "Footwell module "
+  },
+  {
+    "FuseId": "F42",
+    "Amperage": "40",
+    "Description": "Footwell module"
+  },
+  {
+    "FuseId": "F43",
+    "Amperage": "30",
+    "Description": "Headlight washer pump"
+  },
+  {
+    "FuseId": "F44",
+    "Amperage": "30",
+    "Description": "Trailer module"
+  },
+  {
+    "FuseId": "F45",
+    "Amperage": "30",
+    "Description": "Passenger seat module"
+  },
+  {
+    "FuseId": "F46",
+    "Amperage": "30",
+    "Description": "Driver seat module"
+  },
+  {
+    "FuseId": "F47",
+    "Amperage": "30",
+    "Description": "Rear window defogger"
+  },
+  {
+    "FuseId": "F48",
+    "Amperage": "30",
+    "Description": "Headlight washer"
+  },
+  {
+    "FuseId": "F49",
+    "Amperage": "40",
+    "Description": "Passenger seat module"
+  },
+  {
+    "FuseId": "F50",
+    "Amperage": "30",
+    "Description": "Wiper control"
+  },
+  {
+    "FuseId": "F51",
+    "Amperage": "40",
+    "Description": "Car access system"
+  },
+  {
+    "FuseId": "F53",
+    "Amperage": "10",
+    "Description": "Rollover protection"
+  },
+  {
+    "FuseId": "F55",
+    "Amperage": "5",
+    "Description": "Car access system "
+  },
+  {
+    "FuseId": "F56",
+    "Amperage": "20",
+    "Description": "CCC"
+  },
+  {
+    "FuseId": "F57",
+    "Amperage": "15",
+    "Description": "Horns"
+  },
+  {
+    "FuseId": "F58",
+    "Amperage": "5",
+    "Description": "Instrument cluster "
+  },
+  {
+    "FuseId": "F59",
+    "Amperage": "5",
+    "Description": "Telephone"
+  },
+  {
+    "FuseId": "F60",
+    "Amperage": "5",
+    "Description": "Central information display"
+  },
+  {
+    "FuseId": "F61",
+    "Amperage": "5",
+    "Description": "Comfort access control module "
+  },
+  {
+    "FuseId": "F63",
+    "Amperage": "5",
+    "Description": "Diversity antenna "
+  },
+  {
+    "FuseId": "F64",
+    "Amperage": "5",
+    "Description": "OBD II plug"
+  },
+  {
+    "FuseId": "F65",
+    "Amperage": "10",
+    "Description": "Selector lever illumination "
+  },
+  {
+    "FuseId": "F67",
+    "Amperage": "20",
+    "Description": "DSC"
+  },
+  {
+    "FuseId": "F68",
+    "Amperage": "20",
+    "Description": "Driver seat heating module"
+  },
+  {
+    "FuseId": "F70",
+    "Amperage": "20",
+    "Description": "Fuel pump "
+  },
+  {
+    "FuseId": "F71",
+    "Amperage": "20",
+    "Description": "Trailer module"
+  },
+  {
+    "FuseId": "F72",
+    "Amperage": "15",
+    "Description": "Central locking"
+  },
+  {
+    "FuseId": "F73",
+    "Amperage": "15",
+    "Description": "Central locking"
+  },
+  {
+    "FuseId": "F74",
+    "Amperage": "5",
+    "Description": "Instrument cluster"
+  },
+  {
+    "FuseId": "F75",
+    "Amperage": "5",
+    "Description": "Passenger seat module"
+  },
+  {
+    "FuseId": "F76",
+    "Amperage": "5",
+    "Description": "Radio"
+  },
+  {
+    "FuseId": "F77",
+    "Amperage": "10",
+    "Description": "Glove compartment light "
+  },
+  {
+    "FuseId": "F78",
+    "Amperage": "30",
+    "Description": "Window control"
+  },
+  {
+    "FuseId": "F79",
+    "Amperage": "30",
+    "Description": "Wiper control"
+  },
+  {
+    "FuseId": "F80",
+    "Amperage": "30",
+    "Description": "Window control"
+  },
+  {
+    "FuseId": "F81",
+    "Amperage": "30",
+    "Description": "Footwell module"
+  },
+  {
+    "FuseId": "F82",
+    "Amperage": "30",
+    "Description": "DSC control module"
+  },
+  {
+    "FuseId": "F83",
+    "Amperage": "40",
+    "Description": "Footwell module"
+  },
+  {
+    "FuseId": "F84",
+    "Amperage": "40",
+    "Description": "Footwell module"
+  },
+  {
+    "FuseId": "F85",
+    "Amperage": "30",
+    "Description": "Car access system "
+  },
+  {
+    "FuseId": "F86",
+    "Amperage": "40",
+    "Description": "Footwell module"
+  },
+  {
+    "FuseId": "F88",
+    "Amperage": "40",
+    "Description": "Blower"
+  },
+  {
+    "FuseId": "F89",
+    "Amperage": "40",
+    "Description": "Secondary air pump relay"
+  },
+  {
+    "FuseId": "F90",
+    "Amperage": "40",
+    "Description": "DSC control module"
+  },
+  {
+    "FuseId": "F92",
+    "Amperage": "50",
+    "Description": "400 watt engine cooling fan"
+  },
+  {
+    "FuseId": "F92",
+    "Amperage": "60",
+    "Description": "600 watt engine cooling fan"
+  },
+  {
+    "FuseId": "",
+    "Amperage": "",
+    "Description": ""
+  },
+  {
+    "FuseId": "I01068 ",
+    "Amperage": "",
+    "Description": "Relay"
+  },
+  {
+    "FuseId": "K36 ",
+    "Amperage": "",
+    "Description": "Wiper relay 1"
+  },
+  {
+    "FuseId": "K37",
+    "Amperage": "",
+    "Description": "Wiper relay 2"
+  }
+]

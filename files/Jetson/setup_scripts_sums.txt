@@ -1,0 +1,5 @@
+e705fcc83bfd16a93d084f129986f277  setup_cuda-cross.sh
+400be030d140d1bd63a433ec5645c7b7  setup_cuda-native.sh
+4e3d16ace92a135366b3da0ea2ccbb6d  setup_cuda_src.sh
+589ba28e94e98917704576b537063699  setup_prerequisites.sh
+dedba14f5b48f3aa8481a4d9db51de52  setup_toolchain.sh

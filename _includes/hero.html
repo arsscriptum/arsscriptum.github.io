@@ -1,0 +1,35 @@
+<style>
+/* change cover_img in config.yml */
+.jumbotron {
+    background-color: var(--main-background-color) !important;
+    background-image: url('/assets/images/home-bg.jpg');
+    text-align: center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+.jumbotron-btns {
+  display: block;
+  margin-top: 50px;
+}
+
+.jumbotron-heading, .lead {
+  color: #fff;
+}
+</style>
+
+<!-- home hero section -->
+<div class="jumbotron">
+  
+  <p class="jumbotron-heading">Ars Scriptum, the Art of Code</p>
+  <img class="author-profile-img" src="{{site.url}}{{site.baseurl}}/assets/img/art.png" />
+  <br /><br />
+  <p class="lead" id="typewriteText"></p>
+  <!-- uncomment/modify buttons as you want-->
+  <div class="jumbotron-btns">
+    <a id="olvy-target">  
+      <button class="btn btn-md btn-default"> <strong>Latest</strong> </button>
+     </a>
+  </div>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>

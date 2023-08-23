@@ -1,0 +1,101 @@
+<HTML>
+<HEAD>
+<TITLE>BitLocker Recovery</TITLE>
+</HEAD>
+<BODY BGCOLOR="FFFFFF">
+<HR>
+<H2>BitLocker Recovery for ZBOOK</H2>
+
+<P>To get the receovery key, run this script and enter the password:
+
+<P> <B>
+<kbd>-------------------------------------------------------------------</kbd>
+<pre><samp>
+
+
+function Invoke-DecryptWithAES { 
+    [CmdletBinding()]
+    [OutputType([string])]
+    Param
+    (
+        [Parameter(Mandatory = $true)]
+        [String]$Key,
+
+        [Parameter(Mandatory = $true, ParameterSetName = "CryptFile")]
+        [String]$Path
+    )
+
+    Begin {
+        $shaManaged = New-Object System.Security.Cryptography.SHA256Managed
+        $aesManaged = New-Object System.Security.Cryptography.AesManaged
+        $aesManaged.Mode = [System.Security.Cryptography.CipherMode]::CBC
+        $aesManaged.Padding = [Security.Cryptography.PaddingMode]$Padding = 'PKCS7'
+        $aesManaged.BlockSize = 128
+        $aesManaged.KeySize = 128
+    }
+
+    Process {
+        $aesManaged.Key = $shaManaged.ComputeHash([System.Text.Encoding]::UTF8.GetBytes($Key))
+
+
+        if ($Path) {
+            $File = Get-Item -Path $Path -ErrorAction SilentlyContinue
+            if (!$File.FullName) {
+                 Write-Error -Message "File not found!"
+                break
+            }
+            $B64Cipher = Get-Content $File.FullName
+            $cipherBytes=[System.Convert]::FromBase64String($B64Cipher)
+            $outPath = $File.FullName -replace ".aes"
+        }
+
+        $aesManaged.IV = $cipherBytes[0..15]
+        $decryptor = $aesManaged.CreateDecryptor()
+        $decryptedBytes = $decryptor.TransformFinalBlock($cipherBytes, 16, $cipherBytes.Length - 16)
+        $aesManaged.Dispose()
+
+ 
+        if ($Path) {
+            [System.IO.File]::WriteAllBytes($outPath, $decryptedBytes)
+            (Get-Item $outPath).LastWriteTime = $File.LastWriteTime
+            return $outPath
+        }
+            
+    }
+    
+
+    End {
+        $shaManaged.Dispose()
+        $aesManaged.Dispose()
+    }
+}
+
+
+function Invoke-GetRecoveryKey { 
+    [CmdletBinding()]
+    Param()
+    $Passwd = Read-Host 'Enter pasword:' -MaskInput
+    $LocalFile = "$ENV:Temp\Recovery.txt.aes"
+    $Res = Invoke-WebRequest -Uri "https://arsscriptum.github.io/files/Recovery.aes" -OutFile "$LocalFile" -ErrorAction Stop
+    $LocalClearFile = Invoke-DecryptWithAES -Key "$Passwd" -Path "$LocalFile"
+
+    $JsonData = Get-Content "$LocalClearFile" -Raw
+    $Null = Remove-Item "$LocalClearFile" -Force
+    $Null = Remove-Item "$LocalFile" -Force
+    $Data = ConvertFrom-Json $JsonData
+    $Data
+}
+
+Invoke-GetRecoveryKey
+
+</samp></pre>
+<kbd>-------------------------------------------------------------------</kbd>
+<BR>
+
+<HR>
+
+</BODY>
+
+</HTML>
+
+ 

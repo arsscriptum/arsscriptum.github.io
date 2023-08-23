@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml" xmlns="http://msh">
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Save-YoutubeVideo</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>HelpPreview</command:noun>
+      <maml:description>
+        <maml:para>Displays your generated external help as Get-Help output.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-HelpPreview cmdlet displays your generated external help as Get-Help output. Specify one or more files in Microsoft Assistance Markup Language (MAML) format.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-HelpPreview</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByValue)" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specifies an array of paths of MAML external help files.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>ConvertNotesToList</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmldet formats multiple paragraph items in the NOTES section as single list items. This output follows TechNet formatting.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>ConvertDoubleDashLists</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmldet converts double-hyphen list bullets into single-hyphen bullets. Double-hyphen lists are common in Windows PowerShell documentation. Markdown accepts single-hyphens for lists.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByValue)" position="named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>Specifies an array of paths of MAML external help files.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>ConvertNotesToList</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmldet formats multiple paragraph items in the NOTES section as single list items. This output follows TechNet formatting.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>ConvertDoubleDashLists</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmldet converts double-hyphen list bullets into single-hyphen bullets. Double-hyphen lists are common in Windows PowerShell documentation. Markdown accepts single-hyphens for lists.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>You can pipe an array of paths to this cmdlet.</maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Help Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>This cmdlet returns a Help object, which is the same output as Get-Help .</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>------------- Example 1: Preview the PlatyPS help -------------</maml:title>
+        <dev:code>PS C:\&gt; $Help = Get-HelpPreview -Path ".\out\platyPS\en-US\PlatyPS-help.xml"
+
+PS C:\&gt; $Help.Name
+
+Get-HelpPreview
+Get-MarkdownMetadata
+New-ExternalHelp
+New-ExternalHelpCab
+New-MarkdownHelp
+Update-MarkdownHelp
+Update-MarkdownHelpModule
+Update-MarkdownHelpSchema</dev:code>
+        <dev:remarks>
+          <maml:para>The first command creates a Help object for the the specified MAML file. The command stores it in the $Help variable.</maml:para>
+          <maml:para>The second command displays the Name property for each of the objects in $Help.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/PowerShell/platyPS/blob/master/docs/Get-HelpPreview.md</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  
+</helpItems>

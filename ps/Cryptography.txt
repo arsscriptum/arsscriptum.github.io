@@ -1,0 +1,2143 @@
+
+
+
+
+
+function Get-SystemUUID{
+    try {
+        $Uuid=((Get-CimInstance -Class Win32_ComputerSystemProduct).UUID)  
+        return $Uuid 
+    }
+
+    catch {
+        return $null
+    }
+}
+
+
+Function Decrypt-SecureString {
+    [CmdletBinding(SupportsShouldProcess)]
+    Param
+    (
+        [Parameter(Mandatory = $true)]
+        [string]$String
+    )
+
+    Write-Verbose " ----- Decrypt-SecureString -----"
+    $Ptr = [System.Runtime.InteropServices.Marshal]::SecureStringToCoTaskMemUnicode($String)
+    $Result = [System.Runtime.InteropServices.Marshal]::PtrToStringUni($Ptr)
+    # Free memory
+    [System.Runtime.InteropServices.Marshal]::ZeroFreeCoTaskMemUnicode($Ptr)
+    return $Result
+}
+
+function Check-Version{
+    $VersionMajor= $PSVersionTable.PSVersion.Major
+    if($VersionMajor -eq 5){
+        return $true
+    }
+    return $false 
+}
+
+
+function Get-MachineCryptoGuid{
+    $Path="HKLM:\SOFTWARE\Microsoft\Cryptography"
+    $Entry="MachineGuid"
+    try {
+        $Result=(Get-ItemProperty -Path $Path | Select-Object -ExpandProperty $Entry)
+        return $Result
+    }
+
+    catch {
+        return $null
+    }
+}
+
+function Get-4KHash{
+    If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
+        return $null
+    }
+    
+    try {
+        $4KHash=(Get-CimInstance -Namespace root/cimv2/mdm/dmmap -Class MDM_DevDetail_Ext01 -Filter "InstanceID='Ext' AND ParentID='./DevDetail'").DeviceHardwareData
+        return $4KHash 
+    }
+
+    catch {
+        return $null
+    }
+}
+
+
+function Test-MachineIdentification {
+    $Result=Get-4KHash
+    Write-Host '[PcId 4KHash]' -f DarkRed -NoNewLine; Write-Host "$Result" -f White
+    $Result=Get-MachineCryptoGuid
+    Write-Host '[PcId MachineCryptoGuid]' -f DarkRed -NoNewLine; Write-Host "$Result" -f White        
+    $Result=Get-SystemUUID
+    Write-Host '[PcId SystemUUID]' -f DarkRed -NoNewLine; Write-Host "$Result" -f White
+    
+}
+
+Function Get-PossiblePasswordList{
+
+    [CmdletBinding(SupportsShouldProcess)]
+    Param
+    ()
+
+    $PasswdList = [System.Collections.ArrayList]::new()
+    if(Get-SystemUUID -ne $null){
+        $Key=Get-SystemUUID
+        $Key = $Key -replace "-"
+        $Key = $Key.SubString(0,30)
+        $null=$PasswdList.Add($Key)
+    }
+
+    if(Get-MachineCryptoGuid -ne $null){
+        $Key=Get-MachineCryptoGuid
+        $Key = $Key -replace "-"
+        $Key = $Key.SubString(0,30)
+        $null=$PasswdList.Add($Key)
+    }
+    if(Get-4KHash -ne $null){
+        $Key=Get-4KHash
+        $Key = $Key -replace "-"
+        $Key = $Key.SubString(0,30)
+        $null=$PasswdList.Add($Key)
+    }
+    if($env:COMPUTERNAME -ne $null -And $env:COMPUTERNAME -ne ""){
+        $Key=$env:COMPUTERNAME
+        $Key = $Key -replace "-"
+        $KeyLen = $Key.Length
+        if($KeyLen -gt 30) { 
+             $Key = $Key.SubString(0,30)
+        }elseif($KeyLen -lt 16) { 
+            $KeyLen = $Key.Length
+            $MissingChars=30-$KeyLen
+            $RandString='aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+            $RandString = $RandString -replace "-"
+            $RandString = $RandString.SubString(0,$MissingChars)
+            $Key = $Key + $RandString
+        }
+        $null=$PasswdList.Add($Key)
+    }
+
+    return $PasswdList
+}
+
+function Invoke-fAESDecrypt
+{
+    Param(
+        [Parameter(Mandatory=$true)][byte[]]$aBytesToDecrypt,
+        [Parameter(Mandatory=$true)][byte[]]$aPasswordBytes,
+        [Parameter(Mandatory=$true)][ref]$raDecryptedBytes,
+        [Parameter(Mandatory=$false)][byte[]]$aCustomSalt
+    )   
+    [byte[]]$oDecryptedBytes = @();
+    # Salt must have at least 8 Bytes!!
+    # Encrypt and decrypt must use the same salt
+    [byte[]]$aSaltBytes = @(4,7,12,254,123,98,34,12,67,12,122,111) 
+    if($aCustomSalt.Count -ge 1)
+    {
+        $aSaltBytes=$aCustomSalt
+    }
+    [System.IO.MemoryStream] $oMemoryStream = new-object System.IO.MemoryStream
+    [System.Security.Cryptography.RijndaelManaged] $oAES = new-object System.Security.Cryptography.RijndaelManaged
+    $oAES.KeySize = 256;
+    $oAES.BlockSize = 128;
+    [System.Security.Cryptography.Rfc2898DeriveBytes] $oKey = new-object System.Security.Cryptography.Rfc2898DeriveBytes($aPasswordBytes, $aSaltBytes, 1000);
+    $oAES.Key = $oKey.GetBytes($oAES.KeySize / 8);
+    $oAES.IV = $oKey.GetBytes($oAES.BlockSize / 8);
+    $oAES.Mode = [System.Security.Cryptography.CipherMode]::CBC
+    $oCryptoStream = new-object System.Security.Cryptography.CryptoStream($oMemoryStream, $oAES.CreateDecryptor(), [System.Security.Cryptography.CryptoStreamMode]::Write)
+    try
+    {
+        $oCryptoStream.Write($aBytesToDecrypt, 0, $aBytesToDecrypt.Length)
+        $oCryptoStream.Close()
+    }
+    catch [Exception]
+    {
+        $raDecryptedBytes.Value=[system.text.encoding]::ASCII.GetBytes("Error occured while decoding string. Salt or Password incorrect?")
+        return $false
+    }
+    $oDecryptedBytes = $oMemoryStream.ToArray();
+    $raDecryptedBytes.Value=$oDecryptedBytes
+    return $true
+}
+
+function Invoke-AESEncryption {
+    [CmdletBinding()]
+    [OutputType([string])]
+    Param
+    (
+        [Parameter(Mandatory = $true)]
+        [ValidateSet('Encrypt', 'Decrypt')]
+        [String]$Mode,
+
+        [Parameter(Mandatory = $true)]
+        [String]$Key,
+
+        [Parameter(Mandatory = $true, ParameterSetName = "CryptText")]
+        [String]$Text,
+
+        [Parameter(Mandatory = $true, ParameterSetName = "CryptFile")]
+        [String]$Path
+    )
+
+    Begin {
+        $shaManaged = New-Object System.Security.Cryptography.SHA256Managed
+        $aesManaged = New-Object System.Security.Cryptography.AesManaged
+        $aesManaged.Mode = [System.Security.Cryptography.CipherMode]::CBC
+        $aesManaged.Padding = [Security.Cryptography.PaddingMode]$Padding = 'PKCS7'
+        $aesManaged.BlockSize = 128
+        $aesManaged.KeySize = 128
+    }
+
+    Process {
+        $aesManaged.Key = $shaManaged.ComputeHash([System.Text.Encoding]::UTF8.GetBytes($Key))
+
+        switch ($Mode) {
+            'Encrypt' {
+                if ($Text) {$plainBytes = [System.Text.Encoding]::UTF8.GetBytes($Text)}
+                
+                if ($Path) {
+                    $File = Get-Item -Path $Path -ErrorAction SilentlyContinue
+                    if (!$File.FullName) {
+                        Write-Error -Message "File not found!"
+                        break
+                    }
+                    $plainBytes = [System.IO.File]::ReadAllBytes($File.FullName)
+                    $outPath = $File.FullName + ".aes"
+                }
+
+                $encryptor = $aesManaged.CreateEncryptor()
+                $encryptedBytes = $encryptor.TransformFinalBlock($plainBytes, 0, $plainBytes.Length)
+                $encryptedBytes = $aesManaged.IV + $encryptedBytes
+                $aesManaged.Dispose()
+
+                if ($Text) {return [System.Convert]::ToBase64String($encryptedBytes)}
+                
+                if ($Path) {
+                    $B64Cipher=[System.Convert]::ToBase64String($encryptedBytes)
+                    Set-Content -Path $outPath -Value $B64Cipher
+                    #[System.IO.File]::WriteAllBytes($outPath, $encryptedBytes)
+                    (Get-Item $outPath).LastWriteTime = $File.LastWriteTime
+                    return $outPath
+                }
+            }
+
+            'Decrypt' {
+                if ($Text) {$cipherBytes = [System.Convert]::FromBase64String($Text)}
+                
+               if ($Path) {
+                    $File = Get-Item -Path $Path -ErrorAction SilentlyContinue
+                    if (!$File.FullName) {
+                        Write-Error -Message "File not found!"
+                        break
+                    }
+                    #$cipherBytes = [System.IO.File]::ReadAllBytes($File.FullName)
+                    $B64Cipher = Get-Content $File.FullName
+                    $cipherBytes=[System.Convert]::FromBase64String($B64Cipher)
+                    $outPath = $File.FullName -replace ".aes"
+                }
+
+                $aesManaged.IV = $cipherBytes[0..15]
+                $decryptor = $aesManaged.CreateDecryptor()
+                $decryptedBytes = $decryptor.TransformFinalBlock($cipherBytes, 16, $cipherBytes.Length - 16)
+                $aesManaged.Dispose()
+
+                if ($Text) {return [System.Text.Encoding]::UTF8.GetString($decryptedBytes).Trim([char]0)}
+                
+                if ($Path) {
+                    [System.IO.File]::WriteAllBytes($outPath, $decryptedBytes)
+                    (Get-Item $outPath).LastWriteTime = $File.LastWriteTime
+                    return $outPath
+                }
+            }
+        }
+    }
+
+    End {
+        $shaManaged.Dispose()
+        $aesManaged.Dispose()
+    }
+}
+
+
+Function Decrypt-String {
+    [CmdletBinding(SupportsShouldProcess)]
+    Param
+    (
+        [Parameter(Mandatory = $true)]
+        [string]$EncryptedString,
+        [Parameter(Mandatory = $false)]
+        [string]$Passphrase="",
+        [Parameter(Mandatory = $false)]
+        [switch]$UseSystemUUID,
+        [Parameter(Mandatory = $false)]
+        [switch]$UseCryptoGuid,
+        [Parameter(Mandatory = $false)]
+        [switch]$Use4KHash
+    )
+    $BackupEA = $ErrorActionPreference
+    $ErrorActionPreference = "SilentlyContinue"
+
+    $DecryptionKey=""
+
+    if ($PSBoundParameters.ContainsKey('Passphrase')) {
+        $DecryptionKey=$Passphrase
+        Write-Verbose "Using Password: $DecryptionKey"
+        $Result=Invoke-AESEncryption -Mode decrypt -Key $DecryptionKey -Text $EncryptedString
+        return $Result  
+    }else {
+
+        if ($PSBoundParameters.ContainsKey('UseSystemUUID')) {
+            $DecryptionKey=Get-SystemUUID
+            Write-Verbose "Using (rying) Password: $DecryptionKey"
+            $Result=Invoke-AESEncryption -Mode decrypt -Key $DecryptionKey -Text $EncryptedString
+            if($Result -ne $null){
+                return $Result  
+            }
+        
+        }elseif($PSBoundParameters.ContainsKey('UseCryptoGuid')) {
+            $DecryptionKey=Get-MachineCryptoGuid
+            Write-Verbose "Using (rying) Password: $DecryptionKey"
+            $Result=Invoke-AESEncryption -Mode decrypt -Key $DecryptionKey -Text $EncryptedString
+            if($Result -ne $null){
+                return $Result  
+            }
+        
+        }elseif($PSBoundParameters.ContainsKey('Use4KHash')) {
+            $DecryptionKey=Get-4KHash
+            Write-Verbose "Using (rying) Password: $DecryptionKey"
+            $Result=Invoke-AESEncryption -Mode decrypt -Key $DecryptionKey -Text $EncryptedString
+            if($Result -ne $null){
+                return $Result  
+            }
+        }else{
+           return $null
+        }
+       
+    }
+    Catch{
+        Write-Error $_
+    }
+}
+
+
+
+Function Encrypt-String {
+    [CmdletBinding(SupportsShouldProcess)]
+    Param
+    (
+        [Parameter(Mandatory = $true)]
+        [string]$String,
+        [Parameter(Mandatory = $false)]
+        [string]$Passphrase="",
+        [Parameter(Mandatory = $false)]
+        [switch]$UseSystemUUID,
+        [Parameter(Mandatory = $false)]
+        [switch]$UseCryptoGuid,
+        [Parameter(Mandatory = $false)]
+        [switch]$Use4KHash
+    )
+    $BackupEA = $ErrorActionPreference
+    $ErrorActionPreference = "SilentlyContinue"
+
+    Write-Verbose " ----- Encrypt-String -----"
+    $DecryptionKey=""
+    if ($PSBoundParameters.ContainsKey('Passphrase')) {
+        $EncryptionKey=$Passphrase
+        Write-Verbose "Using Password: $EncryptionKey"
+        $Result=Invoke-AESEncryption -Mode encrypt -Key $EncryptionKey -Text $String
+        return $Result  
+    }else {
+        if ($PSBoundParameters.ContainsKey('UseSystemUUID')) {
+            $EncryptionKey=Get-SystemUUID
+            Write-Verbose "Using (rying) Password: $EncryptionKey"
+            $Result=Invoke-AESEncryption -Mode encrypt -Key $EncryptionKey -Text $String
+            if($Result -ne $null){
+                return $Result 
+            } 
+        
+        }elseif($PSBoundParameters.ContainsKey('UseCryptoGuid')) {
+            $EncryptionKey=Get-MachineCryptoGuid
+            Write-Verbose "Using (rying) Password: $EncryptionKey"
+            $Result=Invoke-AESEncryption -Mode encrypt -Key $EncryptionKey -Text $String
+            if($Result -ne $null){
+                return $Result  
+            }
+        }elseif($PSBoundParameters.ContainsKey('Use4KHash')) {
+            $EncryptionKey=Get-4KHash
+            Write-Verbose "Using (rying) Password: $EncryptionKey"
+            $Result=Invoke-AESEncryption -Mode encrypt -Key $EncryptionKey -Text $String
+            if($Result -ne $null){
+                return $Result  
+            }
+        }else{
+            return $null        
+        }
+    }
+       
+    Catch{
+        Write-Error $_
+    }
+}
+
+Function Test-EncryptionDecryption {
+    [CmdletBinding(SupportsShouldProcess)]
+    Param
+    ()
+    $BackupEA = $ErrorActionPreference
+    $ErrorActionPreference = "SilentlyContinue"
+
+    try{
+        $ClearText = (New-Guid).Guid
+        Write-Host "Test-Encryption: Test 1 " -f Red -NoNewLine
+        $Cipher=Encrypt-String -String $ClearText -Passphrase 'testtest'
+        $Decrypted=Decrypt-String -EncryptedString $Cipher -Passphrase  'testtest'
+        if($ClearText -like $Decrypted){
+            Write-Output "ok"
+        }else {
+            throw "Error"
+        }
+ 
+        Write-Host "Test-Encryption: Test UseSystemUUID " -f Red -NoNewLine
+        $Cipher=Encrypt-String -String $ClearText  -UseSystemUUID
+        $Decrypted=Decrypt-String -EncryptedString $Cipher  -UseSystemUUID
+        if($ClearText -like $Decrypted){
+            Write-Output "ok"
+        }else {
+            throw "Error"
+        }
+
+        Write-Host "Test-Encryption: Test UseCryptoGuid " -f Red -NoNewLine
+        $Cipher=Encrypt-String -String $ClearText -UseCryptoGuid
+        $Decrypted=Decrypt-String -EncryptedString $Cipher -UseCryptoGuid
+        if($ClearText -like $Decrypted){
+            Write-Output "ok"
+        }else {
+            throw "Error"
+        }
+
+        Write-Host "Test-Encryption: Test Use4KHash " -f Red -NoNewLine
+        $Cipher=Encrypt-String -String $ClearText -Use4KHash
+        $Decrypted=Decrypt-String -EncryptedString $Cipher -Use4KHash
+        if($ClearText -like $Decrypted){
+            Write-Output "ok"
+        }else {
+            throw "Error"
+        }
+
+
+   
+    }
+    Catch{
+        Write-Error $_
+    }
+}
+
+Function Decrypt-SecureString
+{
+  Param(
+    [SecureString]$SecureString
+  )
+  $bstr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($SecureString)
+  $plain = [Runtime.InteropServices.Marshal]::PtrToStringAuto($bstr)
+  return $plain
+}
+
+Function New-PasswordKey 
+{
+  [CmdletBinding()]
+  Param(
+    [SecureString]$Password,
+
+    [String]$Salt
+  )
+  $saltBytes = [Text.Encoding]::ASCII.GetBytes($Salt) 
+  $iterations = 1000
+  $keySize = 256
+
+  $clearPass = Decrypt-SecureString -SecureString $Password
+  $passwordType = 'Security.Cryptography.Rfc2898DeriveBytes'
+  $passwordDerive = New-Object -TypeName $passwordType `
+    -ArgumentList @( 
+      $clearPass, 
+      $saltBytes, 
+      $iterations,
+      'SHA256'
+    )
+
+  $keyBytes = $passwordDerive.GetBytes($keySize / 8)
+  return $keyBytes
+}
+
+Class CipherInfo
+{
+  [String]$CipherText
+  [Byte[]]$IV
+  [String]$Salt
+
+  CipherInfo([String]$CipherText, [Byte[]]$IV, [String]$Salt)
+  {
+    $this.CipherText = $CipherText
+    $this.IV = $IV
+    $this.Salt = $Salt
+  }
+}
+
+Function Protect-AesString 
+{
+  [CmdletBinding()]
+  Param(
+    [Parameter(Position=0, Mandatory=$true, ValueFromPipeline=$true)]
+    [String]$String,
+
+    [Parameter(Position=1, Mandatory=$true)]
+    [SecureString]$Password,
+
+    [Parameter(Position=2)]
+    [String]$Salt = 'qtsbp6j643ah8e0omygzwlv9u75xcfrk4j63fdane78w1zgxhucsytkirol0v25q',
+
+    [Parameter(Position=3)]
+    [Security.Cryptography.PaddingMode]$Padding = 'PKCS7'
+  )
+  Try 
+  {
+    $valueBytes = [Text.Encoding]::UTF8.GetBytes($String)
+    [byte[]]$keyBytes = New-PasswordKey -Password $Password -Salt $Salt
+
+    $cipher = [Security.Cryptography.SymmetricAlgorithm]::Create('AesManaged')
+    $cipher.Mode = [Security.Cryptography.CipherMode]::CBC
+    $cipher.Padding = $Padding
+    $vectorBytes = $cipher.IV
+
+    $encryptor = $cipher.CreateEncryptor($keyBytes, $vectorBytes)
+    $stream = New-Object -TypeName IO.MemoryStream
+    $writer = New-Object -TypeName Security.Cryptography.CryptoStream `
+      -ArgumentList @(
+        $stream,
+        $encryptor,
+        [Security.Cryptography.CryptoStreamMode]::Write
+      )
+
+    $writer.Write($valueBytes, 0, $valueBytes.Length)
+    $writer.FlushFinalBlock()
+    $encrypted = $stream.ToArray()
+
+    $cipher.Clear()
+    $stream.SetLength(0)
+    $stream.Close()
+    $writer.Clear()
+    $writer.Close()
+    $encryptedValue = [Convert]::ToBase64String($encrypted)
+    New-Object -TypeName CipherInfo `
+      -ArgumentList @($encryptedValue, $vectorBytes, $Salt)
+  }
+  Catch
+  {
+    Write-Error $_
+  }
+}
+
+Function Unprotect-AesString 
+{
+  [CmdletBinding(DefaultParameterSetName='String')]
+  Param(
+    [Parameter(Position=0, Mandatory=$true, ParameterSetName='String')]
+    [Alias('EncryptedString')]
+    [String]$String,
+
+    [Parameter(Position=1, Mandatory=$true)]
+    [SecureString]$Password,
+
+    [Parameter(Position=2, ParameterSetName='String')]
+    [String]$Salt = 'qtsbp6j643ah8e0omygzwlv9u75xcfrk4j63fdane78w1zgxhucsytkirol0v25q',
+
+    [Parameter(Position=3, Mandatory=$true, ParameterSetName='String')]
+    [Alias('Vector')]
+    [Byte[]]$InitializationVector,
+
+    [Parameter(Position=0, Mandatory=$true, ParameterSetName='CipherInfo', ValueFromPipeline=$true)]
+    [CipherInfo]$CipherInfo,
+
+    [Parameter(Position=3, ParameterSetName='String')]
+    [Parameter(Position=2, ParameterSetName='CipherInfo')]
+    [Security.Cryptography.PaddingMode]$Padding = 'PKCS7'
+  )
+  Process
+  {
+    Try
+    {
+      if ($PSCmdlet.ParameterSetName -eq 'CipherInfo')
+      {
+        $Salt = $CipherInfo.Salt
+        $InitializationVector = $CipherInfo.IV
+        $String = $CipherInfo.CipherText
+      }
+      $iv = $InitializationVector
+
+      $valueBytes = [Convert]::FromBase64String($String)
+      $keyBytes = New-PasswordKey -Password $Password -Salt $Salt
+
+      $cipher = [Security.Cryptography.SymmetricAlgorithm]::Create('AesManaged')
+      $cipher.Mode = [Security.Cryptography.CipherMode]::CBC
+      $cipher.Padding = $Padding
+
+      $decryptor = $cipher.CreateDecryptor($keyBytes, $iv)
+      $stream = New-Object -TypeName IO.MemoryStream `
+        -ArgumentList @(, $valueBytes)
+      $reader = New-Object -TypeName Security.Cryptography.CryptoStream `
+        -ArgumentList @(
+          $stream,
+          $decryptor,
+          [Security.Cryptography.CryptoStreamMode]::Read
+        )
+
+      $decrypted = New-Object -TypeName Byte[] -ArgumentList $valueBytes.Length
+      $decryptedByteCount = $reader.Read($decrypted, 0, $decrypted.Length)
+      $decryptedValue = [Text.Encoding]::UTF8.GetString(
+        $decrypted,
+        0,
+        $decryptedByteCount
+      )
+      $cipher.Clear()
+      $stream.SetLength(0)
+      $stream.Close()
+      $reader.Clear()
+      $reader.Close()
+      return $decryptedValue
+    }
+    Catch
+    {
+      Write-Error $_
+    }
+  }
+}
+
+
+
+
+Function Test-CliXmlCrypto {
+    [CmdletBinding(SupportsShouldProcess)]
+    Param
+    ()
+    
+    try{
+        Clear-Host
+        Write-Host "`n`n===============================================================================" -f Cyan
+        Write-Host "                               Test-CliXmlCrypto                              " -f Blue;
+        Write-Host "===============================================================================" -f Cyan       
+
+        [string]$Key = 'Password_String'
+   
+        $FilePath = "$ENV:TEMP\cryptotest.xml"
+        $FilePathCopy = "$ENV:TEMP\cryptotest_copy.xml"
+        $Null = Remove-Item "$FilePath" -Force -ErrorAction "Ignore" -Recurse  
+
+        $DataDict = @{}
+        $DataDict['Username']       = 'UsernameValue'
+        $DataDict['Password']       = 'PasswordValue'
+
+        Write-Host -f DarkCyan "Export: $FilePath"
+        Export-Clixml -Path $FilePath -InputObject $DataDict
+        
+        Write-Host -f DarkCyan "Copy: $FilePath -> $FilePathCopy"
+        Copy-Item $FilePath $FilePathCopy
+
+        $HashValue = (Get-FileHash $FilePath).Hash
+        $HashCopyValue = (Get-FileHash $FilePathCopy).Hash
+        Write-Host -f Red "Hash: $FilePath    `t-> $HashValue"
+        Write-Host -f Red "Hash: $FilePathCopy`t-> $HashCopyValue"
+
+        Write-Host -f Blue "Invoke-AESEncryption Encrypt: $FilePath"
+        Invoke-AESEncryption -Mode 'Encrypt' -Key $Key -Path "$FilePath"
+        $EncryptedFilePath = "$FilePath" + '.aes'
+        
+        Write-Host -f Blue "Invoke-AESEncryption Decrypt: $EncryptedFilePath"
+        Invoke-AESEncryption -Mode 'Decrypt' -Key $Key -Path "$EncryptedFilePath"
+
+        $DecryptedHashValue = (Get-FileHash $FilePath).Hash
+        Write-Host -f DarkCyan "Hash original file         `t-> $HashValue"
+        Write-Host -f DarkCyan "Hash orig file copy        `t-> $HashCopyValue"
+        Write-Host -f DarkRed "Hash decrypted file        `t-> $DecryptedHashValue"
+
+    }
+    Catch{
+        Write-Error $_
+    }
+}
+
+
+
+Function Test-JsonCrypto {
+    [CmdletBinding(SupportsShouldProcess)]
+    Param
+    ()
+    
+    try{
+        Clear-Host
+        Write-Host "`n`n===============================================================================" -f Cyan
+        Write-Host "                               Test-CliXmlCrypto                              " -f Blue;
+        Write-Host "===============================================================================" -f Cyan       
+
+        [string]$Key = 'Password_String'
+   
+        $FilePath = "$ENV:TEMP\cryptotest.json"
+        $FilePathCopy = "$ENV:TEMP\cryptotest_copy.json"
+        $Null = Remove-Item "$FilePath" -Force -ErrorAction "Ignore" -Recurse  
+
+        $DataDict = @{}
+        $DataDict['Username']       = 'UsernameValue'
+        $DataDict['Password']       = 'PasswordValue'
+
+        Write-Host -f DarkCyan "Export: $FilePath"
+        $Json = ConvertTo-Json $DataDict
+        Set-Content -Path $FilePath -Value $Json
+        
+        Write-Host -f DarkCyan "Copy: $FilePath -> $FilePathCopy"
+        Copy-Item $FilePath $FilePathCopy
+
+        $HashValue = (Get-FileHash $FilePath).Hash
+        $HashCopyValue = (Get-FileHash $FilePathCopy).Hash
+        Write-Host -f Red "Hash: $FilePath    `t-> $HashValue"
+        Write-Host -f Red "Hash: $FilePathCopy`t-> $HashCopyValue"
+
+        Write-Host -f Blue "Invoke-AESEncryption Encrypt: $FilePath"
+        Invoke-AESEncryption -Mode 'Encrypt' -Key $Key -Path "$FilePath"
+        $EncryptedFilePath = "$FilePath" + '.aes'
+        
+        Write-Host -f Blue "Invoke-AESEncryption Decrypt: $EncryptedFilePath"
+        Invoke-AESEncryption -Mode 'Decrypt' -Key $Key -Path "$EncryptedFilePath"
+
+        $DecryptedHashValue = (Get-FileHash $FilePath).Hash
+        Write-Host -f DarkCyan "Hash original file         `t-> $HashValue"
+        Write-Host -f DarkCyan "Hash orig file copy        `t-> $HashCopyValue"
+        Write-Host -f DarkRed "Hash decrypted file        `t-> $DecryptedHashValue"
+        Invoke-Sublime $FilePath
+        Invoke-Sublime $FilePathCopy
+    }
+    Catch{
+        Write-Error $_
+    }
+}
+
+
+
+Function Test-AesCryptDecrypt {
+    [CmdletBinding(SupportsShouldProcess)]
+    Param
+    ()
+    
+    try{
+        Clear-Host
+        Write-Host "`n`n===============================================================================" -f Cyan
+        Write-Host "                               Test-AesCryptDecrypt                                " -f Blue;
+        Write-Host "===============================================================================" -f Cyan       
+
+        $FilePath = "$ENV:TEMP\cryptotest.json"
+        $Null = Remove-Item "$FilePath" -Force -ErrorAction "Ignore" -Recurse
+        $Null = New-Item "$FilePath" -Force -ErrorAction "Ignore"
+        $Null = Remove-Item "$FilePath" -Force -ErrorAction "Ignore"  
+
+        $password = Read-Host -AsSecureString
+        $secret = 'Super secret info...'
+        Write-Host "[Test-AesCryptDecrypt] " -n -f DarkCyan ; Write-Host "Protect-AesString '$secret'" -f DarkGreen;
+
+        $cipherInfo = Protect-AesString -String $secret -Password $password -Salt 'MoreSalt'
+        $Data = $cipherInfo | ConvertTo-Json -Compress 
+        Set-Content -Path "$FilePath" -Value $Data
+        Write-Host "[Test-AesCryptDecrypt] " -n -f DarkCyan ; Write-Host "Save JSON '$FilePath'" -f DarkGreen;
+        $info = Get-Content -Path "$FilePath" | ConvertFrom-Json
+        $Result = Unprotect-AesString -String $info.CipherText -Salt $info.Salt -InitializationVector $info.IV -Password $password
+        Write-Host "[Test-AesCryptDecrypt] " -n -f DarkCyan ; Write-Host "$Result" -f DarkGreen;
+   
+    }
+    Catch{
+        Write-Error $_
+    }
+}
+
+
+function Test-AesEncryptDecrypt{
+    [CmdletBinding(SupportsShouldProcess)]
+    Param
+    ()
+    Clear-Host
+    Write-Host "`n`n===============================================================================" -f Cyan
+    Write-Host "                               Test-AesEncryptDecrypt                             " -f Blue;
+    Write-Host "===============================================================================" -f Cyan       
+
+    $ClearFile="$ENV:TEMP\Clear.txt"
+    $ClearFileCopy="$ENV:TEMP\ClearCopy.txt"
+    $CodedFile="$ENV:TEMP\Clear.txt.aes"
+    $Null = Remove-Item "$ClearFile" -Force -ErrorAction "Ignore"  
+    $Null = Remove-Item "$CodedFile" -Force -ErrorAction "Ignore"  
+    $DataDict = @{}
+    $DataDict['Username'] = 'UsernameValue'
+    $DataDict['Password'] = 'PasswordValue'
+
+    #Export-Clixml -Path "$ClearFile" -InputObject $DataDict
+    Set-Content -Path "$ClearFile" -Value (ConvertTo-Json $DataDict)
+
+    Invoke-AESEncryption -Mode 'Encrypt' -Key 'pass' -Path "$ClearFile"
+    $Null = Copy-Item "$ClearFile" "$ClearFileCopy"
+    $Null = Remove-Item "$ClearFile" -Force -ErrorAction "Ignore"  
+
+    Invoke-AESEncryption -Mode 'Decrypt' -Key 'pass' -Path "$CodedFile"
+
+    $ClearFileHash = (Get-FileHash $ClearFileCopy).Hash
+    $DecryptedFileHash = (Get-FileHash $ClearFile).Hash    
+    Write-Host -f DarkYellow "Hash original  file        `t-> $ClearFileHash"
+    Write-Host -f DarkRed "Hash decrypted file        `t-> $DecryptedFileHash"    
+
+    $Sublime = 'C:\Program Files\Sublime Text 3\subl.exe'
+    #&"$Sublime" $ClearFileCopy
+    #&"$Sublime" $ClearFile
+}
+
+Function Test-InvokeAesFile {
+    [CmdletBinding(SupportsShouldProcess)]
+    Param
+    ()
+    
+    try{
+        Clear-Host
+        Write-Host "`n`n===============================================================================" -f Cyan
+        Write-Host "                               Test-InvokeAesFile                                " -f Blue;
+        Write-Host "===============================================================================" -f Cyan       
+
+        $pass = Read-Host 'Enter Password' -AsSecureString
+        $String = "Keep this super safe!!"
+        Write-Host "[Test-UnprotectAesString] " -n -f DarkCyan ; Write-Host "Protect-AesString '$String'" -f DarkGreen;
+        
+        $info = Protect-AesString -String $String -Password $pass
+
+        # Decrypt
+        $ClearData = Unprotect-AesString -CipherInfo $info -Password $pass
+        Write-Host "[Test-UnprotectAesString] " -n -f DarkCyan ; Write-Host "Unprotect-AesString '$ClearData'" -f DarkGreen;
+   
+    }
+    Catch{
+        Write-Error $_
+    }
+}
+
+
+
+function Extract-PFXCerts {
+    [CmdletBinding(
+        PositionalBinding=$true,
+        ConfirmImpact='Medium'
+    )]
+    Param(
+        [Parameter(Mandatory=$False)]
+        [string]$PFXFilePath = $(Read-Host -Prompt "Please enter the full path to the .pfx file."),
+
+        [Parameter(Mandatory=$False)]
+        $PFXFilePwd, # This is only needed if the .pfx contains a password-protected private key, which should be the case 99% of the time
+
+        [Parameter(Mandatory=$False)]
+        [bool]$StripPrivateKeyPwd = $true,
+
+        [Parameter(Mandatory=$False)]
+        [string]$OutputDirectory, # If this parameter is left blank, all output files will be in the same directory as the original .pfx
+
+        [Parameter(Mandatory=$False)]
+        [switch]$DownloadAndAddOpenSSLToPath
+    )
+
+    ##### BEGIN Native Helper Functions #####
+
+    function Unzip-File {
+        [CmdletBinding()]
+        Param(
+            [Parameter(Mandatory=$true,Position=0)]
+            [string]$PathToZip,
+            
+            [Parameter(Mandatory=$true,Position=1)]
+            [string]$TargetDir,
+    
+            [Parameter(Mandatory=$false,Position=2)]
+            [string[]]$SpecificItem
+        )
+    
+        if ($PSVersionTable.PSEdition -eq "Core") {
+            [System.Collections.ArrayList]$AssembliesToCheckFor = @("System.Console","System","System.IO",
+                "System.IO.Compression","System.IO.Compression.Filesystem","System.IO.Compression.ZipFile"
+            )
+    
+            [System.Collections.ArrayList]$NeededAssemblies = @()
+    
+            foreach ($assembly in $AssembliesToCheckFor) {
+                try {
+                    [System.Collections.ArrayList]$Failures = @()
+                    try {
+                        $TestLoad = [System.Reflection.Assembly]::LoadWithPartialName($assembly)
+                        if (!$TestLoad) {
+                            throw
+                        }
+                    }
+                    catch {
+                        $null = $Failures.Add("Failed LoadWithPartialName")
+                    }
+    
+                    try {
+                        $null = Invoke-Expression "[$assembly]"
+                    }
+                    catch {
+                        $null = $Failures.Add("Failed TabComplete Check")
+                    }
+    
+                    if ($Failures.Count -gt 1) {
+                        $Failures
+                        throw
+                    }
+                }
+                catch {
+                    Write-Host "Downloading $assembly..."
+                    $NewAssemblyDir = "$HOME\Downloads\$assembly"
+                    $NewAssemblyDllPath = "$NewAssemblyDir\$assembly.dll"
+                    if (!$(Test-Path $NewAssemblyDir)) {
+                        New-Item -ItemType Directory -Path $NewAssemblyDir
+                    }
+                    if (Test-Path "$NewAssemblyDir\$assembly*.zip") {
+                        Remove-Item "$NewAssemblyDir\$assembly*.zip" -Force
+                    }
+                    $OutFileBaseNamePrep = Invoke-WebRequest "https://www.nuget.org/api/v2/package/$assembly" -DisableKeepAlive -UseBasicParsing
+                    $OutFileBaseName = $($OutFileBaseNamePrep.BaseResponse.ResponseUri.AbsoluteUri -split "/")[-1] -replace "nupkg","zip"
+                    Invoke-WebRequest -Uri "https://www.nuget.org/api/v2/package/$assembly" -OutFile "$NewAssemblyDir\$OutFileBaseName"
+                    Expand-Archive -Path "$NewAssemblyDir\$OutFileBaseName" -DestinationPath $NewAssemblyDir
+    
+                    $PossibleDLLs = Get-ChildItem -Recurse $NewAssemblyDir | Where-Object {$_.Name -eq "$assembly.dll" -and $_.Parent -notmatch "net[0-9]" -and $_.Parent -match "core|standard"}
+    
+                    if ($PossibleDLLs.Count -gt 1) {
+                        Write-Warning "More than one item within $NewAssemblyDir\$OutFileBaseName matches $assembly.dll"
+                        Write-Host "Matches include the following:"
+                        for ($i=0; $i -lt $PossibleDLLs.Count; $i++){
+                            "$i) $($($PossibleDLLs[$i]).FullName)"
+                        }
+                        $Choice = Read-Host -Prompt "Please enter the number corresponding to the .dll you would like to load [0..$($($PossibleDLLs.Count)-1)]"
+                        if ($(0..$($($PossibleDLLs.Count)-1)) -notcontains $Choice) {
+                            Write-Error "The number indicated does is not a valid choice! Halting!"
+                            $global:FunctionResult = "1"
+                            return
+                        }
+    
+                        if ($PSVersionTable.Platform -eq "Win32NT") {
+                            # Install to GAC
+                            [System.Reflection.Assembly]::LoadWithPartialName("System.EnterpriseServices")
+                            $publish = New-Object System.EnterpriseServices.Internal.Publish
+                            $publish.GacInstall($PossibleDLLs[$Choice].FullName)
+                        }
+    
+                        # Copy it to the root of $NewAssemblyDir\$OutFileBaseName
+                        Copy-Item -Path "$($PossibleDLLs[$Choice].FullName)" -Destination "$NewAssemblyDir\$assembly.dll"
+    
+                        # Remove everything else that was extracted with Expand-Archive
+                        Get-ChildItem -Recurse $NewAssemblyDir | Where-Object {
+                            $_.FullName -ne "$NewAssemblyDir\$assembly.dll" -and
+                            $_.FullName -ne "$NewAssemblyDir\$OutFileBaseName"
+                        } | Remove-Item -Recurse -Force
+                        
+                    }
+                    if ($PossibleDLLs.Count -lt 1) {
+                        Write-Error "No matching .dll files were found within $NewAssemblyDir\$OutFileBaseName ! Halting!"
+                        continue
+                    }
+                    if ($PossibleDLLs.Count -eq 1) {
+                        if ($PSVersionTable.Platform -eq "Win32NT") {
+                            # Install to GAC
+                            [System.Reflection.Assembly]::LoadWithPartialName("System.EnterpriseServices")
+                            $publish = New-Object System.EnterpriseServices.Internal.Publish
+                            $publish.GacInstall($PossibleDLLs.FullName)
+                        }
+    
+                        # Copy it to the root of $NewAssemblyDir\$OutFileBaseName
+                        Copy-Item -Path "$($PossibleDLLs[$Choice].FullName)" -Destination "$NewAssemblyDir\$assembly.dll"
+    
+                        # Remove everything else that was extracted with Expand-Archive
+                        Get-ChildItem -Recurse $NewAssemblyDir | Where-Object {
+                            $_.FullName -ne "$NewAssemblyDir\$assembly.dll" -and
+                            $_.FullName -ne "$NewAssemblyDir\$OutFileBaseName"
+                        } | Remove-Item -Recurse -Force
+                    }
+                }
+                $AssemblyFullInfo = [System.Reflection.Assembly]::LoadWithPartialName($assembly)
+                if (!$AssemblyFullInfo) {
+                    $AssemblyFullInfo = [System.Reflection.Assembly]::LoadFile("$NewAssemblyDir\$assembly.dll")
+                }
+                if (!$AssemblyFullInfo) {
+                    Write-Error "The assembly $assembly could not be found or otherwise loaded! Halting!"
+                    $global:FunctionResult = "1"
+                    return
+                }
+                $null = $NeededAssemblies.Add([pscustomobject]@{
+                    AssemblyName = "$assembly"
+                    Available = if ($AssemblyFullInfo){$true} else {$false}
+                    AssemblyInfo = $AssemblyFullInfo
+                    AssemblyLocation = $AssemblyFullInfo.Location
+                })
+            }
+    
+            if ($NeededAssemblies.Available -contains $false) {
+                $AssembliesNotFound = $($NeededAssemblies | Where-Object {$_.Available -eq $false}).AssemblyName
+                Write-Error "The following assemblies cannot be found:`n$AssembliesNotFound`nHalting!"
+                $global:FunctionResult = "1"
+                return
+            }
+    
+            $Assem = $NeededAssemblies.AssemblyInfo.FullName
+    
+            $Source = @"
+            using System;
+            using System.IO;
+            using System.IO.Compression;
+    
+            namespace MyCore.Utils
+            {
+                public static class Zip
+                {
+                    public static void ExtractAll(string sourcepath, string destpath)
+                    {
+                        string zipPath = @sourcepath;
+                        string extractPath = @destpath;
+    
+                        using (ZipArchive archive = ZipFile.Open(zipPath, ZipArchiveMode.Update))
+                        {
+                            archive.ExtractToDirectory(extractPath);
+                        }
+                    }
+    
+                    public static void ExtractSpecific(string sourcepath, string destpath, string specificitem)
+                    {
+                        string zipPath = @sourcepath;
+                        string extractPath = @destpath;
+                        string itemout = @specificitem.Replace(@"\","/");
+    
+                        //Console.WriteLine(itemout);
+    
+                        using (ZipArchive archive = ZipFile.OpenRead(zipPath))
+                        {
+                            foreach (ZipArchiveEntry entry in archive.Entries)
+                            {
+                                //Console.WriteLine(entry.FullName);
+                                //bool satisfied = new bool();
+                                //satisfied = entry.FullName.IndexOf(@itemout, 0, StringComparison.CurrentCultureIgnoreCase) != -1;
+                                //Console.WriteLine(satisfied);
+    
+                                if (entry.FullName.IndexOf(@itemout, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
+                                {
+                                    string finaloutputpath = extractPath + "\\" + entry.Name;
+                                    entry.ExtractToFile(finaloutputpath, true);
+                                }
+                            }
+                        } 
+                    }
+                }
+            }
+"@
+    
+            Add-Type -ReferencedAssemblies $Assem -TypeDefinition $Source
+    
+            if (!$SpecificItem) {
+                [MyCore.Utils.Zip]::ExtractAll($PathToZip, $TargetDir)
+            }
+            else {
+                [MyCore.Utils.Zip]::ExtractSpecific($PathToZip, $TargetDir, $SpecificItem)
+            }
+        }
+    
+    
+        if ($PSVersionTable.PSEdition -eq "Desktop" -and $($($PSVersionTable.Platform -and $PSVersionTable.Platform -eq "Win32NT") -or !$PSVersionTable.Platform)) {
+            if ($SpecificItem) {
+                foreach ($item in $SpecificItem) {
+                    if ($SpecificItem -match "\\") {
+                        $SpecificItem = $SpecificItem -replace "\\","\\"
+                    }
+                }
+            }
+    
+            ##### BEGIN Native Helper Functions #####
+            function Get-ZipChildItems {
+                [CmdletBinding()]
+                Param(
+                    [Parameter(Mandatory=$false,Position=0)]
+                    [string]$ZipFile = $(Read-Host -Prompt "Please enter the full path to the zip file")
+                )
+    
+                $shellapp = new-object -com shell.application
+                $zipFileComObj = $shellapp.Namespace($ZipFile)
+                $i = $zipFileComObj.Items()
+                Get-ZipChildItems_Recurse $i
+            }
+    
+            function Get-ZipChildItems_Recurse {
+                [CmdletBinding()]
+                Param(
+                    [Parameter(Mandatory=$true,Position=0)]
+                    $items
+                )
+    
+                foreach($si in $items) {
+                    if($si.getfolder -ne $null) {
+                        # Loop through subfolders 
+                        Get-ZipChildItems_Recurse $si.getfolder.items()
+                    }
+                    # Spit out the object
+                    $si
+                }
+            }
+    
+            ##### END Native Helper Functions #####
+    
+            ##### BEGIN Variable/Parameter Transforms and PreRun Prep #####
+            if (!$(Test-Path $PathToZip)) {
+                Write-Verbose "The path $PathToZip was not found! Halting!"
+                Write-Error "The path $PathToZip was not found! Halting!"
+                $global:FunctionResult = "1"
+                return
+            }
+            if ($(Get-ChildItem $PathToZip).Extension -ne ".zip") {
+                Write-Verbose "The file specified by the -PathToZip parameter does not have a .zip file extension! Halting!"
+                Write-Error "The file specified by the -PathToZip parameter does not have a .zip file extension! Halting!"
+                $global:FunctionResult = "1"
+                return
+            }
+    
+            $ZipFileNameWExt = $(Get-ChildItem $PathToZip).Name
+    
+            ##### END Variable/Parameter Transforms and PreRun Prep #####
+    
+            ##### BEGIN Main Body #####
+    
+            Write-Verbose "NOTE: PowerShell 5.0 uses Expand-Archive cmdlet to unzip files"
+    
+            if (!$SpecificItem) {
+                if ($PSVersionTable.PSVersion.Major -ge 5) {
+                    Expand-Archive -Path $PathToZip -DestinationPath $TargetDir
+                }
+                if ($PSVersionTable.PSVersion.Major -lt 5) {
+                    # Load System.IO.Compression.Filesystem 
+                    [System.Reflection.Assembly]::LoadWithPartialName("System.IO.Compression.FileSystem") | Out-Null
+    
+                    # Unzip file
+                    [System.IO.Compression.ZipFile]::ExtractToDirectory($PathToZip, $TargetDir)
+                }
+            }
+            if ($SpecificItem) {
+                $ZipSubItems = Get-ZipChildItems -ZipFile $PathToZip
+    
+                foreach ($searchitem in $SpecificItem) {
+                    [array]$potentialItems = foreach ($item in $ZipSubItems) {
+                        if ($item.Path -match $searchitem) {
+                            $item
+                        }
+                    }
+    
+                    $shell = new-object -com shell.application
+    
+                    if ($potentialItems.Count -eq 1) {
+                        $shell.Namespace($TargetDir).CopyHere($potentialItems[0], 0x14)
+                    }
+                    if ($potentialItems.Count -gt 1) {
+                        Write-Warning "More than one item within $ZipFileNameWExt matches $searchitem."
+                        Write-Host "Matches include the following:"
+                        for ($i=0; $i -lt $potentialItems.Count; $i++){
+                            "$i) $($($potentialItems[$i]).Path)"
+                        }
+                        $Choice = Read-Host -Prompt "Please enter the number corresponding to the item you would like to extract [0..$($($potentialItems.Count)-1)]"
+                        if ($(0..$($($potentialItems.Count)-1)) -notcontains $Choice) {
+                            Write-Warning "The number indicated does is not a valid choice! Skipping $searchitem..."
+                            continue
+                        }
+                        for ($i=0; $i -lt $potentialItems.Count; $i++){
+                            $shell.Namespace($TargetDir).CopyHere($potentialItems[$Choice], 0x14)
+                        }
+                    }
+                    if ($potentialItems.Count -lt 1) {
+                        Write-Warning "No items within $ZipFileNameWExt match $searchitem! Skipping..."
+                        continue
+                    }
+                }
+            }
+            ##### END Main Body #####
+        }
+    }
+
+    ##### END Native Helper Functions #####
+
+    ##### BEGIN Variable/Parameter Transforms and PreRun Prep #####
+    # Check for Win32 or Win64 OpenSSL Binary
+    if (! $(Get-Command openssl.exe -ErrorAction SilentlyContinue)) {
+        if ($DownloadAndAddOpenSSLToPath) {
+            Write-Host "Downloading openssl.exe from https://indy.fulgan.com/SSL/..."
+            $LatestWin64OpenSSLVer = $($($(Invoke-WebRequest -Uri https://indy.fulgan.com/SSL/).Links | Where-Object {$_.href -like "*[a-z]-x64*"}).href | Sort-Object)[-1]
+            Invoke-WebRequest -Uri "https://indy.fulgan.com/SSL/$LatestWin64OpenSSLVer" -OutFile "$env:USERPROFILE\Downloads\$LatestWin64OpenSSLVer"
+            $SSLDownloadUnzipDir = $(Get-ChildItem "$env:USERPROFILE\Downloads\$LatestWin64OpenSSLVer").BaseName
+            if (! $(Test-Path "$env:USERPROFILE\Downloads\$SSLDownloadUnzipDir")) {
+                New-Item -Path "$env:USERPROFILE\Downloads\$SSLDownloadUnzipDir" -ItemType Directory
+            }
+            Unzip-File -PathToZip "$env:USERPROFILE\Downloads\$LatestWin64OpenSSLVer" -TargetDir "$env:USERPROFILE\Downloads\$SSLDownloadUnzipDir"
+            # Add OpenSSL to $env:Path
+            if ($env:Path[-1] -eq ";") {
+                $env:Path = "$env:Path$env:USERPROFILE\Downloads\$SSLDownloadUnzipDir"
+            }
+            else {
+                $env:Path = "$env:Path;$env:USERPROFILE\Downloads\$SSLDownloadUnzipDir"
+            }
+        }
+        else {
+            Write-Verbose "The Extract-PFXCerts function requires openssl.exe. Openssl.exe cannot be found on this machine. Use the -DownloadAndAddOpenSSLToPath parameter to download openssl.exe and add it to `$env:Path. NOTE: Openssl.exe does NOT require installation. Halting!"
+            Write-Error "The Extract-PFXCerts function requires openssl.exe. Openssl.exe cannot be found on this machine. Use the -DownloadAndAddOpenSSLToPath parameter to download openssl.exe and add it to `$env:Path. NOTE: Openssl.exe does NOT require installation. Halting!"
+            $global:FunctionResult = "1"
+            return
+        }
+    }
+
+    # OpenSSL can't handle PowerShell SecureStrings, so need to convert it back into Plain Text
+    if ($PFXFilePwd) {
+        if ($PFXFilePwd.GetType().FullName -eq "System.Security.SecureString") {
+            $PwdForPFXOpenSSL = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($PFXFilePwd))
+        }
+        if ($PFXFilePwd.GetType().FullName -eq "System.String") {
+            $PwdForPFXOpenSSL = $PFXFilePwd
+        }
+    }
+
+    $privpos = $PFXFilePath.LastIndexOf("\")
+    $PFXFileDir = $PFXFilePath.Substring(0, $privpos)
+    $PFXFileName = $PFXFilePath.Substring($privpos+1)
+    $PFXFileNameSansExt = $($PFXFileName.Split("."))[0]
+
+    if (!$OutputDirectory) {
+        $OutputDirectory = $PFXFileDir
+    }
+
+    $ProtectedPrivateKeyOut = "$PFXFileNameSansExt"+"_protected_private_key"+".pem"
+    $UnProtectedPrivateKeyOut = "$PFXFileNameSansExt"+"_unprotected_private_key"+".pem"
+    $AllPublicKeysInChainOut = "$PFXFileNameSansExt"+"_all_public_keys_in_chain"+".pem"
+    ##### END Variable/Parameter Transforms and PreRun Prep #####
+
+
+    ##### BEGIN Parameter Validation #####
+    if (!$(Test-Path $PFXFilePath)) {
+        Write-Verbose "The path $PFXFilePath was not found! Halting!"
+        Write-Error "The path $PFXFilePath was not found! Halting!"
+        $global:FunctionResult = "1"
+        return
+    }
+
+    if (! $(Test-Path $OutputDirectory)) {
+        Write-Verbose "The path $OutputDirectory was not found! Halting!"
+        Write-Error "The path $OutputDirectory was not found! Halting!"
+        $global:FunctionResult = "1"
+        return
+    }
+    
+    ##### END Parameter Validation #####
+
+
+    ##### BEGIN Main Body #####
+    # The .pfx File could (and most likely does) contain a private key
+    # Extract Private Key and Keep It Password Protected
+    try {
+        $ProcessInfo = New-Object System.Diagnostics.ProcessStartInfo
+        $ProcessInfo.FileName = "openssl.exe"
+        $ProcessInfo.RedirectStandardError = $true
+        $ProcessInfo.RedirectStandardOutput = $true
+        $ProcessInfo.UseShellExecute = $false
+        $ProcessInfo.Arguments = "pkcs12 -in $PFXFilePath -nocerts -out $OutputDirectory\$ProtectedPrivateKeyOut -nodes -password pass:$PwdForPFXOpenSSL"
+        $Process = New-Object System.Diagnostics.Process
+        $Process.StartInfo = $ProcessInfo
+        $Process.Start() | Out-Null
+        $Process.WaitForExit()
+        $stdout = $Process.StandardOutput.ReadToEnd()
+        $stderr = $Process.StandardError.ReadToEnd()
+        $AllOutput = $stdout + $stderr
+
+        if ($AllOutput -match "error") {
+            Write-Warning "openssl.exe reports that -PFXFilePwd is incorrect. However, it may be that at this stage in the process, it is not protected with a password. Trying without password..."
+            throw
+        }
+    }
+    catch {
+        try {
+            $ProcessInfo = New-Object System.Diagnostics.ProcessStartInfo
+            $ProcessInfo.FileName = "openssl.exe"
+            $ProcessInfo.RedirectStandardError = $true
+            $ProcessInfo.RedirectStandardOutput = $true
+            $ProcessInfo.UseShellExecute = $false
+            $ProcessInfo.Arguments = "pkcs12 -in $PFXFilePath -nocerts -out $OutputDirectory\$ProtectedPrivateKeyOut -nodes -password pass:"
+            $Process = New-Object System.Diagnostics.Process
+            $Process.StartInfo = $ProcessInfo
+            $Process.Start() | Out-Null
+            $Process.WaitForExit()
+            $stdout = $Process.StandardOutput.ReadToEnd()
+            $stderr = $Process.StandardError.ReadToEnd()
+            $AllOutput = $stdout + $stderr
+
+            if ($AllOutput -match "error") {
+                Write-Warning "openssl.exe reports that -PFXFilePwd is incorrect."
+                throw
+            }
+        }
+        catch {
+            $PFXFilePwdFailure = $true
+        }
+    }
+    if ($PFXFilePwdFailure -eq $true) {
+        Write-Verbose "The value for -PFXFilePwd is incorrect or was not supplied (and is needed). Halting!"
+        Write-Error "The value for -PFXFilePwd is incorrect or was not supplied (and is needed). Halting!"
+        $global:FunctionResult = "1"
+        return
+    }
+    
+
+    if ($StripPrivateKeyPwd) {
+        # Strip Private Key of Password
+        & openssl.exe rsa -in "$PFXFileDir\$ProtectedPrivateKeyOut" -out "$OutputDirectory\$UnProtectedPrivateKeyOut" 2>&1 | Out-Null
+    }
+
+    New-Variable -Name "$PFXFileNameSansExt`PrivateKeyInfo" -Value $(
+        if ($StripPrivateKeyPwd) {
+            [pscustomobject][ordered]@{
+                ProtectedPrivateKeyFilePath     = "$OutputDirectory\$ProtectedPrivateKeyOut"
+                UnProtectedPrivateKeyFilePath   = "$OutputDirectory\$UnProtectedPrivateKeyOut"
+            }
+        }
+        else {
+            [pscustomobject][ordered]@{
+                ProtectedPrivateKeyFilePath     = "$OutputDirectory\$ProtectedPrivateKeyOut"
+                UnProtectedPrivateKeyFilePath   = $null
+            }
+        }
+    )
+    
+
+    # Setup $ArrayOfPubCertPSObjects for PSCustomObject Collection
+    $ArrayOfPubCertPSObjects = @()
+    # The .pfx File Also Contains ALL Public Certificates in Chain 
+    # The below extracts ALL Public Certificates in Chain
+    try {
+        $ProcessInfo = New-Object System.Diagnostics.ProcessStartInfo
+        $ProcessInfo.FileName = "openssl.exe"
+        $ProcessInfo.RedirectStandardError = $true
+        $ProcessInfo.RedirectStandardOutput = $true
+        $ProcessInfo.UseShellExecute = $false
+        $ProcessInfo.Arguments = "pkcs12 -in $PFXFilePath -nokeys -out $OutputDirectory\$AllPublicKeysInChainOut -password pass:$PwdForPFXOpenSSL"
+        $Process = New-Object System.Diagnostics.Process
+        $Process.StartInfo = $ProcessInfo
+        $Process.Start() | Out-Null
+        $Process.WaitForExit()
+        $stdout = $Process.StandardOutput.ReadToEnd()
+        $stderr = $Process.StandardError.ReadToEnd()
+        $AllOutput = $stdout + $stderr
+
+        if ($AllOutput -match "error") {
+            Write-Warning "openssl.exe reports that -PFXFilePwd is incorrect. However, it may be that at this stage in the process, it is not protected with a password. Trying without password..."
+            throw
+        }
+    }
+    catch {
+        try {
+            $ProcessInfo = New-Object System.Diagnostics.ProcessStartInfo
+            $ProcessInfo.FileName = "openssl.exe"
+            $ProcessInfo.RedirectStandardError = $true
+            $ProcessInfo.RedirectStandardOutput = $true
+            $ProcessInfo.UseShellExecute = $false
+            $ProcessInfo.Arguments = "pkcs12 -in $PFXFilePath -nokeys -out $OutputDirectory\$AllPublicKeysInChainOut -password pass:"
+            $Process = New-Object System.Diagnostics.Process
+            $Process.StartInfo = $ProcessInfo
+            $Process.Start() | Out-Null
+            $Process.WaitForExit()
+            $stdout = $Process.StandardOutput.ReadToEnd()
+            $stderr = $Process.StandardError.ReadToEnd()
+            $AllOutput = $stdout + $stderr
+
+            if ($AllOutput -match "error") {
+                Write-Warning "openssl.exe reports that -PFXFilePwd is incorrect."
+                throw
+            }
+        }
+        catch {
+            $PFXFilePwdFailure = $true
+        }
+    }
+    if ($PFXFilePwdFailure -eq $true) {
+        Write-Verbose "The value for -PFXFilePwd is incorrect or was not supplied (and is needed). Halting!"
+        Write-Error "The value for -PFXFilePwd is incorrect or was not supplied (and is needed). Halting!"
+        $global:FunctionResult = "1"
+        return
+    }
+    New-Variable -Name "CertObj$PFXFileNameSansExt" -Scope Script -Value $(
+        [pscustomobject][ordered]@{
+            CertName                = "$PFXFileNameSansExt`AllPublicKCertsInChain"
+            AllCertInfo             = Get-Content "$OutputDirectory\$AllPublicKeysInChainOut"
+            FileLocation            = "$OutputDirectory\$AllPublicKeysInChainOut"
+        }
+    ) -Force
+
+    $ArrayOfPubCertPSObjects +=, $(Get-Variable -Name "CertObj$PFXFileNameSansExt" -ValueOnly)
+
+
+    # Parse the Public Certificate Chain File and and Write Each Public Certificate to a Separate File
+    # These files should have the EXACT SAME CONTENT as the .cer counterparts
+    $PublicKeySansChainPrep1 = $(Get-Content "$OutputDirectory\$AllPublicKeysInChainOut") -join "`n"
+    $PublicKeySansChainPrep2 = $($PublicKeySansChainPrep1 -replace "-----END CERTIFICATE-----","-----END CERTIFICATE-----;;;").Split(";;;")
+    $PublicKeySansChainPrep3 = foreach ($obj1 in $PublicKeySansChainPrep2) {
+        if ($obj1 -like "*[\w]*") {
+            $obj1.Trim()
+        }
+    }
+    # Setup PSObject for Certs with CertName and CertValue
+    foreach ($obj1 in $PublicKeySansChainPrep3) {
+        $CertNamePrep = $($obj1).Split("`n") | foreach {if ($_ | Select-String "subject") {$_}}
+        $CertName = $($CertNamePrep | Select-String "CN=([\w]|[\W]){1,1000}$").Matches.Value -replace "CN=",""
+        $IndexNumberForBeginCert = $obj1.Split("`n") | foreach {
+            if ($_ -match "-----BEGIN CERTIFICATE-----") {
+                [array]::indexof($($obj1.Split("`n")),$_)
+            }
+        }
+        $IndexNumberForEndCert = $obj1.Split("`n") | foreach {
+            if ($_ -match "-----End CERTIFICATE-----") {
+                [array]::indexof($($obj1.Split("`n")),$_)
+            }
+        }
+        $CertValue = $($($obj1.Split("`n"))[$IndexNumberForBeginCert..$IndexNumberForEndCert] | Out-String).Trim()
+        $AttribFriendlyNamePrep = $obj1.Split("`n") | Select-String "friendlyName"
+        if ($AttribFriendlyNamePrep) {
+            $AttribFriendlyName = $($AttribFriendlyNamePrep.Line).Split(":")[-1].Trim()
+        }
+        $tmpFile = [IO.Path]::GetTempFileName()
+        $CertValue.Trim() | Out-File $tmpFile -Encoding Ascii
+
+        $CertDumpContent = certutil -dump $tmpfile
+
+        $SubjectTypePrep = $CertDumpContent | Select-String -Pattern "Subject Type="
+        if ($SubjectTypePrep) {
+            $SubjectType = $SubjectTypePrep.Line.Split("=")[-1]
+        }
+        $RootCertFlag = $CertDumpContent | Select-String -Pattern "Subject matches issuer"
+        
+        if ($SubjectType -eq "CA" -and $RootCertFlag) {
+            $RootCACert = $True
+        }
+        else {
+            $RootCACert = $False
+        }
+        if ($SubjectType -eq "CA" -and !$RootCertFlag) {
+            $IntermediateCACert = $True
+        }
+        else {
+            $IntermediateCACert = $False
+        }
+        if ($RootCACert -eq $False -and $IntermediateCACert -eq $False) {
+            $EndPointCert = $True
+        }
+        else {
+            $EndPointCert = $False
+        }
+
+        New-Variable -Name "CertObj$CertName" -Scope Script -Value $(
+            [pscustomobject][ordered]@{
+                CertName                = $CertName
+                FriendlyName            = $AttribFriendlyName
+                CertValue               = $CertValue.Trim()
+                AllCertInfo             = $obj1.Trim()
+                RootCACert              = $RootCACert
+                IntermediateCACert      = $IntermediateCACert
+                EndPointCert            = $EndPointCert
+                FileLocation            = "$OutputDirectory\$($CertName)_Public_Cert.pem"
+            }
+        ) -Force
+
+        $ArrayOfPubCertPSObjects +=, $(Get-Variable -Name "CertObj$CertName" -ValueOnly)
+
+        Remove-Item -Path $tmpFile -Force
+        Remove-Variable -Name "tmpFile" -Force
+    }
+
+    # Write each CertValue to Separate Files (i.e. writing all public keys in chain to separate files)
+    foreach ($obj1 in $ArrayOfPubCertPSObjects) {
+        if ($(Test-Path $obj1.FileLocation) -and !$Force) {
+            Write-Verbose "The extracted Public cert $($obj1.CertName) was NOT written to $OutputDirectory because it already exists there!"
+        }
+        if (!$(Test-Path $obj1.FileLocation) -or $Force) {
+            $obj1.CertValue | Out-File "$($obj1.FileLocation)" -Encoding Ascii
+            Write-Verbose "Public certs have been extracted and written to $OutputDirectory"
+        }
+    }
+
+    New-Variable -Name "PubAndPrivInfoOutput" -Scope Script -Value $(
+        [pscustomobject][ordered]@{
+            PublicKeysInfo      = $ArrayOfPubCertPSObjects
+            PrivateKeyInfo      = $(Get-Variable -Name "$PFXFileNameSansExt`PrivateKeyInfo" -ValueOnly)
+        }
+    ) -Force
+
+    $(Get-Variable -Name "PubAndPrivInfoOutput" -ValueOnly)
+    
+    $global:FunctionResult = "0"
+    ##### END Main Body #####
+
+}
+
+
+
+
+
+
+
+
+
+
+
+function Test-GPGInstalled {
+    [CmdletBinding(SupportsShouldProcess)]
+    param
+    ()
+
+    $Script:InstallFolder = 'C:\Program Files (x86)\GNU\GnuPG'
+
+    if ($Command = Get-Command 'GPG.exe' -CommandType Application -ErrorAction Ignore) {
+        Write-Verbose "GPG is on the PATH, assume it's installed"
+        $true
+    }
+    elseif (-not (Test-Path $Script:InstallFolder)) {
+        Write-Verbose "Install folder doesn't exist"
+        $false
+    }
+    elseif (-not (Get-ChildItem -Path $Script:InstallFolder)) {
+        Write-Verbose "Install folder exists but is empty"
+        $false
+    }
+    else {
+        Write-Verbose "Install folder exists and is not empty"
+
+        $checkFile1 = Join-Path $Script:InstallFolder 'gpg2.exe'
+        $checkFile2 = Join-Path $Script:InstallFolder 'gpg-agent.exe'
+        $checkFile3 = Join-Path $Script:InstallFolder 'kleopatra.exe'
+        $checkFile4 = Join-Path $Script:InstallFolder 'gpgv2.exe'
+
+        $checkFiles = [System.Collections.ArrayList]::new()
+        $checkFiles.Add($checkFile1) | Out-Null
+        $checkFiles.Add($checkFile2)| Out-Null
+        $checkFiles.Add($checkFile3)| Out-Null
+        $checkFiles.Add($checkFile4)| Out-Null
+
+        ForEach($theFile in $checkFiles){
+            if (-not (Test-Path $theFile)) {
+                Write-Verbose "$theFile missing"
+                return $false
+            }
+        }
+        $true
+    }
+}
+
+function Wait-GPGInstalled {
+
+    [CmdletBinding(SupportsShouldProcess)]
+    param
+    ()
+    
+    $GPGInstalled = $false
+
+    While($GPGInstalled -eq $False){
+        Sleep -Seconds 5
+        Write-Verbose "Checking if GPG is Installed....."
+        $GPGInstalled = Test-GPGInstalled
+    }
+
+    Write-Verbose "GPG is Installed"
+}
+
+
+
+function Install-Gpg4win{
+
+	Try {
+        Register-Assemblies
+	    ## Set the script execution policy for this process
+	    Try { Set-ExecutionPolicy -ExecutionPolicy 'ByPass' -Scope 'Process' -Force -ErrorAction 'Stop' } Catch {}
+
+	    ##*===============================================
+	    ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
+	    [string]$installName = ''
+	    [string]$installTitle = 'Gpg4win'
+
+	    ## Variables: Exit Code
+	    [int32]$mainExitCode = 0
+	    [string]$taskkillExe = (Get-Command 'taskkill.exe').Source
+	    ## Variables: Environment
+
+	    #endregion
+	    ##* Do not modify section above
+	    ##*===============================================
+	    ##* END VARIABLE DECLARATION
+	    ##*===============================================
+
+        ##*===============================================
+        ##* PRE-INSTALLATION
+        ##*===============================================
+        [string]$installPhase = 'Pre-Installation'
+
+        &"$taskkillExe" /F /IM 'gpg-agent'| Out-Null
+        &"$taskkillExe" /F /IM 'kleopatra' | Out-Null
+        ## Show Welcome Message, Close Gpg4win With a 60 Second Countdown Before Automatically Closing
+
+		[string]$DownloadFolderPath = "$ENV:TEMP"
+		[string]$DownloadUrl = 'http://files.gpg4win.org/gpg4win-2.2.5.exe'
+
+		$DownloadFilePath = "$DownloadFolderPath\$($DownloadUrl | Split-Path -Leaf)"
+		if (-not (Test-Path -Path $DownloadFilePath -PathType Leaf)) {
+			Write-Verbose  "Downloading [$($DownloadUrl)] to [$($DownloadFilePath)]"
+			Invoke-WebRequest -Uri $DownloadUrl -OutFile $DownloadFilePath
+		} else {
+			Write-Verbose  "The download file [$($DownloadFilePath)] already exists"
+		}
+
+
+        Sleep -Seconds 5
+        
+        ##*===============================================
+        ##* INSTALLATION
+        ##*===============================================
+        [string]$installPhase = 'Installation'
+        [string]$FNameOut=New-RandomFilename
+        [string]$FNameErr=New-RandomFilename
+
+
+        ## Install Gpg4win
+        $ExePath = $DownloadFilePath
+        If(Test-Path $ExePath)
+        {
+	        Write-Log  "Found $($ExePath.FullName), now attempting to install $installTitle."
+	        Write-Log  "Installing Gpg4win. This may take some time. Please wait..."
+
+	  		$startProcessParams = @{
+	            FilePath               = $ExePath
+	            RedirectStandardError  = $FNameErr
+	            RedirectStandardOutput = $FNameOut
+	            Wait                   = $true
+	            PassThru               = $true
+	            WorkingDirectory       = $DownloadFolderPath
+	            WindowStyle 		   = 'Hidden'
+	        }
+
+	        $ArgumentList = @('/S')
+	        $cmd = Start-Process @startProcessParams -ArgumentList $ArgumentList| Out-null
+	        $cmdExitCode = $cmd.ExitCode
+	        $cmdId = $cmd.Id 
+	        $cmdName=$cmd.Name     
+
+	        Show-MessageBoxInfo "Installed Gpg4win. $cmdName" -Title 'Install Completed'
+        }
+
+	}
+	Catch {
+        Show-ExceptionDetails $_ -ShowStack
+	    [int32]$mainExitCode = 60001
+	    [string]$mainErrorMessage = "Install failure"
+	    Show-MessageBoxError $mainErrorMessage 
+	}
+}
+
+
+
+
+class LogConfiguration
+{
+    #ChannelProperties
+    [string]$Channel = 'CRYPTO'
+    [ConsoleColor]$TitleColor = 'Blue'
+    [ConsoleColor]$MessageColor = 'DarkGray'
+    [ConsoleColor]$ErrorColor = 'DarkRed'
+    [ConsoleColor]$SuccessColor = 'DarkGreen'
+    [ConsoleColor]$ErrorDescriptionColor = 'DarkYellow'
+}
+
+function Get-LogConfig {
+    param(
+    )
+    if($Script:LogConfig -eq $Null){
+        $Script:LogConfig = [LogConfiguration]::new()
+    }
+    return $Script:LogConfig
+}
+
+  
+function Write-LogError{                               
+    [CmdletBinding(SupportsShouldProcess)]
+    param(
+        [Parameter(Mandatory=$true,Position=0)]
+        [string]$Message
+    )
+    $c = Get-LogConfig
+    Write-InteractiveHost "[$($c.Channel)] " -f $($c.TitleColor) -NoNewLine
+    Write-InteractiveHost "‼ " -f $($c.ErrorColor) -NoNewLine
+    Write-InteractiveHost "$Message" -f $($c.MessageColor)
+}
+
+function Write-LogSuccess{                   
+    [CmdletBinding(SupportsShouldProcess)]
+    param(
+        [Parameter(Mandatory=$true,Position=0)]
+        [string]$Message
+    )
+    $c = Get-LogConfig
+    Write-InteractiveHost "[$($c.Channel)] " -f $($c.TitleColor) -NoNewLine
+    Write-InteractiveHost "✔ " -f $($c.SuccessColor) -NoNewLine
+    Write-InteractiveHost "$Message" -f $($c.MessageColor)
+}
+
+
+function Write-LogException{                              
+    [CmdletBinding(SupportsShouldProcess)]
+    param(
+        [Parameter(Mandatory=$true)]
+        [System.Management.Automation.ErrorRecord]$Record
+    )
+    $c = Get-LogConfig
+    $formatstring = "{0}`n{1}"
+    $fields = $Record.FullyQualifiedErrorId,$Record.Exception.ToString()
+    $ExceptMsg=($formatstring -f $fields)
+    Write-InteractiveHost "[$($c.Channel)] " -f $($c.TitleColor) -NoNewLine
+    Write-InteractiveHost "$ExceptMsg`n`n" -ForegroundColor DarkYellow
+}
+
+function Write-Log {
+    param(
+        [Parameter(Mandatory=$true, Position=0)]
+        [object[]] $InputObject,
+        [Parameter(Mandatory=$false)]
+        [switch]$Time
+    )
+    $c = Get-LogConfig
+    foreach ($item in $InputObject) {
+        foreach ($line in ($item | Out-String)) {
+            Write-InteractiveHost "[$($c.Channel)] " -f $($c.TitleColor) -NoNewLine
+            if($Time){
+                Write-InteractiveHost -n ("{0} | {1}" -f ((Get-Date).GetDateTimeFormats()[18]), $line) -f $($c.MessageColor)    
+            }else{
+                Write-InteractiveHost -n $line -f $($c.MessageColor)
+            }
+            
+        }
+    }
+}
+
+function Write-InteractiveHost {
+
+    [CmdletBinding(
+        HelpUri='http://go.microsoft.com/fwlink/?LinkID=113426',
+        RemotingCapability='None')]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingWriteHost", "", Justification="This provides a wrapper around Write-Host. In general, we'd like to use Write-Information, but it's not supported on PS 4.0 which we need to support.")]
+    param(
+        [Parameter(
+            Position=0,
+            ValueFromPipeline,
+            ValueFromRemainingArguments)]
+        [System.Object] $Object,
+
+        [switch] $NoNewline,
+
+        [System.Object] $Separator,
+
+        [System.ConsoleColor] $ForegroundColor,
+
+        [System.ConsoleColor] $BackgroundColor
+    )
+
+    begin
+    {
+        $hostIsInteractive = ([Environment]::UserInteractive -and
+            ![Bool]([Environment]::GetCommandLineArgs() -like '-noni*') -and
+            ((Get-Host).Name -ne 'Default Host'))
+    }
+
+    process
+    {
+        # Determine if the host is interactive
+        if ($hostIsInteractive)
+        {
+            # Special handling for OutBuffer (generated for the proxy function)
+            $outBuffer = $null
+            if ($PSBoundParameters.TryGetValue('OutBuffer', [ref]$outBuffer))
+            {
+                $PSBoundParameters['OutBuffer'] = 1
+            }
+
+            Write-Host @PSBoundParameters
+        }
+    }
+}
+
+
+
+
+function New-PGPKey {
+    [cmdletBinding(DefaultParameterSetName = 'Credential')]
+    param(
+        [parameter(Mandatory, ParameterSetName = 'Strength')]
+        [parameter(Mandatory, ParameterSetName = 'StrengthCredential')]
+        [parameter(Mandatory, ParameterSetName = 'ClearText')]
+        [parameter(Mandatory, ParameterSetName = 'Credential')]
+        [string] $FilePathPublic,
+        [parameter(Mandatory, ParameterSetName = 'Strength')]
+        [parameter(Mandatory, ParameterSetName = 'StrengthCredential')]
+        [parameter(Mandatory, ParameterSetName = 'ClearText')]
+        [parameter(Mandatory, ParameterSetName = 'Credential')]
+        [string] $FilePathPrivate,
+        [parameter(Mandatory, ParameterSetName = 'Strength')]
+        [parameter(Mandatory, ParameterSetName = 'ClearText')]
+        [string] $UserName,
+        [parameter(Mandatory, ParameterSetName = 'Strength')]
+        [parameter(Mandatory, ParameterSetName = 'ClearText')]
+        [string] $Password,
+        [parameter(Mandatory, ParameterSetName = 'StrengthCredential')]
+        [parameter(Mandatory, ParameterSetName = 'Credential')]
+        [pscredential] $Credential,
+        [parameter(Mandatory, ParameterSetName = 'Strength')]
+        [parameter(Mandatory, ParameterSetName = 'StrengthCredential')]
+        [int] $Strength,
+        [parameter(Mandatory, ParameterSetName = 'Strength')]
+        [parameter(Mandatory, ParameterSetName = 'StrengthCredential')]
+        [int] $Certainty,
+        [parameter(ParameterSetName = 'Strength')]
+        [parameter(ParameterSetName = 'StrengthCredential')]
+        [switch] $EmitVersion
+    )
+    try {
+        $PGP = [PgpCore.PGP]::new()
+    } catch {
+        if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+            throw
+        } else {
+            Write-Warning -Message "New-PGPKey - Creating keys genarated erorr: $($_.Exception.Message)"
+            return
+        }
+    }
+    if ($Credential) {
+        $UserName = $Credential.UserName
+        $Password = $Credential.GetNetworkCredential().Password
+    }
+    try {
+        if ($Strength) {
+            $PGP.GenerateKey($FilePathPublic, $FilePathPrivate, $UserName, $Password, $Strength, $Certainty, $EmitVersion.IsPresent)
+        } else {
+            $PGP.GenerateKey($FilePathPublic, $FilePathPrivate, $UserName, $Password)
+        }
+    } catch {
+        if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+            throw
+        } else {
+            Write-Warning -Message "New-PGPKey - Creating keys genarated erorr: $($_.Exception.Message)"
+            return
+        }
+    }
+
+    #void GenerateKey(string publicKeyFilePath, string privateKeyFilePath, string username, string password, int strength, int certainty, bool emitVersion)
+    #void GenerateKey(System.IO.Stream publicKeyStream, System.IO.Stream privateKeyStream, string username, string password, int strength, int certainty, bool armor, bool emitVersion)
+}
+
+
+
+function Protect-PGP {
+    [cmdletBinding(DefaultParameterSetName = 'File')]
+    param(
+        [Parameter(Mandatory, ParameterSetName = 'Folder')]
+        [Parameter(Mandatory, ParameterSetName = 'File')]
+        [Parameter(Mandatory, ParameterSetName = 'String')]
+        [string] $FilePathPublic,
+
+        [Parameter(Mandatory, ParameterSetName = 'Folder')][string] $FolderPath,
+        [Parameter(ParameterSetName = 'Folder')][string] $OutputFolderPath,
+
+        [Parameter(Mandatory, ParameterSetName = 'File')][string] $FilePath,
+        [Parameter(ParameterSetName = 'File')][string] $OutFilePath,
+
+        [Parameter(Mandatory, ParameterSetName = 'String')][string] $String
+    )
+
+    if (Test-Path -LiteralPath $FilePathPublic) {
+        $PublicKey = [System.IO.FileInfo]::new($FilePathPublic)
+    } else {
+        if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+            throw
+        } else {
+            Write-Warning -Message "Protect-PGP - Public key doesn't exists $($FilePathPublic): $($_.Exception.Message)"
+            return
+        }
+    }
+    try {
+        $EncryptionKeys = [PgpCore.EncryptionKeys]::new($PublicKey)
+        $PGP = [PgpCore.PGP]::new($EncryptionKeys)
+    } catch {
+        if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+            throw
+        } else {
+            Write-Warning -Message "Protect-PGP - Can't encrypt files because: $($_.Exception.Message)"
+            return
+        }
+    }
+    if ($FolderPath) {
+        foreach ($File in Get-ChildItem -LiteralPath $FolderPath -Recurse:$Recursive) {
+            try {
+                if ($OutputFolderPath) {
+                    $OutputFile = [io.Path]::Combine($OutputFolderPath, "$($File.Name).pgp")
+                    $PGP.EncryptFile($File.FullName, $OutputFile)
+                } else {
+                    $PGP.EncryptFile($File.FullName, "$($File.FullName).pgp")
+                }
+            } catch {
+                if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+                    throw
+                } else {
+                    Write-Warning -Message "Protect-PGP - Can't encrypt file $($File.FuleName): $($_.Exception.Message)"
+                    return
+                }
+            }
+        }
+    } elseif ($FilePath) {
+        try {
+            if ($OutFilePath) {
+                $PGP.EncryptFile($FilePath, "$OutFilePath")
+            } else {
+                $PGP.EncryptFile($FilePath, "$($FilePath).pgp")
+            }
+        } catch {
+            if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+                throw
+            } else {
+                Write-Warning -Message "Protect-PGP - Can't encrypt file $($File.FuleName): $($_.Exception.Message)"
+                return
+            }
+        }
+    } elseif ($String) {
+        try {
+            $PGP.EncryptArmoredString($String)
+        } catch {
+            if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+                throw
+            } else {
+                Write-Warning -Message "Protect-PGP - Can't encrypt file $($File.FuleName): $($_.Exception.Message)"
+            }
+        }
+    }
+}
+
+
+
+
+function Test-PGP {
+    [cmdletBinding(DefaultParameterSetName = 'File')]
+    param(
+        [Parameter(Mandatory, ParameterSetName = 'Folder')]
+        [Parameter(Mandatory, ParameterSetName = 'File')]
+        [Parameter(Mandatory, ParameterSetName = 'String')]
+        [string] $FilePathPublic,
+
+        [Parameter(Mandatory, ParameterSetName = 'Folder')][string] $FolderPath,
+        [Parameter(ParameterSetName = 'Folder')][string] $OutputFolderPath,
+
+        [Parameter(Mandatory, ParameterSetName = 'File')][string] $FilePath,
+        [Parameter(ParameterSetName = 'File')][string] $OutFilePath,
+
+        [Parameter(Mandatory, ParameterSetName = 'String')][string] $String
+    )
+    if (Test-Path -LiteralPath $FilePathPublic) {
+        $PublicKey = [System.IO.FileInfo]::new($FilePathPublic)
+    } else {
+        if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+            throw
+        } else {
+            Write-Warning -Message "Test-PGP - Public key doesn't exists $($FilePathPublic): $($_.Exception.Message)"
+            return
+        }
+    }
+    try {
+        $EncryptionKeys = [PgpCore.EncryptionKeys]::new($PublicKey)
+        $PGP = [PgpCore.PGP]::new($EncryptionKeys)
+    } catch {
+        if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+            throw
+        } else {
+            Write-Warning -Message "Test-PGP - Can't test files because: $($_.Exception.Message)"
+            return
+        }
+    }
+    if ($FolderPath) {
+        $ResolvedFolderPath = Resolve-Path -Path $FolderPath
+        foreach ($File in Get-ChildItem -LiteralPath $ResolvedFolderPath.Path -Recurse:$Recursive) {
+            try {
+                $Output = $PGP.VerifyFile($File.FullName)
+                $ErrorMessage = ''
+            } catch {
+                $Output = $false
+                if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+                    throw
+                } else {
+                    Write-Warning -Message "Test-PGP - Can't test file $($File.FuleName): $($_.Exception.Message)"
+                    $ErrorMessage = $($_.Exception.Message)
+                }
+            }
+            [PSCustomObject] @{
+                FilePath = $File.FullName
+                Status   = $Output
+                Error    = $ErrorMessage
+            }
+        }
+    } elseif ($FilePath) {
+        $ResolvedFilePath = Resolve-Path -Path $FilePath
+        try {
+            $Output = $PGP.VerifyFile($ResolvedFilePath.Path)
+        } catch {
+            $Output = $false
+            if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+                throw
+            } else {
+                Write-Warning -Message "Test-PGP - Can't test file $($ResolvedFilePath.Path): $($_.Exception.Message)"
+                $ErrorMessage = $($_.Exception.Message)
+            }
+        }
+        [PSCustomObject] @{
+            FilePath = $ResolvedFilePath.Path
+            Status   = $Output
+            Error    = $ErrorMessage
+        }
+    } elseif ($String) {
+        try {
+            $PGP.VerifyArmoredString($String)
+        } catch {
+            if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+                throw
+            } else {
+                Write-Warning -Message "Test-PGP - Can't test string: $($_.Exception.Message)"
+            }
+        }
+    }
+
+}
+
+
+function Unprotect-PGP {
+    [cmdletBinding(DefaultParameterSetName = 'FolderCredential')]
+    param(
+        [Parameter(Mandatory, ParameterSetName = 'FolderCredential')]
+        [Parameter(Mandatory, ParameterSetName = 'FolderClearText')]
+        [Parameter(Mandatory, ParameterSetName = 'FileCredential')]
+        [Parameter(Mandatory, ParameterSetName = 'FileClearText')]
+        [Parameter(Mandatory, ParameterSetName = 'StringClearText')]
+        [Parameter(Mandatory, ParameterSetName = 'StringCredential')]
+        [string] $FilePathPrivate,
+
+        [Parameter(Mandatory, ParameterSetName = 'FolderClearText')]
+        [Parameter(Mandatory, ParameterSetName = 'FileClearText')]
+        [Parameter(Mandatory, ParameterSetName = 'StringClearText')]
+        [string] $Password,
+
+        [Parameter(Mandatory, ParameterSetName = 'FileCredential')]
+        [Parameter(Mandatory, ParameterSetName = 'FolderCredential')]
+        [Parameter(Mandatory, ParameterSetName = 'StringCredential')]
+        [pscredential] $Credential,
+
+
+        [Parameter(Mandatory, ParameterSetName = 'FolderCredential')]
+        [Parameter(Mandatory, ParameterSetName = 'FolderClearText')]
+        [string] $FolderPath,
+
+        [Parameter(Mandatory, ParameterSetName = 'FolderCredential')]
+        [Parameter(Mandatory, ParameterSetName = 'FolderClearText')]
+        [string] $OutputFolderPath,
+
+        [Parameter(Mandatory, ParameterSetName = 'FileCredential')]
+        [Parameter(Mandatory, ParameterSetName = 'FileClearText')]
+        [string] $FilePath,
+
+        [Parameter(Mandatory, ParameterSetName = 'FileCredential')]
+        [Parameter(Mandatory, ParameterSetName = 'FileClearText')]
+        [string] $OutFilePath,
+
+        [Parameter(Mandatory, ParameterSetName = 'StringClearText')]
+        [Parameter(Mandatory, ParameterSetName = 'StringCredential')]
+        [string] $String
+    )
+
+
+
+    if ($Credential) {
+        $Password = $Credential.GetNetworkCredential().Password
+    }
+
+    if (-not (Test-Path -LiteralPath $FilePathPrivate)) {
+        Write-Warning -Message "Unprotect-PGP - Remove PGP encryption failed because private key not given."
+        return
+    }
+    $PrivateKey = Get-Content -LiteralPath $FilePathPrivate -Raw
+    try {
+        $EncryptionKeys = [PgpCore.EncryptionKeys]::new($PrivateKey, $Password)
+
+        $PGP = [PgpCore.PGP]::new($EncryptionKeys)
+    } catch {
+        if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+            throw
+        } else {
+            Write-Warning -Message "Protect-PGP - Can't encrypt files because: $($_.Exception.Message)"
+            return
+        }
+    }
+    if ($FolderPath) {
+        foreach ($File in Get-ChildItem -LiteralPath $FolderPath -Recurse:$Recursive) {
+            try {
+                if ($OutputFolderPath) {
+                    $OutputFile = [io.Path]::Combine($OutputFolderPath, "$($File.Name.Replace('.pgp',''))")
+                    $PGP.DecryptFile($File.FullName, $OutputFile)
+                } else {
+                    $PGP.DecryptFile($File.FullName, "$($File.FullName)")
+                }
+            } catch {
+                if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+                    throw
+                } else {
+                    Write-Warning -Message "Unprotect-PGP - Remove PGP encryption from $($File.FuleName) failed: $($_.Exception.Message)"
+                    return
+                }
+            }
+        }
+    } elseif ($FilePath) {
+        try {
+            if ($OutFilePath) {
+                $PGP.DecryptFile($FilePath, "$OutFilePath", $FilePathPrivate, $Password)
+            } else {
+                $PGP.DecryptFile($FilePath, "$($FilePath.Replace('.pgp',''))")
+            }
+        } catch {
+            if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+                throw
+            } else {
+                Write-Warning -Message "Unprotect-PGP - Remove PGP encryption from $($File.FuleName) failed: $($_.Exception.Message)"
+                return
+            }
+        }
+    } elseif ($String) {
+        try {
+            $PGP.DecryptArmoredString($String)
+        } catch {
+            if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+                throw
+            } else {
+                Write-Warning -Message "Unprotect-PGP - Remove PGP encryption from string failed: $($_.Exception.Message)"
+                return
+            }
+        }
+    }
+}
+
+
+
+
+Export-ModuleMember -Function *
+

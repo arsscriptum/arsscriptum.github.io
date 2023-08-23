@@ -1,0 +1,47 @@
+[
+  {
+    "FuseId": "F01",
+    "Amperage": "30",
+    "Description": "Ignition coils "
+  },
+  {
+    "FuseId": "F02",
+    "Amperage": "30",
+    "Description": "Coolant thermostat"
+  },
+  {
+    "FuseId": "F03",
+    "Amperage": "20",
+    "Description": "Crankshaft sensor "
+  },
+  {
+    "FuseId": "F04",
+    "Amperage": "30",
+    "Description": "Crankcase breather heaters"
+  },
+  {
+    "FuseId": "F06",
+    "Amperage": "10",
+    "Description": "E"
+  },
+  {
+    "FuseId": "F07",
+    "Amperage": "40",
+    "Description": "Electric coolant pump"
+  },
+  {
+    "FuseId": "",
+    "Amperage": "",
+    "Description": ""
+  },
+  {
+    "FuseId": "K6300 ",
+    "Amperage": "",
+    "Description": "DME main relay"
+  },
+  {
+    "FuseId": "A2076 ",
+    "Amperage": "",
+    "Description": "B"
+  }
+]

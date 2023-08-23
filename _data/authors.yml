@@ -1,0 +1,55 @@
+
+guillaume:
+  name: Guillaume Plante
+  username: guillaume
+  bio: "A developper with a passion for technology, music, astronomy and art. Coding range: hardware/drivers, security, ai,. c/c++, powershell"
+  site: https://arsscriptum.github.io
+  avatar: guillaume_face.png
+  avatar_logo: cybercastor.png
+  face: power.png
+  email: guillaumeplante.qc@gmail.com
+  social:
+      - title: "github"
+        url: "https://github.com/arsscriptum"
+      - title: "linkedin"
+        url: "https://www.linkedin.com/in/planteguilaume"
+      - title: "youtube"
+        url: "https://www.youtube.com/channel/UC_cXD2XltTck3r9wpYaXfhA"
+
+
+cybercastor:
+  name: cybercastor
+  username: cybercastor
+  bio: "Anonymous developper"
+  site: https://arsscriptum.github.io
+  avatar: cybercastor.png
+  face: cybercastor.png
+  avatar_logo: cybercastor.png
+  email: rarebit-hatted.0z@icloud.com
+  social:
+      - title: "github"
+        url: "https://github.com/arsscriptum"
+      - title: "linkedin"
+        url: "https://www.linkedin.com/in/planteguilaume"
+      - title: "youtube"
+        url: "https://www.youtube.com/channel/UC_cXD2XltTck3r9wpYaXfhA"
+
+
+johndoe:
+  name: johndoe
+  username: johndoe
+  bio: "Anonymous developper"
+  site: https://arsscriptum.github.io
+  avatar: johndoe.png
+  avatar_url: johndoe.png
+  face: profile.png
+  avatar_logo: profile.png
+  email: rarebit-hatted.0z@icloud.com
+  social:
+      - title: "github"
+        url: "https://github.com/arsscriptum"
+      - title: "linkedin"
+        url: "https://www.linkedin.com/in/planteguilaume"
+      - title: "youtube"
+        url: "https://www.youtube.com/channel/UC_cXD2XltTck3r9wpYaXfhA"
+

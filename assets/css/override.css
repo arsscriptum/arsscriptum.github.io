@@ -1,0 +1,190 @@
+
+/*
+ OVERRIDE
+/*-----------------------------------------------------------------------------------*/
+
+.car_vid {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  height: auto;
+}
+
+
+.center_vid {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  height: auto;
+  text-align: center;  
+}
+
+.normal_vid {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  height: auto;
+}
+
+.card-img-top-restricted-75 {
+  max-width: 75%;
+  height: auto;
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+  text-align: center;  
+  margin-left: auto;  
+  margin-right: auto;  
+}
+
+.card-img-top-restricted-60 {
+  max-width: 60%;
+  height: auto;
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+  text-align: center;  
+  margin-left: auto;  
+  margin-right: auto;  
+}
+
+
+.card-img-top-restricted-50 {
+  max-width: 50%;
+  height: auto;
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+  text-align: center;  
+  margin-left: auto;  
+  margin-right: auto;  
+}
+
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: rgb(28, 28, 30);
+    color: #f69801;
+    padding: 20px;
+    text-align: center;
+    width: 80%;
+    font-family: 'Quicksand', sans-serif !important;
+    font-feature-settings: "kern"on;
+    font-size: 1.2rem;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: rgb(28, 28, 40);
+    color: #ff7601;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr:active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+.styled-table tbody tr:hover {
+  background: yellow;
+}
+
+.ampfive { 
+  text-align: center; 
+  background-color: #556B2F;
+  color: #ff7601;
+}
+
+.ampten { 
+  text-align: center; 
+  background-color: #006400;
+  color: #ff7601;
+}
+
+.ampfifteen { 
+  text-align: center; 
+  background-color: #00008B;
+  color: #ff7601;
+}
+
+.amptwenty { 
+  text-align: center; 
+  background-color: #FF8C00;
+  color: #8B0000;
+}
+
+.amptwentyfive { 
+  text-align: center; 
+  background-color: #DC143C;
+  color: #FFFFFF;
+}
+
+.ampthirty { 
+  text-align: center; 
+  background-color: #8b0000;
+  color: #FFFFFF;
+}
+
+.ampbig { 
+  text-align: center; 
+  background-color: #FF0000;
+  color: #FFFF00;
+}
+
+
+hr {
+    height: 3px;
+    background-color: #f69801;
+    border: none;
+}
+
+/* Red border */
+hr.new1 {
+  border-top: 1px solid red;
+}
+
+/* Dashed red border */
+hr.new2 {
+  border-top: 1px dashed red;
+}
+
+/* Dotted red border */
+hr.new3 {
+  border-top: 1px dotted red;
+}
+
+/* Thick red border */
+hr.new4 {
+  border: 1px solid red;
+}
+
+/* Large rounded green border */
+hr.new5 {
+  border: 10px solid green;
+  border-radius: 5px;
+}
+
+hr.orange {
+    height: 3px;
+    background-color: #f69801;
+    border: none;
+}

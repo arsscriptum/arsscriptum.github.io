@@ -1,0 +1,1298 @@
+[
+  {
+    "Filename": "MSSpeech_SR_en-US_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_en-US_TELE.msi",
+    "Name": "TELE",
+    "Country": "US",
+    "Language": "English",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_en-US_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_en-US_TELE.msi",
+    "Name": "TELE",
+    "Country": "US",
+    "Language": "English",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_ca-ES_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_ca-ES_TELE.msi",
+    "Name": "TELE",
+    "Country": "ES",
+    "Language": "Catalan",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_ca-ES_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_ca-ES_TELE.msi",
+    "Name": "TELE",
+    "Country": "ES",
+    "Language": "Catalan",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_da-DK_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_da-DK_TELE.msi",
+    "Name": "TELE",
+    "Country": "DK",
+    "Language": "Danish",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_da-DK_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_da-DK_TELE.msi",
+    "Name": "TELE",
+    "Country": "DK",
+    "Language": "Danish",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_de-DE_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_de-DE_TELE.msi",
+    "Name": "TELE",
+    "Country": "DE",
+    "Language": "German",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_de-DE_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_de-DE_TELE.msi",
+    "Name": "TELE",
+    "Country": "DE",
+    "Language": "German",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_en-AU_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_en-AU_TELE.msi",
+    "Name": "TELE",
+    "Country": "AU",
+    "Language": "English",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_en-AU_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_en-AU_TELE.msi",
+    "Name": "TELE",
+    "Country": "AU",
+    "Language": "English",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_en-CA_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_en-CA_TELE.msi",
+    "Name": "TELE",
+    "Country": "CA",
+    "Language": "English",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_en-CA_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_en-CA_TELE.msi",
+    "Name": "TELE",
+    "Country": "CA",
+    "Language": "English",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_en-GB_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_en-GB_TELE.msi",
+    "Name": "TELE",
+    "Country": "GB",
+    "Language": "English",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_en-GB_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_en-GB_TELE.msi",
+    "Name": "TELE",
+    "Country": "GB",
+    "Language": "English",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_en-IN_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_en-IN_TELE.msi",
+    "Name": "TELE",
+    "Country": "IN",
+    "Language": "English",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_en-IN_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_en-IN_TELE.msi",
+    "Name": "TELE",
+    "Country": "IN",
+    "Language": "English",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_es-ES_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_es-ES_TELE.msi",
+    "Name": "TELE",
+    "Country": "ES",
+    "Language": "Spanish",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_es-ES_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_es-ES_TELE.msi",
+    "Name": "TELE",
+    "Country": "ES",
+    "Language": "Spanish",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_es-MX_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_es-MX_TELE.msi",
+    "Name": "TELE",
+    "Country": "MX",
+    "Language": "Spanish",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_es-MX_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_es-MX_TELE.msi",
+    "Name": "TELE",
+    "Country": "MX",
+    "Language": "Spanish",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_fi-FI_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_fi-FI_TELE.msi",
+    "Name": "TELE",
+    "Country": "FI",
+    "Language": "Finnish",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_fi-FI_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_fi-FI_TELE.msi",
+    "Name": "TELE",
+    "Country": "FI",
+    "Language": "Finnish",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_fr-CA_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_fr-CA_TELE.msi",
+    "Name": "TELE",
+    "Country": "CA",
+    "Language": "French",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_fr-CA_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_fr-CA_TELE.msi",
+    "Name": "TELE",
+    "Country": "CA",
+    "Language": "French",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_fr-FR_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_fr-FR_TELE.msi",
+    "Name": "TELE",
+    "Country": "FR",
+    "Language": "French",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_fr-FR_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_fr-FR_TELE.msi",
+    "Name": "TELE",
+    "Country": "FR",
+    "Language": "French",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_it-IT_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_it-IT_TELE.msi",
+    "Name": "TELE",
+    "Country": "IT",
+    "Language": "Italian",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_it-IT_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_it-IT_TELE.msi",
+    "Name": "TELE",
+    "Country": "IT",
+    "Language": "Italian",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_ja-JP_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_ja-JP_TELE.msi",
+    "Name": "TELE",
+    "Country": "JP",
+    "Language": "Japanese",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_ja-JP_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_ja-JP_TELE.msi",
+    "Name": "TELE",
+    "Country": "JP",
+    "Language": "Japanese",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_ko-KR_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_ko-KR_TELE.msi",
+    "Name": "TELE",
+    "Country": "KR",
+    "Language": "Korean",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_ko-KR_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_ko-KR_TELE.msi",
+    "Name": "TELE",
+    "Country": "KR",
+    "Language": "Korean",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_nb-NO_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_nb-NO_TELE.msi",
+    "Name": "TELE",
+    "Country": "NO",
+    "Language": "Norwegian Bokmal",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_nb-NO_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_nb-NO_TELE.msi",
+    "Name": "TELE",
+    "Country": "NO",
+    "Language": "Norwegian Bokmal",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_nl-NL_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_nl-NL_TELE.msi",
+    "Name": "TELE",
+    "Country": "NL",
+    "Language": "Dutch",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_nl-NL_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_nl-NL_TELE.msi",
+    "Name": "TELE",
+    "Country": "NL",
+    "Language": "Dutch",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_pl-PL_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_pl-PL_TELE.msi",
+    "Name": "TELE",
+    "Country": "PL",
+    "Language": "Polish",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_pl-PL_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_pl-PL_TELE.msi",
+    "Name": "TELE",
+    "Country": "PL",
+    "Language": "Polish",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_pt-BR_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_pt-BR_TELE.msi",
+    "Name": "TELE",
+    "Country": "BR",
+    "Language": "Portuguese",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_pt-BR_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_pt-BR_TELE.msi",
+    "Name": "TELE",
+    "Country": "BR",
+    "Language": "Portuguese",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_pt-PT_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_pt-PT_TELE.msi",
+    "Name": "TELE",
+    "Country": "PT",
+    "Language": "Portuguese",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_pt-PT_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_pt-PT_TELE.msi",
+    "Name": "TELE",
+    "Country": "PT",
+    "Language": "Portuguese",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_ru-RU_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_ru-RU_TELE.msi",
+    "Name": "TELE",
+    "Country": "RU",
+    "Language": "Russian",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_ru-RU_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_ru-RU_TELE.msi",
+    "Name": "TELE",
+    "Country": "RU",
+    "Language": "Russian",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_sv-SE_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_sv-SE_TELE.msi",
+    "Name": "TELE",
+    "Country": "SE",
+    "Language": "Swedish",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_sv-SE_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_sv-SE_TELE.msi",
+    "Name": "TELE",
+    "Country": "SE",
+    "Language": "Swedish",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_zh-CN_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_zh-CN_TELE.msi",
+    "Name": "TELE",
+    "Country": "CN",
+    "Language": "Chinese",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_zh-CN_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_zh-CN_TELE.msi",
+    "Name": "TELE",
+    "Country": "CN",
+    "Language": "Chinese",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_zh-HK_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_zh-HK_TELE.msi",
+    "Name": "TELE",
+    "Country": "HK",
+    "Language": "Chinese",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_zh-HK_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_zh-HK_TELE.msi",
+    "Name": "TELE",
+    "Country": "HK",
+    "Language": "Chinese",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_zh-TW_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_zh-TW_TELE.msi",
+    "Name": "TELE",
+    "Country": "TW",
+    "Language": "Chinese",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_zh-TW_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_zh-TW_TELE.msi",
+    "Name": "TELE",
+    "Country": "TW",
+    "Language": "Chinese",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_TTS_ca-ES_Herena.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_ca-ES_Herena.msi",
+    "Name": "Herena",
+    "Country": "ES",
+    "Language": "Catalan",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_ca-ES_Herena.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_ca-ES_Herena.msi",
+    "Name": "Herena",
+    "Country": "ES",
+    "Language": "Catalan",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_da-DK_Helle.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_da-DK_Helle.msi",
+    "Name": "Helle",
+    "Country": "DK",
+    "Language": "Danish",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_da-DK_Helle.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_da-DK_Helle.msi",
+    "Name": "Helle",
+    "Country": "DK",
+    "Language": "Danish",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_de-DE_Hedda.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_de-DE_Hedda.msi",
+    "Name": "Hedda",
+    "Country": "DE",
+    "Language": "German",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_de-DE_Hedda.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_de-DE_Hedda.msi",
+    "Name": "Hedda",
+    "Country": "DE",
+    "Language": "German",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_en-AU_Hayley.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_en-AU_Hayley.msi",
+    "Name": "Hayley",
+    "Country": "AU",
+    "Language": "English",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_en-AU_Hayley.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_en-AU_Hayley.msi",
+    "Name": "Hayley",
+    "Country": "AU",
+    "Language": "English",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_en-CA_Heather.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_en-CA_Heather.msi",
+    "Name": "Heather",
+    "Country": "CA",
+    "Language": "English",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_en-CA_Heather.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_en-CA_Heather.msi",
+    "Name": "Heather",
+    "Country": "CA",
+    "Language": "English",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_en-GB_Hazel.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_en-GB_Hazel.msi",
+    "Name": "Hazel",
+    "Country": "GB",
+    "Language": "English",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_en-GB_Hazel.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_en-GB_Hazel.msi",
+    "Name": "Hazel",
+    "Country": "GB",
+    "Language": "English",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_en-IN_Heera.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_en-IN_Heera.msi",
+    "Name": "Heera",
+    "Country": "IN",
+    "Language": "English",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_en-IN_Heera.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_en-IN_Heera.msi",
+    "Name": "Heera",
+    "Country": "IN",
+    "Language": "English",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_en-US_Helen.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_en-US_Helen.msi",
+    "Name": "Helen",
+    "Country": "US",
+    "Language": "English",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_en-US_Helen.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_en-US_Helen.msi",
+    "Name": "Helen",
+    "Country": "US",
+    "Language": "English",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_en-US_ZiraPro.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_en-US_ZiraPro.msi",
+    "Name": "ZiraPro",
+    "Country": "US",
+    "Language": "English",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_en-US_ZiraPro.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_en-US_ZiraPro.msi",
+    "Name": "ZiraPro",
+    "Country": "US",
+    "Language": "English",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_es-ES_Helena.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_es-ES_Helena.msi",
+    "Name": "Helena",
+    "Country": "ES",
+    "Language": "Spanish",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_es-ES_Helena.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_es-ES_Helena.msi",
+    "Name": "Helena",
+    "Country": "ES",
+    "Language": "Spanish",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_es-MX_Hilda.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_es-MX_Hilda.msi",
+    "Name": "Hilda",
+    "Country": "MX",
+    "Language": "Spanish",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_es-MX_Hilda.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_es-MX_Hilda.msi",
+    "Name": "Hilda",
+    "Country": "MX",
+    "Language": "Spanish",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_fi-FI_Heidi.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_fi-FI_Heidi.msi",
+    "Name": "Heidi",
+    "Country": "FI",
+    "Language": "Finnish",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_fi-FI_Heidi.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_fi-FI_Heidi.msi",
+    "Name": "Heidi",
+    "Country": "FI",
+    "Language": "Finnish",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_fr-CA_Harmonie.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_fr-CA_Harmonie.msi",
+    "Name": "Harmonie",
+    "Country": "CA",
+    "Language": "French",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_fr-CA_Harmonie.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_fr-CA_Harmonie.msi",
+    "Name": "Harmonie",
+    "Country": "CA",
+    "Language": "French",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_fr-FR_Hortense.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_fr-FR_Hortense.msi",
+    "Name": "Hortense",
+    "Country": "FR",
+    "Language": "French",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_fr-FR_Hortense.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_fr-FR_Hortense.msi",
+    "Name": "Hortense",
+    "Country": "FR",
+    "Language": "French",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_it-IT_Lucia.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_it-IT_Lucia.msi",
+    "Name": "Lucia",
+    "Country": "IT",
+    "Language": "Italian",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_it-IT_Lucia.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_it-IT_Lucia.msi",
+    "Name": "Lucia",
+    "Country": "IT",
+    "Language": "Italian",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_ja-JP_Haruka.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_ja-JP_Haruka.msi",
+    "Name": "Haruka",
+    "Country": "JP",
+    "Language": "Japanese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_ja-JP_Haruka.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_ja-JP_Haruka.msi",
+    "Name": "Haruka",
+    "Country": "JP",
+    "Language": "Japanese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_ko-KR_Heami.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_ko-KR_Heami.msi",
+    "Name": "Heami",
+    "Country": "KR",
+    "Language": "Korean",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_ko-KR_Heami.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_ko-KR_Heami.msi",
+    "Name": "Heami",
+    "Country": "KR",
+    "Language": "Korean",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_nb-NO_Hulda.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_nb-NO_Hulda.msi",
+    "Name": "Hulda",
+    "Country": "NO",
+    "Language": "Norwegian Bokmal",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_nb-NO_Hulda.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_nb-NO_Hulda.msi",
+    "Name": "Hulda",
+    "Country": "NO",
+    "Language": "Norwegian Bokmal",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_nl-NL_Hanna.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_nl-NL_Hanna.msi",
+    "Name": "Hanna",
+    "Country": "NL",
+    "Language": "Dutch",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_nl-NL_Hanna.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_nl-NL_Hanna.msi",
+    "Name": "Hanna",
+    "Country": "NL",
+    "Language": "Dutch",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_pl-PL_Paulina.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_pl-PL_Paulina.msi",
+    "Name": "Paulina",
+    "Country": "PL",
+    "Language": "Polish",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_pl-PL_Paulina.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_pl-PL_Paulina.msi",
+    "Name": "Paulina",
+    "Country": "PL",
+    "Language": "Polish",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_pt-BR_Heloisa.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_pt-BR_Heloisa.msi",
+    "Name": "Heloisa",
+    "Country": "BR",
+    "Language": "Portuguese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_pt-BR_Heloisa.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_pt-BR_Heloisa.msi",
+    "Name": "Heloisa",
+    "Country": "BR",
+    "Language": "Portuguese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_pt-PT_Helia.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_pt-PT_Helia.msi",
+    "Name": "Helia",
+    "Country": "PT",
+    "Language": "Portuguese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_pt-PT_Helia.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_pt-PT_Helia.msi",
+    "Name": "Helia",
+    "Country": "PT",
+    "Language": "Portuguese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_pt-PT_Helia16k.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_pt-PT_Helia16k.msi",
+    "Name": "Helia16k",
+    "Country": "PT",
+    "Language": "Portuguese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_pt-PT_Helia16k.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_pt-PT_Helia16k.msi",
+    "Name": "Helia16k",
+    "Country": "PT",
+    "Language": "Portuguese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_ru-RU_Elena.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_ru-RU_Elena.msi",
+    "Name": "Elena",
+    "Country": "RU",
+    "Language": "Russian",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_ru-RU_Elena.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_ru-RU_Elena.msi",
+    "Name": "Elena",
+    "Country": "RU",
+    "Language": "Russian",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_sv-SE_Hedvig.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_sv-SE_Hedvig.msi",
+    "Name": "Hedvig",
+    "Country": "SE",
+    "Language": "Swedish",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_sv-SE_Hedvig.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_sv-SE_Hedvig.msi",
+    "Name": "Hedvig",
+    "Country": "SE",
+    "Language": "Swedish",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_zh-CN_HuiHui.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_zh-CN_HuiHui.msi",
+    "Name": "HuiHui",
+    "Country": "CN",
+    "Language": "Chinese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_zh-CN_HuiHui.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_zh-CN_HuiHui.msi",
+    "Name": "HuiHui",
+    "Country": "CN",
+    "Language": "Chinese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_zh-HK_HunYee.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_zh-HK_HunYee.msi",
+    "Name": "HunYee",
+    "Country": "HK",
+    "Language": "Chinese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_zh-HK_HunYee.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_zh-HK_HunYee.msi",
+    "Name": "HunYee",
+    "Country": "HK",
+    "Language": "Chinese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_zh-TW_HanHan.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_zh-TW_HanHan.msi",
+    "Name": "HanHan",
+    "Country": "TW",
+    "Language": "Chinese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_zh-TW_HanHan.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_zh-TW_HanHan.msi",
+    "Name": "HanHan",
+    "Country": "TW",
+    "Language": "Chinese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_SR_en-US_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_en-US_TELE.msi",
+    "Name": "TELE",
+    "Country": "US",
+    "Language": "English",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_ca-ES_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_ca-ES_TELE.msi",
+    "Name": "TELE",
+    "Country": "ES",
+    "Language": "Catalan",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_da-DK_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_da-DK_TELE.msi",
+    "Name": "TELE",
+    "Country": "DK",
+    "Language": "Danish",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_de-DE_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_de-DE_TELE.msi",
+    "Name": "TELE",
+    "Country": "DE",
+    "Language": "German",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_en-AU_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_en-AU_TELE.msi",
+    "Name": "TELE",
+    "Country": "AU",
+    "Language": "English",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_en-CA_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_en-CA_TELE.msi",
+    "Name": "TELE",
+    "Country": "CA",
+    "Language": "English",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_en-GB_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_en-GB_TELE.msi",
+    "Name": "TELE",
+    "Country": "GB",
+    "Language": "English",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_en-IN_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_en-IN_TELE.msi",
+    "Name": "TELE",
+    "Country": "IN",
+    "Language": "English",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_es-ES_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_es-ES_TELE.msi",
+    "Name": "TELE",
+    "Country": "ES",
+    "Language": "Spanish",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_es-MX_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_es-MX_TELE.msi",
+    "Name": "TELE",
+    "Country": "MX",
+    "Language": "Spanish",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_fi-FI_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_fi-FI_TELE.msi",
+    "Name": "TELE",
+    "Country": "FI",
+    "Language": "Finnish",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_fr-CA_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_fr-CA_TELE.msi",
+    "Name": "TELE",
+    "Country": "CA",
+    "Language": "French",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_fr-FR_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_fr-FR_TELE.msi",
+    "Name": "TELE",
+    "Country": "FR",
+    "Language": "French",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_it-IT_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_it-IT_TELE.msi",
+    "Name": "TELE",
+    "Country": "IT",
+    "Language": "Italian",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_ja-JP_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_ja-JP_TELE.msi",
+    "Name": "TELE",
+    "Country": "JP",
+    "Language": "Japanese",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_ko-KR_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_ko-KR_TELE.msi",
+    "Name": "TELE",
+    "Country": "KR",
+    "Language": "Korean",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_nb-NO_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_nb-NO_TELE.msi",
+    "Name": "TELE",
+    "Country": "NO",
+    "Language": "Norwegian Bokmal",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_nl-NL_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_nl-NL_TELE.msi",
+    "Name": "TELE",
+    "Country": "NL",
+    "Language": "Dutch",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_pl-PL_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_pl-PL_TELE.msi",
+    "Name": "TELE",
+    "Country": "PL",
+    "Language": "Polish",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_pt-BR_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_pt-BR_TELE.msi",
+    "Name": "TELE",
+    "Country": "BR",
+    "Language": "Portuguese",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_pt-PT_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_pt-PT_TELE.msi",
+    "Name": "TELE",
+    "Country": "PT",
+    "Language": "Portuguese",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_ru-RU_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_ru-RU_TELE.msi",
+    "Name": "TELE",
+    "Country": "RU",
+    "Language": "Russian",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_sv-SE_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_sv-SE_TELE.msi",
+    "Name": "TELE",
+    "Country": "SE",
+    "Language": "Swedish",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_zh-CN_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_zh-CN_TELE.msi",
+    "Name": "TELE",
+    "Country": "CN",
+    "Language": "Chinese",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_zh-HK_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_zh-HK_TELE.msi",
+    "Name": "TELE",
+    "Country": "HK",
+    "Language": "Chinese",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_SR_zh-TW_TELE.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_SR_zh-TW_TELE.msi",
+    "Name": "TELE",
+    "Country": "TW",
+    "Language": "Chinese",
+    "Library": "SR"
+  },
+  {
+    "Filename": "MSSpeech_TTS_ca-ES_Herena.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_ca-ES_Herena.msi",
+    "Name": "Herena",
+    "Country": "ES",
+    "Language": "Catalan",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_da-DK_Helle.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_da-DK_Helle.msi",
+    "Name": "Helle",
+    "Country": "DK",
+    "Language": "Danish",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_de-DE_Hedda.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_de-DE_Hedda.msi",
+    "Name": "Hedda",
+    "Country": "DE",
+    "Language": "German",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_en-AU_Hayley.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_en-AU_Hayley.msi",
+    "Name": "Hayley",
+    "Country": "AU",
+    "Language": "English",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_en-CA_Heather.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_en-CA_Heather.msi",
+    "Name": "Heather",
+    "Country": "CA",
+    "Language": "English",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_en-GB_Hazel.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_en-GB_Hazel.msi",
+    "Name": "Hazel",
+    "Country": "GB",
+    "Language": "English",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_en-IN_Heera.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_en-IN_Heera.msi",
+    "Name": "Heera",
+    "Country": "IN",
+    "Language": "English",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_en-US_Helen.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_en-US_Helen.msi",
+    "Name": "Helen",
+    "Country": "US",
+    "Language": "English",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_en-US_ZiraPro.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_en-US_ZiraPro.msi",
+    "Name": "ZiraPro",
+    "Country": "US",
+    "Language": "English",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_es-ES_Helena.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_es-ES_Helena.msi",
+    "Name": "Helena",
+    "Country": "ES",
+    "Language": "Spanish",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_es-MX_Hilda.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_es-MX_Hilda.msi",
+    "Name": "Hilda",
+    "Country": "MX",
+    "Language": "Spanish",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_fi-FI_Heidi.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_fi-FI_Heidi.msi",
+    "Name": "Heidi",
+    "Country": "FI",
+    "Language": "Finnish",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_fr-CA_Harmonie.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_fr-CA_Harmonie.msi",
+    "Name": "Harmonie",
+    "Country": "CA",
+    "Language": "French",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_fr-FR_Hortense.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_fr-FR_Hortense.msi",
+    "Name": "Hortense",
+    "Country": "FR",
+    "Language": "French",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_it-IT_Lucia.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_it-IT_Lucia.msi",
+    "Name": "Lucia",
+    "Country": "IT",
+    "Language": "Italian",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_ja-JP_Haruka.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_ja-JP_Haruka.msi",
+    "Name": "Haruka",
+    "Country": "JP",
+    "Language": "Japanese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_ko-KR_Heami.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_ko-KR_Heami.msi",
+    "Name": "Heami",
+    "Country": "KR",
+    "Language": "Korean",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_nb-NO_Hulda.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_nb-NO_Hulda.msi",
+    "Name": "Hulda",
+    "Country": "NO",
+    "Language": "Norwegian Bokmal",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_nl-NL_Hanna.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_nl-NL_Hanna.msi",
+    "Name": "Hanna",
+    "Country": "NL",
+    "Language": "Dutch",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_pl-PL_Paulina.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_pl-PL_Paulina.msi",
+    "Name": "Paulina",
+    "Country": "PL",
+    "Language": "Polish",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_pt-BR_Heloisa.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_pt-BR_Heloisa.msi",
+    "Name": "Heloisa",
+    "Country": "BR",
+    "Language": "Portuguese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_pt-PT_Helia.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_pt-PT_Helia.msi",
+    "Name": "Helia",
+    "Country": "PT",
+    "Language": "Portuguese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_pt-PT_Helia16k.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_pt-PT_Helia16k.msi",
+    "Name": "Helia16k",
+    "Country": "PT",
+    "Language": "Portuguese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_ru-RU_Elena.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_ru-RU_Elena.msi",
+    "Name": "Elena",
+    "Country": "RU",
+    "Language": "Russian",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_sv-SE_Hedvig.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_sv-SE_Hedvig.msi",
+    "Name": "Hedvig",
+    "Country": "SE",
+    "Language": "Swedish",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_zh-CN_HuiHui.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_zh-CN_HuiHui.msi",
+    "Name": "HuiHui",
+    "Country": "CN",
+    "Language": "Chinese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_zh-HK_HunYee.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_zh-HK_HunYee.msi",
+    "Name": "HunYee",
+    "Country": "HK",
+    "Language": "Chinese",
+    "Library": "TTS"
+  },
+  {
+    "Filename": "MSSpeech_TTS_zh-TW_HanHan.msi",
+    "Link": "https://download.microsoft.com/download/4/0/D/40D6347A-AFA5-417D-A9BB-173D937BEED4/MSSpeech_TTS_zh-TW_HanHan.msi",
+    "Name": "HanHan",
+    "Country": "TW",
+    "Language": "Chinese",
+    "Library": "TTS"
+  }
+]

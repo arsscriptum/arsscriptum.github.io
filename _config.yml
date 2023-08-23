@@ -1,0 +1,205 @@
+title: Ars Scriptum
+subtitle: guillaume's blog
+description: >- # this means to ignore newlines until "baseurl:"
+  A developper with a passion for technology, music, astronomy and art. Coding range: hardware/drivers, security, ai,. c/c++, powershell.
+
+url: "" # the base hostname & protocol for your site, e.g. https://example.github.io
+baseurl: "" # the subpath of your site, e.g. /blog
+
+# Navigation
+urls:
+    - text: Home
+      url: /
+    - text: About
+      url: /about
+    - text: Blog
+      url: /blog
+  #  - text: Documentation
+  #    url: /documentation
+
+
+
+author_face: guillaume.png
+author_logo: cybercastor.png
+author: Guillaume Plante
+#author_bio: welcome
+author_email: "guillaumeplante.qc@gmail.com"
+author_location: Quebec
+author_website_url: "https://arsscriptum.github.io"
+typewrite-text: guillaume's blog - miscellaneous projects and scripts sharing
+hero_cover_img: home-bg.jpg # replace this for changing homepage cover (eg. try cover.jpeg). Image should be in /assets/img
+
+# Experiences
+author_work_experiences:
+            - company_name: Ubisoft
+              company_logo: ubisoft.png
+              company_url: https://ubisoft.com
+              designation: Network Programer
+              description: Ghost Recon, Rainbow 6, Splinter Cell, ++
+              visibility: true
+            - company_name: Electronic Arts
+              company_logo: ea.png
+              company_url: https://ea.com
+              designation: Senior Programmer
+              description: "Army of Two: the 40th day"
+              visibility: true
+            - company_name: Pandemic Studios
+              company_logo: pandemic.png
+              company_url: https://en.wikipedia.org/wiki/Pandemic_Studios
+              designation: Senior Network Programmer
+              description: Mercenaries 2
+              visibility: true
+
+# Education
+author_education_details:
+              - college_logo: laval.png
+                college_name: Laval
+                college_url: https://www.ulaval.ca/en
+                college_degree: Programming
+                description: Programming
+                visibility: true
+
+
+# social links
+twitter_username: cybercastor
+github_username:  arsscriptum
+linkedin_username: planteguillaume
+
+
+# wakatime username (coding activity)
+wakatime_username: arsscriptum
+
+
+# releases - widget can be (sidebar, modal or embed)
+olvy_organization: arsscriptum
+olvy_widget_type: sidebar
+
+# syntax highlighter
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+# Choose what to show ( can be true or false)
+show_author_work_experiences: true
+show_author_education_details: true
+show_author_project_details: false
+
+# pagination of posts
+paginate: 4
+per_page: 4
+paginate_path: "/blog/page/:num/"
+
+
+# minify
+# compress_html:
+#   clippings: all
+#   comments: ["<!-- ", " -->"]
+#   endings: all
+#   ignore:
+#     envs: ['development']
+
+# Archives
+# jekyll-archives:
+#   enabled:
+#     - categories
+#   layout: archive
+#   permalinks:
+#     category: '/category/:name/'
+
+collections:
+  products:
+    output: true
+  authors:
+    output: true
+
+defaults:
+  -
+    scope:
+      path: "documentation"
+    values:
+      permalink: /:path/:basename:output_ext
+  -
+    scope:
+      path: ""
+      type: authors
+    values:
+      layout: author
+      permalink: /blog/authors/:slug
+  -
+    scope:
+      path: 'assets/**'
+    values:
+      sitemap: false
+
+# Build settings
+plugins:
+  - jekyll-paginate
+  - jekyll-gist
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-admin
+
+# Jekyll Admin Config
+jekyll_admin:
+  # hidden_links:
+  #   - posts
+  #   - pages
+  #   - staticfiles 
+  #   - datafiles
+  #   - configuration
+  homepage: "posts"
+
+
+# Exclude from processing.
+# The following items will not be processed, by default.
+# Any item listed under the `exclude:` key here will be automatically added to
+# the internal "default list".
+#
+# Excluded items can be processed by explicitly listing the directories or
+# their entries' file path in the `include:` list.
+
+### Switching Deployment Strategy (in DEPLOY_STRATEGY) file change the key accordingly:
+# none - For no default
+# gh-pages - For Github Pages
+# firebase - For Firebase Hosting
+
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/ 
+  - vendor/gems/
+  - vendor/ruby/
+  - assets/bower_components/isotope-layout/README.md
+  - assets/bower_components/icono/README.md
+  - assets/bower_components/font-awesome/advanced-options/use-with-node-js/fontawesome-svg-core/README.md
+  - assets/bower_components/ghosthunter/README.md
+  - assets/bower_components/nanobar/README.md
+  - assets/bower_components/lightgallery/demo/README.md
+  - assets/bower_components/font-awesome/advanced-options/use-with-node-js/free-brands-svg-icons/README.md
+  - assets/bower_components/font-awesome/advanced-options/use-with-node-js/free-solid-svg-icons/README.md
+  - assets/bower_components/jquery-mousewheel/README.md
+  - assets/bower_components/get-size/README.md
+  - assets/bower_components/font-awesome/advanced-options/use-with-node-js/fontawesome/README.md
+  - assets/bower_components/jquery-mousewheel/ChangeLog/README.md
+  - assets/bower_components/font-awesome/advanced-options/use-with-node-js/fontawesome-free-regular/README.md
+  - assets/bower_components/desandro-matches-selector/README.md
+  - assets/bower_components/ev-emitter/README.md
+  - assets/bower_components/font-awesome/README.md
+  - assets/bower_components/font-awesome/advanced-options/use-with-node-js/fontawesome-free-solid/README.md
+  - assets/bower_components/font-awesome/advanced-options/use-with-node-js/fontawesome-free/README.md
+  - assets/bower_components/font-awesome/advanced-options/use-with-node-js/fontawesome-free-webfonts/README.md
+  - assets/bower_components/font-awesome/advanced-options/use-with-node-js/fontawesome-free-brands/README.md
+  - assets/bower_components/font-awesome/advanced-options/use-with-node-js/fontawesome-common-types/README.md
+  - assets/bower_components/ghosthunter/example/Index.html
+  - assets/bower_components/lightgallery/test/lightgallery.html
+  - assets/bower_components/masonry-layout/README.md
+  - assets/bower_components/imagesloaded/README.md
+
+
+destination: ./_site
+

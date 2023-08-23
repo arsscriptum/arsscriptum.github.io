@@ -1,0 +1,10 @@
+0.0.0.0     browser.events.data.msn.com
+0.0.0.0     browser.events.data.microsoft.com
+0.0.0.0     config.edge.skype.com
+0.0.0.0     cxcs.microsoft.net
+0.0.0.0     evoke-windowsservices-tas.msedge.net
+0.0.0.0     self.events.data.microsoft.com
+0.0.0.0     settings-win.data.microsoft.com
+0.0.0.0     settings.data.microsoft.com
+0.0.0.0     umwatson.events.data.microsoft.com
+0.0.0.0     watson.telemetry.microsoft.com

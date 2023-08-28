@@ -111,5 +111,5 @@ Example Functions
 
 ### Get the Code
 
-[Counters on GitHub](https://github.com/arsscriptum/PowerShell.Reddit.Support/tree/main/Counters)
+[Counters on GitHub](https://github.com/arsscriptum/PowerShell.Public.Sandbox/blob/master/Counters)
 

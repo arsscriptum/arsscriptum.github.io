@@ -42,6 +42,7 @@ param(
     $WriteConsoleScriptPath = Join-Path $ScriptsPath 'WriteConsoleExtended.ps1'
     . "$SiteVersionScriptPath"
     . "$WriteConsoleScriptPath"
+read-host "d"
     #===============================================================================
     # Root Path
     #===============================================================================

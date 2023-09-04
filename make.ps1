@@ -35,8 +35,8 @@ param(
         return ((Get-Item $ThisFile)|select $prop).$prop
     }
 
-    $MakeScriptPath = split-path $script:MyInvocation.MyCommand.Path
-    $ScriptFullName =(Get-Item -Path $script:MyInvocation.MyCommand.Path).FullName
+    $MakeScriptPath = "$PSScriptRoot"
+    $ScriptFullName ="$PSScriptRoot\Make.ps1"
     $ScriptsPath = Join-Path $MakeScriptPath 'scripts'
     $SiteVersionScriptPath = Join-Path $ScriptsPath 'SiteVersion.ps1'
     $WriteConsoleScriptPath = Join-Path $ScriptsPath 'WriteConsoleExtended.ps1'

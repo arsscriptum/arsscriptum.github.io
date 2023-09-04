@@ -9,10 +9,10 @@ name: "Jekyll CI"
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ master ]
+    branches: [ live ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ master ]
+    branches: [ live ]
   # Triggers the workflow on push or pull request events but only for the main branch
   schedule:
     # Runs at 6am UTC every Monday
@@ -22,7 +22,7 @@ on:
 jobs:
   # Check the Jekyll itself for errors and syntax
   build:
-    name: Jekyll Build
+    name: ArsScriptum Jekyll Build
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     # Check that the Jekyll can actually build

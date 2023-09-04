@@ -42,7 +42,7 @@ param(
     $WriteConsoleScriptPath = Join-Path $ScriptsPath 'WriteConsoleExtended.ps1'
     . "$SiteVersionScriptPath"
     . "$WriteConsoleScriptPath"
-read-host "d"
+
     #===============================================================================
     # Root Path
     #===============================================================================
@@ -58,6 +58,7 @@ read-host "d"
     }else{
         $Global:ModuleIdentifier = (Get-Item $Script:RootPath).Name
     }
+
     #===============================================================================
     # Script Variables
     #===============================================================================

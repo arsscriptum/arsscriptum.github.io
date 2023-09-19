@@ -683,4 +683,4 @@ where the script will be uploaded before used.
 [PowerShell.PSProtector.Analysis on GitHub](https://github.com/arsscriptum/PowerShell.PSProtector.Analysis)
 
 
-***Important Note*** Do You have Issues accessing the core repository? **Don't be shy and send me an** [EMAIL](mailto:guillaumeplante.qc@gmail.com) **and I will fix access for you**
+***Important Note*** Do You have Issues accessing the core repository? **Don't be shy and send me an** [EMAIL to guillaumeplante.qc@gmail.com](mailto:guillaumeplante.qc@gmail.com) **and I will fix access for you**

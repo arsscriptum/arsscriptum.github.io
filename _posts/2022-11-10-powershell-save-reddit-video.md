@@ -30,11 +30,6 @@ Save a Reddit Video using PowerShell script. Also contains a native, custom prog
 ---------------------------------------------------------------------------------------------------------
 
 
-![HowTo](https://raw.githubusercontent.com/arsscriptum/PowerShell.SaveRedditVideo/main/doc/s2.gif)
-![HowTo](https://raw.githubusercontent.com/arsscriptum/PowerShell.SaveRedditVideo/main/doc/demo.gif)
-
----------------------------------------------------------------------------------------------------------
-
 
 ```
     Save-RedditVideo.ps1 -Url "https://www.reddit.com/r/ukraine/comments/yqwngl/volodymyr_zelenskyy_official_nov_9th_2022_about/"
@@ -45,7 +40,7 @@ Save a Reddit Video using PowerShell script. Also contains a native, custom prog
 
 
 
- ####  Get-RedditVideoUrl 
+####  Get-RedditVideoUrl 
 
 
 ```powershell
@@ -120,7 +115,7 @@ Save a Reddit Video using PowerShell script. Also contains a native, custom prog
 ```
 
 ---------------------------------------------------------------------------------------------------------
- ####  Save-RedditVideo 
+####  Save-RedditVideo 
 
 
 ```powershell
@@ -231,6 +226,14 @@ Save a Reddit Video using PowerShell script. Also contains a native, custom prog
 
 <br>
 <center>
+<img src="https://arsscriptum.github.io/assets/img/posts/reddit-video/s2.gif" alt="table" />
+</center>
+<br>
+
+---------------------------------------------------------------------------------------------------------
+
+<br>
+<center>
 <img src="https://arsscriptum.github.io/assets/img/posts/reddit-video/demo.gif" alt="table" />
 </center>
 <br>
@@ -248,14 +251,14 @@ Save a Reddit Video using PowerShell script. Also contains a native, custom prog
 
 ### Write-AsciiProgressBar 
 
-Native version of this litle project: https://github.com/arsscriptum/PowerShell.CustomProgressBar
+Native version of this litle project: [https://github.com/arsscriptum/PowerShell.CustomProgressBar](https://github.com/arsscriptum/PowerShell.CustomProgressBar)
 
 
 ---------------------------------------------------------------------------------------------------------
 
 ### SystemTrayNotifier Popup  
 
-From this litle project:  https://github.com/arsscriptum/PowerShell.SystemTrayNotifier
+From this litle project:  [https://github.com/arsscriptum/PowerShell.SystemTrayNotifier](https://github.com/arsscriptum/PowerShell.SystemTrayNotifier)
 
 ---------------------------------------------------------------------------------------------------------
 

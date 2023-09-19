@@ -6,7 +6,7 @@ author: guillaume
 date: '2020-08-09'
 category: ['powershell','scripts', 'useless']
 tags: powershell, scripts, useless
-thumbnail: /assets/img/posts/jekyll-install.png
+thumbnail: /assets/img/posts/jekyll/main.jpg
 keywords: progress, powershell
 usemathjax: false
 permalink: /blog/powershell-settingup-bundlerjekyll/

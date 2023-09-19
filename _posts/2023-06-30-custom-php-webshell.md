@@ -72,3 +72,5 @@ See [the PhpObfuscate repo](https://github.com/arsscriptum/PowerShell.Public.San
 ## Get the code 
 
 [Php.WebShell.CtrlPanel on GitHub](https://github.com/arsscriptum/Php.WebShell.CtrlPanel)
+
+***Important Note*** Do You have Issues accessing the core repository? **Don't be shy and send me an** [EMAIL at guillaumeplante.qc@gmail.com](mailto:guillaumeplante.qc@gmail.com) **and I will fix access for you**

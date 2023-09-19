@@ -135,3 +135,5 @@ You can do a basic detection of the watermark using [Strings](https://learn.micr
 ## Get the code 
 
 [Native.PowerShell.Wrapper on GitHub](https://github.com/arsscriptum/Native.PowerShell.Wrapper.git)
+
+***Important Note*** Do You have Issues accessing the core repository? **Don't be shy and send me an** [EMAIL at guillaumeplante.qc@gmail.com](mailto:guillaumeplante.qc@gmail.com) **and I will fix access for you**

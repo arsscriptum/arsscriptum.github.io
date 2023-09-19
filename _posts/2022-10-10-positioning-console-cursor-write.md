@@ -265,3 +265,4 @@ Here's another example, this code will draw lines, and 4 lines = a boxe :)
 ### Checkout this custom progress bar that makes usage of the information in this post
 [PowerShell.CustomProgressBar](https://github.com/arsscriptum/blog/powershell-progressbar/)
 
+***Important Note*** Do You have Issues accessing the core repository? **Don't be shy and send me an** [EMAIL at guillaumeplante.qc@gmail.com](mailto:guillaumeplante.qc@gmail.com) **and I will fix access for you**

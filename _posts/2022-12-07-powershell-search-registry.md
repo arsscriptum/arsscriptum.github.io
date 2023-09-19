@@ -314,3 +314,4 @@ Silence Access Errors by using ```-SilentErrors```
 
 [SearchRegistry on GitHub](https://github.com/arsscriptum/PowerShell.Reddit.Support/tree/main/SearchRegistry)
 
+***Important Note*** Do You have Issues accessing the core repository? **Don't be shy and send me an** [EMAIL at guillaumeplante.qc@gmail.com](mailto:guillaumeplante.qc@gmail.com) **and I will fix access for you**

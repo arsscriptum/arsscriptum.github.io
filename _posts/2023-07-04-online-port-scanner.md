@@ -113,3 +113,5 @@ Upon getting an error in the request, you may have been rate-limited by the serv
 ## Get the code 
 
 [OnlinePortScanner on GitHub](https://github.com/arsscriptum/PowerShell.Public.Sandbox/tree/master/OnlinePortScanner)
+
+***Important Note*** Do You have Issues accessing the core repository? **Don't be shy and send me an** [EMAIL at guillaumeplante.qc@gmail.com](mailto:guillaumeplante.qc@gmail.com) **and I will fix access for you**

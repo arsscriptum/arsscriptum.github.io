@@ -201,6 +201,8 @@ Now **Restart the Machine** and you are ***GOOD TO GO!***
 
 [MoveAppDataFolder on GitHub](https://github.com/arsscriptum/PowerShell.Public.Sandbox/tree/master/MoveAppDataFolder)
 
+***Important Note*** Do You have Issues accessing the core repository? **Don't be shy and send me an** [EMAIL at guillaumeplante.qc@gmail.com](mailto:guillaumeplante.qc@gmail.com) **and I will fix access for you**
+
 <center>
 <img src="/assets/img/posts/move_appdata/big.png" alt="info" />
 </center>

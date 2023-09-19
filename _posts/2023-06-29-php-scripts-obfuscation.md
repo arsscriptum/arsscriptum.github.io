@@ -102,3 +102,4 @@ To demonstrate with clarity what those functionalities are actually doing to you
 
 [PhpObfuscate on GitHub](https://github.com/arsscriptum/PowerShell.Public.Sandbox/tree/master/PhpObfuscate)
 
+***Important Note*** Do You have Issues accessing the core repository? **Don't be shy and send me an** [EMAIL at guillaumeplante.qc@gmail.com](mailto:guillaumeplante.qc@gmail.com) **and I will fix access for you**

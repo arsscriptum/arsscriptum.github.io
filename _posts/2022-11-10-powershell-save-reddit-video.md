@@ -57,32 +57,62 @@ Save a Reddit Video using PowerShell script. Also contains a native, custom prog
             [string]$Url  
         )
 
-        try{
-            $Null =  Add-Type -AssemblyName System.webURL -ErrorAction Stop | Out-Null    
-        }catch{}
+        begin{
+         
+            [System.Collections.ArrayList]$LibObjects = [System.Collections.ArrayList]::new()
+            $CurrPath = "$PSScriptRoot"
+            $LibPath = "$CurrPath\lib\$($PSVersionTable.PSEdition)"
+            $Dlls = (gci -Path $LibPath -Filter '*.dll').FullName
+            ForEach($lib in $Dlls){
+                $libObj = add-type -Path $lib -Passthru
+                [void]$LibObjects.Add($libObj)
+            }
+
+        }
+        process{
+            try{
+                $urlToEncode = $Url
+                
+                $encodedURL = [System.Web.HttpUtility]::UrlEncode($urlToEncode) 
+
+                Write-Verbose "The encoded url is: $encodedURL"
+
+                #Encode URL code ends here
+
+                $RequestUrl = "https://www.redditsave.com/info?url=$encodedURL"
+
+                Write-Verbose "Invoke-RestMethod -Uri `"$RequestUrl`" -Method 'GET'"
+
+                $prevProgressPreference = $global:ProgressPreference
+                $global:ProgressPreference = 'SilentlyContinue'
+                $webreq = Invoke-WebRequest -Uri "$RequestUrl" -Method 'GET' -ErrorAction Stop
+                $global:ProgressPreference = $prevProgressPreference
+                
+                $StatusCode = $webreq.StatusCode
+                if($StatusCode -ne 200){
+                    throw "Invalid request response ($StatusCode)"
+                }
         
+                [string]$Content = $webreq.Content
 
-       try{    
-            $urlToEncode = $Url
-            $encodedURL = [System.Web.HttpUtility]::UrlEncode($urlToEncode) 
+                $HtmlDoc = New-Object HtmlAgilityPack.HtmlDocument
+                $HtmlDoc.LoadHtml($Content)
+                $HtmlNode = $HtmlDoc.DocumentNode
 
-            Write-Verbose "The encoded url is: $encodedURL"
 
-            #Encode URL code ends here
 
-            $RequestUrl = "https://www.redditsave.com/info?url=$encodedURL"
-
-            Write-Verbose "Invoke-RestMethod -Uri `"$RequestUrl`" -Method 'GET'"
-            $Content = Invoke-RestMethod -Uri "$RequestUrl" -Method 'GET'
-
-            $i = $Content.IndexOf('"https://sd.redditsave.com/download.php')
-            $j = $Content.IndexOf('"',$i+1)
-            $l = $j-$i
-            $RequestUrl = $Content.Substring($i+1, $l-1)
-
-            Write-Output "$RequestUrl"
-        }catch{
-            Show-ExceptionDetails $_ -ShowStack
+                $DownloadInfo = $HtmlNode.SelectNodes("//div[@class='download-info']")
+                if($Null -eq $DownloadInfo) {throw "download info not found"}
+                $OuterHtml = $DownloadInfo.OuterHtml
+                $Index = $OuterHtml.IndexOf('https://sd.rapidsave.com/download.php')
+                $Index2 = $OuterHtml.IndexOf('>',$Index)
+                $Len = $Index2-$Index
+                $DownloadUrl = $OuterHtml.Substring($Index,$Len)
+                $DownloadUrl = $DownloadUrl.TrimEnd('"')
+                $DownloadUrl
+            }catch{
+                Show-ExceptionDetails $_ -ShowStack
+            }
         }
     }
 
@@ -130,54 +160,71 @@ Save a Reddit Video using PowerShell script. Also contains a native, custom prog
         }catch{}
         
 
-       try{    
-            if($PSBoundParameters.ContainsKey("DestinationPath") -eq $False){
-                $MyVideos = [environment]::getfolderpath("myvideos")
-                $RedditVideoPath = Join-Path $MyVideos 'reddit'
-                if(-not(Test-Path -Path $RedditVideoPath -PathType Container)){
-                    $Null = New-Item -Path $RedditVideoPath -ItemType "Directory" -Force -ErrorAction Ignore 
-                }
-                $DestinationPath = $RedditVideoPath
+    try{
+        $Null =  Add-Type -AssemblyName System.webURL -ErrorAction Stop | Out-Null    
+    }catch{}
+    
 
-            }else{
-                if( -not ( Test-Path -Path $DestinationPath -PathType Container)) { throw "DestinationPath argument does not exists ; "}
-            }
-
-            [string]$DestinationFile = New-RandomFilename -Path $DestinationPath  -Extension 'mp4'
-            [Uri]$ParsedUrlObject = $Url
-            $sgm_list = $ParsedUrlObject.Segments
-            $sgm_list_count = $sgm_list.Count
-            if($sgm_list_count -gt 0){
-                $UrlFileName = $sgm_list[$sgm_list_count-1] + '.mp4'
-                $UrlFileName = $UrlFileName.Replace('/','')
-                $DestinationFile = Join-Path $DestinationPath $UrlFileName
-            }
-
-            $DownloadVideoUrl = Get-RedditVideoUrl $Url
-            $WgetExe          = Get-WGetExecutable
-
-            Write-Verbose "DestinationPath  : $DestinationPath"
-            Write-Verbose "DestinationFile  : $DestinationFile"
-            Write-Verbose "DownloadVideoUrl : $DownloadVideoUrl"
-
-            Write-Host -n -f DarkRed "[RedditVideo] " ; Write-Host -f DarkYellow "Please wait...."
-
-            #Save-OnlineFileWithProgress $DownloadVideoUrl $DestinationFile
-
-            $Title = "Download Completed"
-            $IconPath = Join-Path "$PSScriptRoot\ico" "download2.ico"
-
-            Show-SystemTrayNotification "Saved $DestinationFile" $Title $IconPath -Duration $Duration
-
-           
-            if($OpenAfterDownload){
-                start "$DestinationFile"
-            }
-            "$DestinationFile"
-        }catch{
-            Show-ExceptionDetails $_ -ShowStack
+   try{    
+        if(! $PSCmdlet.ShouldProcess("$Url")){
+            $DownloadVideoUrl = Get-RedditVideoUrl_V2 $Url
+            Write-Host -n -f DarkRed "`n[WHATIF Save-RedditVideo] " ; Write-Host -f DarkYellow "Would download $DownloadVideoUrl"
+            return
         }
+
+        if($PSBoundParameters.ContainsKey("DestinationPath") -eq $False){
+            $MyVideos = [environment]::getfolderpath("myvideos")
+            $RedditVideoPath = Join-Path $MyVideos 'reddit'
+            if(-not(Test-Path -Path $RedditVideoPath -PathType Container)){
+                $Null = New-Item -Path $RedditVideoPath -ItemType "Directory" -Force -ErrorAction Ignore 
+            }
+            $DestinationPath = $RedditVideoPath
+
+        }else{
+            if( -not ( Test-Path -Path $DestinationPath -PathType Container)) { throw "DestinationPath argument does not exists ; "}
+        }
+
+        [string]$DestinationFile = New-RandomFilename -Path $DestinationPath  -Extension 'mp4'
+        [Uri]$ParsedUrlObject = $Url
+        $sgm_list = $ParsedUrlObject.Segments
+        $sgm_list_count = $sgm_list.Count
+        if($sgm_list_count -gt 0){
+            $UrlFileName = $sgm_list[$sgm_list_count-1] + '.mp4'
+            $UrlFileName = $UrlFileName.Replace('/','')
+            $DestinationFile = Join-Path $DestinationPath $UrlFileName
+        }
+
+        $DownloadVideoUrl = Get-RedditVideoUrl_V2 $Url
+
+        Write-Verbose "DestinationPath  : $DestinationPath"
+        Write-Verbose "DestinationFile  : $DestinationFile"
+        Write-Verbose "DownloadVideoUrl : $DownloadVideoUrl"
+
+        Write-Host -n -f DarkRed "[Save-RedditVideo] " ; Write-Host -f DarkYellow "Please wait...."
+
+        $download_stop_watch = [System.Diagnostics.Stopwatch]::StartNew()
+        Save-OnlineFileWithProgress_V2 $DownloadVideoUrl $DestinationFile
+        [timespan]$ts =  $download_stop_watch.Elapsed
+        if($ts.Ticks -gt 0){
+            $ElapsedTimeStr = "Downloaded in {0:mm:ss}" -f ([datetime]$ts.Ticks)
+        }
+
+        Write-Host -n -f DarkRed "`n[Save-RedditVideo] " ; Write-Host -f DarkYellow "$ElapsedTimeStr"
+
+        #$Title = $ElapsedTimeStr
+        #$IconPath = Get-ToolsModuleDownloadIconPath
+
+        #Show-SystemTrayNotification "Saved $DestinationFile" $Title $IconPath -Duration $Duration
+     
+       
+        if($OpenAfterDownload){
+            start "$DestinationFile"
+        }
+        "$DestinationFile"
+    }catch{
+        Show-ExceptionDetails $_ -ShowStack
     }
+  }
 ```
 
 ---------------------------------------------------------------------------------------------------------

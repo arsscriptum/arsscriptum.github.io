@@ -6,7 +6,7 @@ author: guillaume
 date: '2023-09-15'
 category: ['powershell','scripts', 'regex', 'network', 'regular', 'assembly', 'executable']
 tags: powershell, scripts, regex, regular
-thumbnail: /assets/img/posts/regexhelper/main.jpg
+thumbnail: /assets/img/posts/regexhelper/main.png
 keywords: powershell, scripts, resources, binary
 usemathjax: false
 permalink: /blog/regexhelper/

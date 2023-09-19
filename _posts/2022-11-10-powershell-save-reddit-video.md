@@ -229,21 +229,35 @@ Save a Reddit Video using PowerShell script. Also contains a native, custom prog
 
 ---------------------------------------------------------------------------------------------------------
 
- ####  Write-AsciiProgressBar 
+<br>
+<center>
+<img src="https://arsscriptum.github.io/assets/img/posts/reddit-video/demo.gif" alt="table" />
+</center>
+<br>
 
+---------------------------------------------------------------------------------------------------------
+
+<br>
+<center>
+<img src="https://arsscriptum.github.io/assets/img/posts/reddit-video/demo2.gif" alt="table" />
+</center>
+<br>
+
+
+---------------------------------------------------------------------------------------------------------
+
+### Write-AsciiProgressBar 
 
 Native version of this litle project: https://github.com/arsscriptum/PowerShell.CustomProgressBar
 
 
 ---------------------------------------------------------------------------------------------------------
 
- ####  SystemTrayNotifier Popup  
-
+### SystemTrayNotifier Popup  
 
 From this litle project:  https://github.com/arsscriptum/PowerShell.SystemTrayNotifier
 
 ---------------------------------------------------------------------------------------------------------
-
 
 
 ### Get the Code

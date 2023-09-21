@@ -27,13 +27,13 @@ For Example: here, let's create a **scriptblock** named ```$custom_gcifilter```;
 
 This line checks if the current instance has a name included in the ```$a``` array and if the instance was created more than 10 minutes ago. if so, it sets the ```$valid``` to ```$True```
 
-```
+```powershell
   if(($($ts.Minutes) -gt 10) -and ($a.Contains($name))) { $valid=$True }
 ```
 
 Complete filer script block
 
-```
+```powershell
   $custom_gcifilter = {
 	$a = @('microsoft.com','google.com','videotron.com','bell.ca','military.com','panasonic.com')
     $valid=$False;$name=$_.Name;[DateTime]$dt=$_.CreationTime;[timespan]$ts = [datetime]::now - $dt;
@@ -44,7 +44,7 @@ Complete filer script block
 
 Now, we use it like so:
 
-```
+```powershell
   Get-ChildItem -Path "." -Recurse | Where $custom_gcifilter
 ```
 
@@ -60,18 +60,18 @@ Let's crank the level a bit. We need to filter directories based on the permissi
 
 Here's the code:
 
-```
-	[string[]]$Permissions=@('Modify','FullControl','Write')
+```powershell
+  [string[]]$Permissions=@('Modify','FullControl','Write')
 
-    $aclfilter_perm = {
-        $ir=$_.IdentityReference;$fsr=$_.FileSystemRights.ToString();$hasright=$false;
-        ForEach($pxs in $Permissions){ if($fsr -match $pxs){$hasright=$True;}};
-        $GroupList.Contains($ir) -and $hasright
-    }
+  $aclfilter_perm = {
+    $ir=$_.IdentityReference;$fsr=$_.FileSystemRights.ToString();$hasright=$false;
+    ForEach($pxs in $Permissions){ if($fsr -match $pxs){$hasright=$True;}};
+    $GroupList.Contains($ir) -and $hasright
+  }
 
-	# Get a dir to check
-	$CurrentPath = (Get-Location).Path
-	(Get-Acl $CurrentPath).Access | Where $aclfilter_perm
+  # Get a dir to check
+  $CurrentPath = (Get-Location).Path
+  (Get-Acl $CurrentPath).Access | Where $aclfilter_perm
 ```
 
 ## Wrapping things up: check directory permissions
@@ -79,7 +79,7 @@ Here's the code:
 Here's a pratical example: listing the ```PSModule``` folders and checking the ones we have access to:
 
 
-```
+```powershell
 
   function Get-WritableModulePath{
     [CmdletBinding(SupportsShouldProcess)]
@@ -122,7 +122,7 @@ Here's a pratical example: listing the ```PSModule``` folders and checking the o
 
 In the command below
 
-```
+```powershell
    $perm = (Get-Acl $p).Access | Where $aclfilter_perm | Select `
       @{n="Path";e={$p}},
       @{n="IdentityReference";e={$ir}},

@@ -29,7 +29,7 @@ Including binary images in a script is like emedding any other binary files, but
 
 The code block below shows how to convert and represent a resource as a base 64 string. The last 2 lines are adding a string variable in the script.
 
-```
+```powershell
 
  # Get-Content Support for PS5 and PSCore
 function Get-ContentBytes{ 
@@ -68,7 +68,7 @@ ForEach($img in $AllImages){
 
 This will generate a file like this:
 
-```
+```powershell
    $Image_000 = "/9j/4AAQSkZJRgABAQEAYABgAAD/4QAiRXh .... "
 ```
 
@@ -78,7 +78,7 @@ Straighforward enough... Now let's ***uno reverse*** extract an embedded image r
 
 1) Convert the ***Base64 string to Bitmap***
 
-```
+```powershell
   # Takes a Base64 string representing an encoded image and convert it to a BitmapImage
   # Special attention must be employed when selecting the ImageType, It must be the same as the base64-encoded image type.
 
@@ -116,7 +116,7 @@ Straighforward enough... Now let's ***uno reverse*** extract an embedded image r
 3) To use our embedded resource, just assign the [BitmapImage] to the **Source** property : 
 
 
-```
+```powershell
     # the resource is now loaded...
     [System.Windows.Media.Imaging.BitmapImage]$BitmapObj = ConvertTo-BitmapImage $ImageBase64Data -ImageType Jpeg
     $BgImageVar.Source = $BitmapObj
@@ -139,14 +139,14 @@ You can embed a .NET assembly directly in a PowerShell script and load it with t
 
 First, convert the assembly to base64. This example uses NewtonSoft.Json.
 
-```
+```powershell
     $Bytes = [IO.File]::ReadAllBytes("NewtonSoft.Json.dll")
     $Base64 = [Convert]::ToBase64String($Bytes)
 ```
 
 Next, in your PS1, you can include the base64 string directly in the code. Then, convert it back to bytes and load it with the assembly class.
 
-```
+```powershell
     $Base64 = "base64-string"
     $Bytes = [Convert]::FromBase64String($Base64)
     # Load the Dll from memory using simply this call
@@ -163,7 +163,7 @@ Next, in your PS1, you can include the base64 string directly in the code. Then,
 
 The following C# code can be added as a custom type in PowerShell, then used to load Dll assemblies from a **byte array**
 
-```
+```powershell
     public MainWindow()
     {
         InitializeComponent();
@@ -194,7 +194,7 @@ The following C# code can be added as a custom type in PowerShell, then used to 
 
 These 2 functions are used to include a file (scripts, binary, etc) as a resource in another text file. The latter is represented as a text header like this:
 
-```
+```powershell
   <# === BEGIN EMBEDDED FILE HEADER === 
   H 4 s I A A A A A A A A C p 1 W X U / b M B R 9 r 9 T / c F V V a q K R a H t
   F q g S U d m J j r K I V L 6 x C J r l t g l y 7 2 A 5 d B f z 3 X T s f N Q
@@ -234,7 +234,7 @@ The function ```ConvertFrom-HeaderBlock``` takes a file path, then:
 
 ### Test - Converter
 
-```
+```powershell
     . .\test\Test-ConvertScriptToHeader.ps1 -Verbose
 ```
 
@@ -244,7 +244,7 @@ Here's a fun test, this function will generate a header block based on a JPG ima
 The script will parse this text and extract the image the it uses in it's code.
 
 
-```
+```powershell
      . .\test\Test-RunImageLauncher.ps1
 ```
 
@@ -280,7 +280,7 @@ deserialized them in a separate folder or deserialize them o overwrite the origi
 
 ### How to use
 
-```
+```powershell
   $MyScript = "c:\script.ps1"
   $DataFile = "c:\results.json"
 
@@ -290,7 +290,7 @@ deserialized them in a separate folder or deserialize them o overwrite the origi
 
 To get the files back from the encoded file
 
-```
+```powershell
   $null = mkdir "$pwd\out" -Force -ea Ignore
   # extract in directory I specified
   Restore-EncodedFiles -Path $SavedDataFile -DestinationPath "$pwd\out"

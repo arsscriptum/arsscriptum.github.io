@@ -57,7 +57,7 @@ Here's a screen shot of a script executing...
 See [the PhpObfuscate repo](https://github.com/arsscriptum/PowerShell.Public.Sandbox/tree/master/PhpObfuscate)
 
 
-```
+```powershell
     cd .\scripts\
     . .\run_obfuscate.ps1
 

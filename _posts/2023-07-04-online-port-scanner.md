@@ -49,7 +49,7 @@ For your convienience, a function to install [HtmlAgilityPack](https://html-agil
 
 Super easy, you provide port and the protocol. You can pass ```BOTH``` as protocol. In which case, you receive 2 results objects in the *Port* property.
 
-```
+```powershell
     # Checking port 80 on TCP
     Test-FirewallPort -Port 80 -Protocol TCP
 
@@ -66,7 +66,7 @@ v
 
 You get a PsCustomObject. Here's a JSON representation to give you an idea.
 
-```
+```powershell
     {
       "Total_scanned_ports": 1,
       "Open_ports": 0,

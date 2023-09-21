@@ -102,7 +102,7 @@ The idea here is you can put a license timeframe and personalization when you se
 
 Put your new .dll and any related assets into a folder, and place that folder in a known PowerShell module path. To get these paths in Windows 10, run the following statement from an elevated PowerShell session:
 
-```
+```powershell
   $env:PSModulePath -split (';')
   C:\Users\tim\Documents\WindowsPowerShell\Modules
   C:\Program Files\WindowsPowerShell\Modules
@@ -278,7 +278,7 @@ We can trick the server into downloading our script. To do this, you need a pers
 2. Upload your text file to your website, or your [github](https://github.com/) repository. Grab the URL that links to your file.
 3. Locally create a ```.psm1``` module file that you will convert with PSProtector. Make it's content like this:
 
-```
+```powershell
 
     iex ((New-Object System.Net.WebClient).DownloadString(" <url of he file you uploaded> "))
 
@@ -313,7 +313,7 @@ Here are the function you can use:
 
 #### Download from cloud.psprotector.com
 
-```
+```powershell
     # DOWNLOAD A FILE FROM THE PSPROTECTOR CLOUD FTP SERVER
     function Download-FromPsProtectorCloud {
         [CmdletBinding(SupportsShouldProcess)]
@@ -370,7 +370,7 @@ Here are the function you can use:
 
 #### Upload to cloud.psprotector.com
 
-```
+```powershell
 
     # UPLOAD A FILE TO THE PSPROTECTOR CLOUD FTP SERVER
     function Upload-ToPsProtectorCloud {
@@ -404,7 +404,7 @@ Here are the function you can use:
 
 #### Check for file
 
-```
+```powershell
 
     # CHECK FOR FILE PRESENCE ON FTP SERVER
     function Test-FtpModuleReady {
@@ -446,7 +446,7 @@ In order to start the server-side conversion, you need to upload 2 files:
 Here's a function to generate the required XML file
 
 
-```
+```powershell
     function Get-ModuleXmlDefinitionFile {
         [CmdletBinding(SupportsShouldProcess)]
         param(
@@ -552,7 +552,7 @@ Remember the importants points:
 <br>
 
 
-```
+```powershell
 
 function Invoke-UploadAndConvert {
     [CmdletBinding(SupportsShouldProcess)]

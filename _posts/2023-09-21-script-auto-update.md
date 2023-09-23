@@ -149,6 +149,8 @@ You will get this:
     Exit
   }
 
+  # To test, change the color...
+  Write-Host "The script logic starts here..." -f Red
 ```
 
 

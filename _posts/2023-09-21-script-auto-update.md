@@ -14,26 +14,29 @@ permalink: /blog/script-auto-update/
 ---
 
 
-# Auto Update for PowerShell scripts
+## Auto Update for PowerShell scripts
 
 This script will check the remote repository to se if there's a new version of he current script file, if so, it will update it and re-run it.
 
 Initializaton, get the git exe path and the current script path
 
+
 ```powershell
+
   $GitCmd = (Get-Command "git.exe")
   if($Null -eq $GitCmd){ throw "git.exe not found" }
   $GitExe = $GitCmd.Source
   $ScriptPath = "$PSCommandPath"
+
 ```
 
 Get the branches names for the local and the remote branch...
 
 
-``powershell
+```powershell
   $RemoteBranch = & "$GitExe" 'for-each-ref' '--format=%(upstream:short)' "`"$(git symbolic-ref -q HEAD)`""
   $LocalBranch  = & "$GitExe" 'branch' '--show-current'
-``
+```
 
 
 Get the current number of new revisions available, 0 if we are up to date
@@ -59,6 +62,8 @@ You will get this:
 
 
 -------------------
+
+## The Script in Full
 
 
 ```powershell

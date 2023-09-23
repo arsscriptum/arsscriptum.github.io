@@ -3,7 +3,7 @@ layout: post
 title:  "PowerShell Script autoUpdate"
 summary: "Having a script check for it's latest version and auto update and relauch if available"
 author: guillaume
-date: '2023-09-20'
+date: '2023-09-21'
 category: ['powershell','scripts', 'update', 'git', 'autoupdate']
 tags: powershell, scripts, regex, regular, 'git', 'autoupdate'
 thumbnail: /assets/img/posts/script-auto-update/main.png

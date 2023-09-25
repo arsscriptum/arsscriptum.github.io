@@ -86,27 +86,23 @@ Here's a test, with a file of 350MB
   function Convert-BytesToHumanReadable{
       [CmdletBinding(SupportsShouldProcess)]
       param (
-          # Array of Bytes to use for CRC calculation
           [Parameter(Position = 0, ValueFromPipeline = $true)]
-          [uint64]$TotalBytes
+          [uint64]$Bytes
       )   
-      $TotalKb =  ($TotalBytes / 1KB)
-      $TotalMb =  ($TotalBytes / 1MB)
-      $TotalGb =  ($TotalBytes / 1GB)
-      [string]$TotalSizeInBytesStr = "{0:n2} Bytes" -f $TotalBytes
-      [string]$TotalFolderSizeInKB = "{0:n2} KB" -f $TotalKb 
-      [string]$TotalFolderSizeInMB = "{0:n2} MB" -f $TotalMb
-      [string]$TotalFolderSizeInGB = "{0:n2} GB" -f $TotalGb
+
       [string]$res_str = ""
-      if($TotalBytes -gt 1GB){
-          $res_str =  $TotalFolderSizeInGB
-      }elseif($TotalBytes -gt 1MB){
-          $res_str =  $TotalFolderSizeInMB
-      }elseif($TotalBytes -gt 1KB){
-          $res_str =  $TotalFolderSizeInKB
+      if($Bytes -gt 1TB){ 
+          $res_str =  "{0:n2} TB" -f ($Bytes / 1TB) 
+      }elseif($Bytes -gt 1GB){ 
+          $res_str =  "{0:n2} GB" -f ($Bytes / 1GB) 
+      }elseif($Bytes -gt 1MB){ 
+          $res_str =  "{0:n2} MB" -f ($Bytes / 1MB) 
+      }elseif($Bytes -gt 1KB){
+          $res_str =  "{0:n2} KB" -f ($Bytes / 1KB) 
       }else{
-          $res_str =  $TotalSizeInBytesStr
+          $res_str =  "{0:n2} Bytes" -f $Bytes      
       }
+      
       return $res_str
   }
 

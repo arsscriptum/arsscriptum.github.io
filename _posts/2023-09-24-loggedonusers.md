@@ -22,14 +22,24 @@ You can determine who is using resources on your local computer with the "net" c
 **PsLoggedOn** is part of a growing kit of Sysinternals command-line tools that aid in the administration of local and remote systems named PsTools.
 
 
+### Script
+
+[Download Get-LoggedOnUsers.ps1](https://arsscriptum.github.io/files/code/Get-LoggedOnUsers.ps1)
 
 -----------------------
-
 
 
 ## Install-PsLoggedOn
 
 Install the ```PsLoggedOn.exe``` Program
+
+The installation is done automatically if the file is not locacted on the computer. It is very fast. 
+
+1. Downloads the ```https://download.sysinternals.com/files/PSTools.zip``` packages from sysinternals.
+2. Unpack the files to TEMP folder
+3. Copy the PsLoggedOn.exe Program to Destination folder.
+
+
 
 ```powershell
 
@@ -90,6 +100,11 @@ Install the ```PsLoggedOn.exe``` Program
 
 Search for the  ```PsLoggedOn.exe``` Program on the computer
 
+1. Look in ```Path``` (Get-Command)
+2. Look in current script folder
+3. Look in ```$ENV:ProgramFiles``` 
+4. Look in ```$ENV:TEMP``` . The latter, this is where ```Install-PsLoggedOn``` places the exe by default
+
 ```powershell
 
   function Search-PsLoggedOnApp { 
@@ -138,6 +153,11 @@ Search for the  ```PsLoggedOn.exe``` Program on the computer
 ## Get-LoggedOnUsers
 
 Get the list of logged on users using the ```PsLoggedOn.exe``` Program. Parse the output in ```PsCustomObjects```
+
+Check if PsLogged on is installed, if not install it.
+Get LoggedOn Users using PsLoggedOn program
+Parse the output in PsCustom Objects
+
 
 ```powershell
 
@@ -266,7 +286,7 @@ Here's a test function using the function above
 
 
 <center>
-<img src="https://arsscriptum.github.io/assets/img/posts/loggedonusers/demo.ps1" alt="table" />
+<img src="https://arsscriptum.github.io/assets/img/posts/loggedonusers/demo.gif" alt="table" />
 </center>
 <br>
 
@@ -289,7 +309,7 @@ The installation is done automatically if the file is not locacted on the comput
 
 
 <center>
-<img src="https://arsscriptum.github.io/assets/img/posts/loggedonusers/install.ps1" alt="table" />
+<img src="https://arsscriptum.github.io/assets/img/posts/loggedonusers/install.gif" alt="table" />
 </center>
 <br>
 

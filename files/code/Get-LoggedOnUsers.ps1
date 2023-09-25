@@ -24,6 +24,7 @@ param()
         3. Copy the PsLoggedOn.exe Program to Destination folder.
 
 #>
+
 function Install-PsLoggedOn { 
     [CmdletBinding(SupportsShouldProcess)]
     param(
@@ -81,6 +82,7 @@ function Install-PsLoggedOn {
         2. Look in current folder
         3. Look in ProgramFiles and TEMP folders
 #>
+
 function Search-PsLoggedOnApp { 
     [CmdletBinding(SupportsShouldProcess)]
     param()
@@ -127,6 +129,7 @@ function Search-PsLoggedOnApp {
         PArse the output in PsCustom Objects
 
 #>
+
 function Get-LoggedOnUsers { 
     [CmdletBinding(SupportsShouldProcess)]
     param(

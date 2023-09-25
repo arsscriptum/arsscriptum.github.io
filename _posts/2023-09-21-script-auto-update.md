@@ -63,10 +63,13 @@ You will get this:
 
 -------------------
 
-## The Script in Full
+## Check for New Version
+
+This ```Test-NewScriptVersion``` function will get the local and remote branches names and use them to diff the local script ( ```$PSCommandPath``` ) with the version in the repo. If there is a difference, we know we need to update.
 
 
 ```powershell
+
   function Test-NewScriptVersion{
     [CmdletBinding(SupportsShouldProcess)]
     param() 
@@ -108,7 +111,14 @@ You will get this:
       }
     }
   }
+```
 
+
+## Update the Script
+
+Simple *Git Pull*
+
+```powershell
 
   function Update-ScriptVersion{
     [CmdletBinding(SupportsShouldProcess)]
@@ -137,6 +147,14 @@ You will get this:
     }
   }
 
+```
+
+
+## Restart the Current Script
+
+After we see we need to update and that the update was done, we restart the current script 
+
+```powershell
 
   $NewVersionAvailable = Test-NewScriptVersion
   if($NewVersionAvailable){
@@ -151,6 +169,7 @@ You will get this:
 
   # To test, change the color...
   Write-Host "The script logic starts here..." -f Red
+
 ```
 
 

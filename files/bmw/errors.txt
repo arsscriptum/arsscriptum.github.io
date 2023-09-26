@@ -1,0 +1,67 @@
+ 
+ 
+$SGBD: MSD80 Version: 7.300
+$INPA: MSD80 Version: 1.001
+ 
+ 
+===========================================================================================
+$DATAID: 004 4CC0I JE0S IEE3S
+ ===  20.09.2023  ===  12:32:00
+DME partnumber: VAR_ECU_SERIAL_ECU
+ 
+current kilometer reading:  33516 km
+___________________________________________________________
+ 
+comment line 1: 
+comment line 2: 
+___________________________________________________________
+ 
+ 
+$error locationNr: 10786
+$error locationtext: 0x2A22 Tankfüllstand, Korrelation                                
+57032A220800144B0128104E9E7F0004000000000000000000000000
+Error: 1(3) No.: 10786   0x2A22 Tankfüllstand, Korrelation                                frequency: 1
+  error type: 8  (4869 ) Abweichung zwischen Verbrauch und Füllstandsänderung               
+  readines Flag: (16 ) Testbedingungen erfüllt                                              
+  error status:  (32 ) Fehler momentan nicht vorhanden, nicht OBD-entprellt                 
+  MIL - Status:  (48) Fehler verursacht kein Aufleuchten der Warnlampe (MIL)        Kraftstoff-Füllstand / Kraftstoffverbrauch - Korrelationsfehler        
+  P-Code:        P144B Kraftstoff-Füllstand / Kraftstoffverbrauch - Korrelationsfehler    F_LZ: 40
+ambient text   /   entry at                33392 km(1.) 
+  Zündzeitpunkt Zylinder 1                 15.00 °CRK   
+  Lambda Setpoint                           0.99 -      
+  Status Drosselklappe Notlauf            ETC_NO_LIH    
+  Widerstand Lambdasonde vor Katalysator Bank 2 256.00 ohm    
+___________________________________________________________
+ 
+$error locationNr: 11068
+$error locationtext: 0x2B3C DMTL, Systemfehler                                        
+57032B3CD40014340128105038060000000000000000000000000000
+Error: 2(3) No.: 11068   0x2B3C DMTL, Systemfehler                                        frequency: 1
+  error type: 4  (5539 ) Abbruch wegen Stromschwankungen bei Referenzmessung                
+  readines Flag: (17 ) Testbedingungen noch nicht erfüllt                                   
+  error status:  (34 ) Fehler momentan vorhanden, noch nicht OBD-entprellt                  
+  MIL - Status:  (49) Fehler wuerde das Aufleuchten der Warnlampe (MIL) verursachen         
+  P-Code:        P1434 Diagnosemodul Tankleckage (DM-TL) - Fehlfunktion                   F_LZ: 40
+                        
+ambient text   /   entry at                33408 km(1.) 
+  Motordrehzahl                           1792.00 rpm   
+  Kraftstofftank Füllstand                  6.00 l      
+  DMTL Strom Referenzleck                   0.00 mA     
+  DMTL Strom Grobleck                       0.00 mA     
+___________________________________________________________
+ 
+$error locationNr: 11066
+$error locationtext: 0x2B3A DMTL, Systemfehler                                        
+57032B3AE1101449052810502705FF0010521D04FF00105B2C06FF00
+Error: 3(3) No.: 11066   0x2B3A DMTL, Systemfehler                                        frequency: 5
+  error type: 1  (5833 ) Pumpenstrom zu groß bei Referenzmessung                            
+  readines Flag: (16 ) Testbedingungen erfüllt                                              
+  error status:  (35 ) Fehler momentan vorhanden, OBD-entprellt                             
+  MIL - Status:  (49) Fehler wuerde das Aufleuchten der Warnlampe (MIL) verursachen         
+  P-Code:        P1449 Diagnosemodul Tankleckage (DM-TL) - Pumpenstrom zu groß            F_LZ: 40
+ambient text   /   entry at                33496 km(n.)  33424 km(2.)  33408 km(1.) 
+  Motordrehzahl                           1408.00 rpm   928.00 rpm    1248.00 rpm   
+  Kraftstofftank Füllstand                  6.00 l        4.00 l        5.00 l      
+  DMTL Strom Referenzleck                  49.80 mA      49.80 mA      49.80 mA       DMTL Strom Referenzleck 
+  DMTL Strom Grobleck                       0.00 mA       0.00 mA       0.00 mA       DMTL current gross leak
+___________________________________________________________

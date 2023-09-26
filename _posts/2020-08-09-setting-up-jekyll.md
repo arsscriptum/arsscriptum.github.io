@@ -37,14 +37,14 @@ Windows Environment:
 
 ```bash
 
-###############################################################################
+################################################################################
 # All This Just To Install Ruby
 #                  ------------
 # i have found the latest distrib version to be 18.x at
 # https://github.com/nodesource/distributions/blob/master/deb/setup_18.x
 #
 # Last tested on 15/10/2022 on WSL Ubuntu 20.04.5
-###############################################################################
+################################################################################
 
 sudo apt-get update -y && sudo apt-get upgrade -y
 sudo apt-add-repository ppa:brightbox/ruby-ng

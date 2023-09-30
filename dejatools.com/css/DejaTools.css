@@ -17,7 +17,7 @@ html
 
 body
 {
-    background:#E5ECF2 url("/web/20190613170039im_/http://www.dejatools.com/images/Background.png") top left repeat-x;
+    background:#E5ECF2 url("https://arsscriptum.github.io/dejatools.com/images/Background.png") top left repeat-x;
     padding-top:25px;
     margin-bottom:0px;
     font:normal 80% helvetica,verdana,arial,sans-serif;
@@ -71,7 +71,7 @@ ul
     margin-left:32px;
     line-height:1.3em;
     margin-bottom:1.0em;
-    list-style-image:url("/web/20190613170039im_/http://www.dejatools.com/images/NavIcon3.png");
+    list-style-image:url("https://arsscriptum.github.io/dejatools.com/images/NavIcon3.png");
 }
 
 .FeatureList
@@ -101,13 +101,13 @@ ul
 
 .PageShadowL
 {
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/PageShadowL.png") top left no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/PageShadowL.png") top left no-repeat;
 }
 
 .PageShadowR
 {
     margin-left:50px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/PageShadowR.png") top right no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/PageShadowR.png") top right no-repeat;
 }
 
 .Main
@@ -235,21 +235,21 @@ table.Eval em
 .HeaderL
 {
     height:80px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/HeaderL.png") top left no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/HeaderL.png") top left no-repeat;
 }
 
 .HeaderR
 {
     height:80px;
     margin-left:28px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/HeaderR.png") top right no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/HeaderR.png") top right no-repeat;
 }
 
 .HeaderM
 {
     height:80px;
     margin-right:28px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/HeaderM.png") top left repeat-x;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/HeaderM.png") top left repeat-x;
 }
 
 .HeaderLogo a
@@ -260,7 +260,7 @@ table.Eval em
     width:150px;
     height:35px;
     float:left;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/DejaToolsLogo.png");
+    background:url("https://arsscriptum.github.io/dejatools.com/images/DejaToolsLogo.png");
 }
 
 /*==============================================================================
@@ -286,7 +286,7 @@ table.Eval em
 
 li.HeaderNotch
 {
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/HeaderNotch.png") center top no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/HeaderNotch.png") center top no-repeat;
 }
 
 .NavInsight, .NavPrice, .NavAbout, .NavContact
@@ -300,25 +300,25 @@ li.HeaderNotch
 .NavInsight
 {
     width:92px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/NavBarDejaInsightB.png") no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/NavBarDejaInsightB.png") no-repeat;
 }
 
 .NavPrice
 {
     width:138px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/NavBarPriceB.png") no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/NavBarPriceB.png") no-repeat;
 }
 
 .NavAbout
 {
     width:144px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/NavBarAboutB.png") no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/NavBarAboutB.png") no-repeat;
 }
 
 .NavContact
 {
     width:85px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/NavBarContactB.png") no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/NavBarContactB.png") no-repeat;
 }
 
 .HeaderNav a
@@ -334,22 +334,22 @@ li.HeaderNotch
 
 .NavInsight a
 {
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/NavBarDejaInsightN.png") no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/NavBarDejaInsightN.png") no-repeat;
 }
 
 .NavPrice a
 {
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/NavBarPriceN.png") no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/NavBarPriceN.png") no-repeat;
 }
 
 .NavAbout a
 {
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/NavBarAboutN.png") no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/NavBarAboutN.png") no-repeat;
 }
 
 .NavContact a
 {
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/NavBarContactN.png") no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/NavBarContactN.png") no-repeat;
 }
 
 img.NavSep
@@ -369,7 +369,7 @@ img.NavSep
     position:relative;
     width:900px;
     height:227px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/Splash.jpg") top left no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/Splash.jpg") top left no-repeat;
 }
 /*==============================================================================
 // Footer
@@ -378,21 +378,21 @@ img.NavSep
 .FooterL
 {
     height:80px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/FooterL.png") top left no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/FooterL.png") top left no-repeat;
 }
 
 .FooterR
 {
     height:80px;
     margin-left:28px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/FooterR.png") top right no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/FooterR.png") top right no-repeat;
 }
 
 .FooterM
 {
     height:80px;
     margin-right:28px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/FooterM.png") top left repeat-x;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/FooterM.png") top left repeat-x;
 }
 
 .FooterContent
@@ -426,32 +426,32 @@ img.NavSep
 
 .NavShadowL
 {
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/NavShadowL150.png") top left no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/NavShadowL150.png") top left no-repeat;
 }
 
 .NavShadowR
 {
     margin-left:16px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/NavShadowR150.png") top right no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/NavShadowR150.png") top right no-repeat;
 }
 
 .NavShadowBL
 {
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/NavShadowBL.png") top left no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/NavShadowBL.png") top left no-repeat;
 }
 
 .NavShadowBR
 {
     margin-right:16px;
     margin-left:32px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/NavShadowBR.png") top right no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/NavShadowBR.png") top right no-repeat;
 }
 
 .NavShadowBM
 {
     height:16px;
     margin-right:32px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/NavShadowBM.png") top right repeat-x;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/NavShadowBM.png") top right repeat-x;
 }
 
 .NavBoxFrame
@@ -473,7 +473,7 @@ img.NavSep
     padding-left:12px;
     font:bold 100% verdana,arial,sans-serif;
     color:#E8982F;
-    background:#F8F9FB url("/web/20190613170039im_/http://www.dejatools.com/images/NavHeader.png") top left repeat-x;
+    background:#F8F9FB url("https://arsscriptum.github.io/dejatools.com/images/NavHeader.png") top left repeat-x;
 }
 
 .NavBoxBG
@@ -484,7 +484,7 @@ img.NavSep
     height:auto !important;
     height:135px;
 
-    background:#FEFEFE url("/web/20190613170039im_/http://www.dejatools.com/images/NavBackground.png") top left repeat-x;
+    background:#FEFEFE url("https://arsscriptum.github.io/dejatools.com/images/NavBackground.png") top left repeat-x;
 }
 
 .NavBoxBG2
@@ -495,7 +495,7 @@ img.NavSep
     height:auto !important;
     height:200px;
 
-    background:#F9F7FD url("/web/20190613170039im_/http://www.dejatools.com/images/NavBackground2.png") top left repeat-x;
+    background:#F9F7FD url("https://arsscriptum.github.io/dejatools.com/images/NavBackground2.png") top left repeat-x;
 }
 
 .NavBox ul
@@ -626,20 +626,20 @@ p.RightLink a:hover
 .ImageShadowL
 {
     position:relative;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/NavShadowL150.png") top left no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/NavShadowL150.png") top left no-repeat;
 }
 
 .ImageShadowR
 {
     position:relative;
     margin-left:16px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/NavShadowR150.png") top right no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/NavShadowR150.png") top right no-repeat;
 }
 
 .ImageShadowBL
 {
     position:relative;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/NavShadowBL.png") top left no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/NavShadowBL.png") top left no-repeat;
 }
 
 .ImageShadowBR
@@ -647,7 +647,7 @@ p.RightLink a:hover
     position:relative;
     margin-right:16px;
     margin-left:32px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/NavShadowBR.png") top right no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/NavShadowBR.png") top right no-repeat;
 }
 
 .ImageShadowBM
@@ -655,7 +655,7 @@ p.RightLink a:hover
     position:relative;
     height:16px;
     margin-right:32px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/NavShadowBM.png") top right repeat-x;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/NavShadowBM.png") top right repeat-x;
 }
 
 .ImageBoxContent
@@ -680,13 +680,13 @@ p.RightLink a:hover
 .ICB1
 {
     position:relative;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/IndexColExpand.png") top left repeat-y;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/IndexColExpand.png") top left repeat-y;
 }
 
 .ICB2
 {
     position:relative;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/IndexColBack.jpg") top left no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/IndexColBack.jpg") top left no-repeat;
 }
 
 .ICB3
@@ -700,7 +700,7 @@ p.RightLink a:hover
 {
     position:relative;
     height:24px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/IndexColBottom.jpg") top left no-repeat;
+    background:url("https://arsscriptum.github.io/dejatools.com/images/IndexColBottom.jpg") top left no-repeat;
 }
 
 .IC1
@@ -734,7 +734,7 @@ p.RightLink a:hover
     top:218px;
     width:18px;
     height:9px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/SplashShadowL.png");
+    background:url("https://arsscriptum.github.io/dejatools.com/images/SplashShadowL.png");
 }
 
 .IC3DI
@@ -753,7 +753,7 @@ p.RightLink a:hover
     top:218px;
     width:18px;
     height:9px;
-    background:url("/web/20190613170039im_/http://www.dejatools.com/images/SplashShadowR.png");
+    background:url("https://arsscriptum.github.io/dejatools.com/images/SplashShadowR.png");
 }
 
 #customers1, #customers2
@@ -775,7 +775,7 @@ p.RightLink a:hover
     padding-left:12px;
     font:bold 100% verdana,arial,sans-serif;
     color:#E8982F;
-    background:#F8F9FB url("/web/20190613170039im_/http://www.dejatools.com/images/NavHeader.png") top left repeat-x;
+    background:#F8F9FB url("https://arsscriptum.github.io/dejatools.com/images/NavHeader.png") top left repeat-x;
 }
 
 .ColText
@@ -802,7 +802,7 @@ p.RightLink a:hover
     height:auto !important;
     height:362px;
 
-    background:#F9F7FD url("/web/20190613170039im_/http://www.dejatools.com/images/Platforms.jpg") top left repeat-x;
+    background:#F9F7FD url("https://arsscriptum.github.io/dejatools.com/images/Platforms.jpg") top left repeat-x;
 }
 
 /*==============================================================================
@@ -868,7 +868,7 @@ p.RightLink a:hover
 
 /*
      FILE ARCHIVED ON 17:00:39 Jun 13, 2019 AND RETRIEVED FROM THE
-     INTERNET ARCHIVE ON 14:14:19 Sep 30, 2023.
+     INTERNET ARCHIVE ON 17:26:13 Sep 30, 2023.
      JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
 
      ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
@@ -876,13 +876,13 @@ p.RightLink a:hover
 */
 /*
 playback timings (ms):
-  captures_list: 476.976
-  exclusion.robots: 0.064
-  exclusion.robots.policy: 0.057
-  cdx.remote: 0.067
+  captures_list: 110.43
+  exclusion.robots: 0.076
+  exclusion.robots.policy: 0.066
+  cdx.remote: 0.059
   esindex: 0.01
-  LoadShardBlock: 449.677 (3)
-  PetaboxLoader3.datanode: 459.179 (5)
-  load_resource: 235.261 (2)
-  PetaboxLoader3.resolve: 126.101 (2)
+  LoadShardBlock: 83.6 (3)
+  PetaboxLoader3.resolve: 123.274 (3)
+  PetaboxLoader3.datanode: 92.862 (5)
+  load_resource: 146.944 (2)
 */

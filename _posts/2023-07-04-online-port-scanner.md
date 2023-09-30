@@ -45,6 +45,7 @@ For your convienience, a function to install [HtmlAgilityPack](https://html-agil
 <img src="https://arsscriptum.github.io/assets/img/posts/scanner/table.jpg" alt="table" />
 </center>
 <br>
+
 ### Usage
 
 Super easy, you provide port and the protocol. You can pass ```BOTH``` as protocol. In which case, you receive 2 results objects in the *Port* property.
@@ -62,6 +63,7 @@ Super easy, you provide port and the protocol. You can pass ```BOTH``` as protoc
     Test-FirewallPort -Port 64 -Protocol UDP
 ```
 
+### HtmlAgilityPack
 To parse the results fro the online port scanner, we need to register [HtmlAgilityPack](https://html-agility-pack.net/)
 
 ```powershell
@@ -93,6 +95,13 @@ To parse the results fro the online port scanner, we need to register [HtmlAgili
   }
 
 ```
+
+## Code : Test-FirewallPort
+
+This ```Test-FirewallPort``` function will make a http request to ```https://www.speedguide.net``` and parse the results.
+
+This webservice will detect you exxternal ip and will try to connect to the port you specified.
+
 
 ```powershell
 
@@ -249,8 +258,17 @@ For this we use ```http://ipinfo.io/json``` like this:
 
 ```
 
+### Important note
 
-## Request Port Description
+Upon getting an error in the request, you may have been rate-limited by the server. Try again later.
+
+
+## Code: Request Port Description
+
+This ```Request-PortDescription``` function will make a http request to ```https://www.grc.com/PortDataHelp.htm``` and parse the results.
+
+This webservice will detect you exxternal ip and will try to connect to the port you specified.
+
 
 ```powershell
   function Request-PortDescription{
@@ -303,18 +321,12 @@ For this we use ```http://ipinfo.io/json``` like this:
     $PortInfoObject | Add-Member -MemberType NoteProperty -Name "AdditionalInfos" -Value "$AdditionalInfos"
     $PortInfoObject
   }
+```
 
-  function Test-RequestPortDescription{
-    [CmdletBinding(SupportsShouldProcess)]
-    param(
-        [Parameter(Mandatory=$false)]
-        [switch]$DumpHtml
-    )
+### To test
 
-    $r = Request-PortDescription 8080 -DumpHtml
-
-    $r 
-  }
+```powershell
+  Request-PortDescription 8080 -DumpHtml
 ```
 
 ### Important note
@@ -344,6 +356,6 @@ Upon getting an error in the request, you may have been rate-limited by the serv
 <br>
 ## Get the code 
 
-[OnlinePortScanner on GitHub](https://github.com/arsscriptum/PowerShell.Public.Sandbox/tree/master/OnlinePortScanner)
+[PowerShell.OnlinePortScanner on GitHub](https://github.com/arsscriptum/PowerShell.OnlinePortScanner/)
 
 ***Important Note*** Do You have Issues accessing the core repository? **Don't be shy and send me an** [EMAIL at guillaumeplante.qc@gmail.com](mailto:guillaumeplante.qc@gmail.com) **and I will fix access for you**

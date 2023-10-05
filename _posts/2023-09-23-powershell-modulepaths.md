@@ -18,6 +18,19 @@ permalink: /blog/powershell-modulepaths/
 List the PowerShell Module Paths, if they are writeable and the number of modules they contain.
 
 
+### Get-WritableModulePath
+
+See [this blog post](https://arsscriptum.github.io/blog/whereobject-filters/) regarding ```whereobject``` filters
+
+This function does this:
+
+1. The user specifies the permissions to have on the directories listed, example ```@('Modify','FullControl','Write')```
+2. We need to get the current user group appartenance.
+3. For each paths, we get the *FileSystemRights* and *IdentityReference*
+4. We check if the *FileSystemRights* match the user-specified permissions
+5. We check if the *IdentityReference* is included in our *current user group list*
+
+
 ```powershell
 
   function Get-WritableModulePath{
@@ -56,6 +69,16 @@ List the PowerShell Module Paths, if they are writeable and the number of module
       return $PathPermissions
   }
 
+```
+
+
+### Get-AllModulePaths
+
+Get All Modules Paths and Writeable status
+
+
+```powershell
+
   function Get-AllModulePaths{
       [CmdletBinding(SupportsShouldProcess)]
       Param()
@@ -80,7 +103,9 @@ List the PowerShell Module Paths, if they are writeable and the number of module
 -------------------
 
 
-## Performance Test Results
+## Test
+
+####  Get All Modules Paths and Writeable status
 
 
 <br>

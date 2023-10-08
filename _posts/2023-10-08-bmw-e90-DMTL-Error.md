@@ -6,7 +6,7 @@ author: guillaume
 date: '2023-10-08'
 category: ['bmw','n54','dmtl', 'fuel', 'correlation error']
 tags: bmw, ecu, n54, dmtl, fuel
-thumbnail: /files/bmw/dmtl.png
+thumbnail: /assets/img/posts/bmw/dmtl.png
 keywords: bmw, ecu, n54, correlation, dmtl
 usemathjax: false
 permalink: /blog/bmw-dmtl-error/
@@ -18,11 +18,11 @@ permalink: /blog/bmw-dmtl-error/
 ## Tank Leakage Diagnostic Module (DM-TL) - Malfunction
 
 
-| **Num**           |  **Error ID**             | **Title**                      | Frequency           | **Code**      |   **Description**                                                      |
-|:-----------------:|:-------------------------:|:------------------------------:|:-------------------:|:-------------:|:----------------------------------------------------------------------:|
-| .  Error: 1/3   . | .   No.: 10786 0x2A22    .| .  Tank level, correlation   . | .  frequency: 1   . | .   P144B   . | .  Fuel level / Fuel consumption - correlation error                 . |
-| .  Error: 2/3   . | .   No.: 11068 0x2B3C    .| .  DMTL, system error        . | .  frequency: 1   . | .   P1434   . | .  Tank Leakage Diagnostic Module (DM-TL) - Malfunction              . |
-| .  Error: 3/3   . | .   No.: 11066 0x2B3A    .| .  DMTL, system error        . | .  frequency: 5   . | .   P1449   . | .  Tank leakage diagnostic module (DM-TL) - pump current too high    . |
+| **Num**           |  **Error ID**             | **Title**                     | Frequency          | **Code**     |   **Description**                                                    |
+|:-----------------:|:-------------------------:|:-----------------------------:|:------------------:|:------------:|:--------------------------------------------------------------------:|
+| .  Error: 1/3   . | .   No.: 10786 0x2A22   . | .  Tank level, correlation  . | .  frequency: 1  . | .   P144B  . | .  Fuel level / Fuel consumption - correlation error               . |
+| .  Error: 2/3   . | .   No.: 11068 0x2B3C   . | .  DMTL, system error       . | .  frequency: 1  . | .   P1434  . | .  Tank Leakage Diagnostic Module (DM-TL) - Malfunction            . |
+| .  Error: 3/3   . | .   No.: 11066 0x2B3A   . | .  DMTL, system error       . | .  frequency: 5  . | .   P1449  . | .  Tank leakage diagnostic module (DM-TL) - pump current too high  . |
 
 <br>
 <br>

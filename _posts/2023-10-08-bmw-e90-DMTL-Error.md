@@ -17,12 +17,13 @@ permalink: /blog/bmw-dmtl-error/
 
 ## Tank Leakage Diagnostic Module (DM-TL) - Malfunction
 
+<center>
+<table><thead><tr><th><strong>Num</strong></th><th><strong>Error ID</strong></th><th><strong>Title</strong></th><th>Frequency</th><th><strong>Code</strong></th><th><strong>Description</strong></th></tr></thead><tbody><tr><td>Error: 1/3</td><td>No.: 10786 0x2A22</td><td>Tank level, correlation</td><td>frequency: 1</td><td>P144B</td><td>Fuel level / Fuel consumption - correlation error</td></tr><tr><td>Error: 2/3</td><td>No.: 11068 0x2B3C</td><td>DMTL, system error</td><td>frequency: 1</td><td>P1434</td><td>Tank Leakage Diagnostic Module (DM-TL) - Malfunction</td></tr><tr><td>Error: 3/3</td><td>No.: 11066 0x2B3A</td><td>DMTL, system error</td><td>frequency: 5</td><td>P1449</td><td>Tank leakage diagnostic module (DM-TL) - pump current too high</td></tr></tbody></table>
 
-| **Num**           |  **Error ID**             | **Title**                     | Frequency          | **Code**     |   **Description**                                                    |
-|:-----------------:|:-------------------------:|:-----------------------------:|:------------------:|:------------:|:--------------------------------------------------------------------:|
-| .  Error: 1/3   . | .   No.: 10786 0x2A22   . | .  Tank level, correlation  . | .  frequency: 1  . | .   P144B  . | .  Fuel level / Fuel consumption - correlation error               . |
-| .  Error: 2/3   . | .   No.: 11068 0x2B3C   . | .  DMTL, system error       . | .  frequency: 1  . | .   P1434  . | .  Tank Leakage Diagnostic Module (DM-TL) - Malfunction            . |
-| .  Error: 3/3   . | .   No.: 11066 0x2B3A   . | .  DMTL, system error       . | .  frequency: 5  . | .   P1449  . | .  Tank leakage diagnostic module (DM-TL) - pump current too high  . |
+<!--<img src="https://arsscriptum.github.io/files/bmw/errors.png" alt="table" />-->
+</center>
+<br>
+
 
 <br>
 <br>

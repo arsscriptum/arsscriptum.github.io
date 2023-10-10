@@ -6,7 +6,7 @@ author: guillaume
 date: '2023-10-06'
 category: ['work','experience','curriculum', 'cv']
 tags: work, experience, curriculum, cv
-thumbnail: /assets/img/posts/webscrapper/main.png
+thumbnail: /assets/img/posts/experience/main.png
 keywords: work, experience, curriculum, cv
 usemathjax: false
 permalink: /blog/experience/

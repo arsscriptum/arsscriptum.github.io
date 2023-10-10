@@ -32,7 +32,9 @@ Cette page est dédiée à la liste de mon expérience professionnelle. Un survo
 
 1. très confortable avec la ligne de commande (je préfère travailler avec bash, pas un GUI)
 1. tout les outils usuels (vi, grep, ps, tcpdump, etc...)
-
+1. bash
+1. configuration de serveur
+1. cron
 
 #### Programmation multiplateforme
 
@@ -40,6 +42,14 @@ Cette page est dédiée à la liste de mon expérience professionnelle. Un survo
 1. expérience avec QT
 1. réseautique (Firewall, NAT et proxy)
 
+#### Réseautique
+
+1. wireshark, tcpdump
+1. implementation de librarie UDP fiable (reliable udp, ordered / lossless )
+1. analyse de paquets, surveillance du réseau en temps réel.
+1. identifier les ralentissements, catégoriser et évaluer le trafic et identifier les risques de sécurité.
+1. optimization des transmissions
+1. serveurs haute performance, haute disponibilitée
 
 #### Cryptographie et sécurité
 

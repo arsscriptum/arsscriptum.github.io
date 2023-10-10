@@ -16,53 +16,50 @@ permalink: /blog/experience/
 
 ## Général
 
-Cette page est dédié a la liste de mon expérience technique professionnelle. Un survol de mes connaissances ansi que mes intérêts. Le but est le partage d'informations pour ma recherche d'emploi.
+Cette page est dédiée à la liste de mon expérience professionnelle. Un survol de mes connaissances ainsi que mes intérêts. Le but est le partage d'informations pour ma recherche d'emploi.
 
 
 ## Expérience Technique
 
 #### Développement sous Windows
- - Microsoft Visual Studio 2005 - 2022
- - Git (git bash, mercurial, tortoise)
- - Perforce
- 
+ - Microsoft Visual Studio 2005 - 2022
+ - Git (git bash, mercurial, tortoise)
+ - Perforce
+ 
 #### Développement sous Linux
- - très comfortable avec la ligne de commande (je prèfère travailler avec bash, pas un GUI)
- - tout les outils usuels (vi, grep, ps, tcpdump, etc...)
+ - très confortable avec la ligne de commande (je préfère travailler avec bash, pas un GUI)
+ - tout les outils usuels (vi, grep, ps, tcpdump, etc...)
 
 #### Programmation multiplateforme
- - consoles de jeu, Win32, Linux, iOS et Android
- - expérience avec QT
- - réseautique (Firewall, NAT et proxy)
+ - consoles de jeu, Win32, Linux, iOS et Android
+ - expérience avec QT
+ - réseautique (Firewall, NAT et proxy)
 
 #### Cryptographie et sécurité
- - conception et implémentation d'un système propriétaire anti-piratage pour Ubisoft
+ - conception et implémentation d'un système propriétaire anti-piratage pour Ubisoft
 
 #### Scripting;
- - Python
- - PowerShell
- - Perl
- - Go
+ - Python
+ - PowerShell
+ - Perl
+ - Go
 
 #### Integration Continue;
- - [Jenkins](https://www.jenkins.io/)
- - [TeamCity](https://www.jetbrains.com/teamcity/)
+ - [Jenkins](https://www.jenkins.io/)
+ - [TeamCity](https://www.jetbrains.com/teamcity/)
 
 #### Systèmes distribués; 
- - [distcc](https://distcc.org/)
- - [incredibuild](https://www.incredibuild.com/)
- - développement d'un sytème distribués de compilation des textures and assets basé sur Unreal. 
-   - Le système est propriétaire, implémenté chez Ubisoft
+ - [distcc](https://distcc.org/)
+ - [incredibuild](https://www.incredibuild.com/)
+ - développement d'un système distribué de compilation des textures et assets basé sur Unreal. 
+   - Le système est propriétaire, implémenté chez Ubisoft
 
 #### Système embarqués;
- - développement projet personnel sur le Nvidia [Jetson TK1](https://elinux.org/Jetson_TK1)
-  -  Projet [lien](https://hackaday.com/2019/10/05/tracking-ants-and-zapping-them-with-lasers/) je ne suis pas l'auteur original mais voulais souligner cet experience avec les projets embarqués
-   - Environment Linux / Windows
-   - Developpement de scripts bash et powershell [tools](https://github.com/arsscriptum/PowerShell.Jetson.Tools) et [scripts](https://github.com/arsscriptum/Jetson.DevKit.Profile)
-   - Implementation en c++ et python
-
-
-
+ - développement projet personnel sur le Nvidia [Jetson TK1](https://elinux.org/Jetson_TK1)
+  -  Projet [lien](https://hackaday.com/2019/10/05/tracking-ants-and-zapping-them-with-lasers/) je ne suis pas l'auteur original mais voulais souligner cet experience avec les projets embarqués car je l'ai fait à la maison
+   - Environment Linux / Windows
+   - Developpement de scripts bash et powershell [tools](https://github.com/arsscriptum/PowerShell.Jetson.Tools) et [scripts](https://github.com/arsscriptum/Jetson.DevKit.Profile)
+   - Implementation en c++ et python
 
 
 

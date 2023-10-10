@@ -3,7 +3,7 @@ layout: post
 title:  "BMW 335i Tank Leakage Diagnostic Module (DM-TL) Malfunction"
 summary: "Tank Leakage Diagnostic Module (DM-TL) - Malfunction, pump current too high, Fuel level / Fuel consumption - correlation error"
 author: guillaume
-date: '2023-10-08'
+date: '2023-10-02'
 category: ['bmw','n54','dmtl', 'fuel', 'correlation error']
 tags: bmw, ecu, n54, dmtl, fuel
 thumbnail: /assets/img/posts/bmw/dmtl.png

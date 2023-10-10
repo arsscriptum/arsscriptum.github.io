@@ -162,5 +162,9 @@
   gtag('js', new Date());
 
   gtag('config', 'G-6YV8KPRSWQ');
+  gtag("event", "repo_clone", {
+    page_url: "{{ page.url }}"
+    page_title: "{{ page.title }}"
+  });
 </script>
 

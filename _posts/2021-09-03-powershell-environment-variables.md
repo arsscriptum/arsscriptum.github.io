@@ -13,7 +13,7 @@ permalink: /blog/powershell-environment-vars/
 
 ---
 
-### Introduction </h3>
+### Introduction
 
 If you want to have a variable that is available across sessions, that is, in every powershell windows, you need to set an environment variable.
 You can set environment variables for every users on your **machine (system wide)**, which *requires administrator access*, or you can set an environment variable
@@ -21,7 +21,7 @@ for your **user only**, that will be available on each *new powershell or dos* s
 
 ---------------------------------------------------------------------------------------------------------
 
-### Changing or Adding Environment Variables </h3>
+### Changing or Adding Environment Variables
 
 Technically, when you add an environment value, it will be added in the Registry under these
 
@@ -53,7 +53,7 @@ Using the following possible scopes:
     Machine
 ```
 
-### Publishing Environement Variables Changes </h3>
+### Publishing Environement Variables Changes
 
 However, note that modifications to the environment variables do not result in immediate change. For example, if you start another PowerShell session, or another Command Prompt after making the changeanges, the environment variables will reflect the previous (not the current) values. The changes do not take effect until you log off and then log back on.
 
@@ -149,7 +149,7 @@ For example, the following function should propagate the changes to the environm
     }
 ```
 
-### Set-EnvironmentVariable </h3>
+### Set-EnvironmentVariable
 
 
 Wrapping things up, to set an environment variable, this helper function will be useful :

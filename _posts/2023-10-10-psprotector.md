@@ -3,7 +3,7 @@ layout: post
 title:  "PS Protector: PowerShell Module Builder"
 summary: "Convert your PowerShell module into a .NET assembly DLL"
 author: guillaume
-date: '2023-07-23'
+date: '2023-10-10'
 category: ['powershell','scripts', 'firewall', 'network', 'psprotector', 'assembly', 'executable']
 tags: powershell, scripts, resources, binary
 thumbnail: /assets/img/posts/psprotector/main_s.jpg

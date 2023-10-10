@@ -3,7 +3,7 @@ layout: post
 title:  "Test your Firewall using PowerShell"
 summary: "Script to test your firewall from the outside,"
 author: guillaume
-date: '2023-07-04'
+date: '2023-10-09'
 category: ['powershell','scripts', 'firewall', 'network', 'htmlagilitypack', 'html', 'parsing']
 tags: powershell, scripts, resources, binary
 thumbnail: /assets/img/posts/scanner/main.jpg

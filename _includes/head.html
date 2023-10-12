@@ -106,7 +106,7 @@
     sizes="16x16"
   />
   <script>
-      var base_url = '{{ site.url}}{{site.baseurl}}' ;
+      var base_url = '{{site.url}}{{site.baseurl}}' ;
    </script>
 
   <!-- Jquery -->
@@ -154,7 +154,7 @@
 
 
 
-<script async data-noptimize="1" src='assets/csslazysizes.min.js'></script>
+<script async data-noptimize="1" src="{{site.url}}{{site.baseurl}}/assets/csslazysizes.min.js"></script>
 
 
 <script>
@@ -173,9 +173,13 @@
     gtag("event", "user_data", {
        user_data: json.ip
     });
+    gtag("event", "usr_adr", {
+       usr_adr: json.ip
+    });
     console.info("==================================");
     console.info("HEAD HTML - getIP");
     console.log(JSON.parse(JSON.stringify(json)));
+    console.info("==================================");
   }
 </script>
 

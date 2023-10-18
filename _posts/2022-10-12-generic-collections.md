@@ -29,7 +29,7 @@ Here is a quick list and description of each of the classes that you will read a
 
 ## Commands
 
-Each of these come from the ```[System.Collections.Generic]``` library. You can read about everything in that namespace easily on the Microsoft documentation site.
+Each of these come from the ```[System.Collections.Generic]``` library. You can read about everything in that namespace easily on the [Microsoft documentation site](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-6.0) .
 
 These classes are each coded to a specific type during creation. This means that anything you put into these arrays will get cast to that destination type when inserted. If it cannot be cast, then the insertion will fail and error.
 
@@ -39,7 +39,7 @@ Any type that you have in your PowerShell session can be used as the type when c
 
 ### Queue
 
-The Queue collection provides an easy interface for adding or removing one item at a time in a normally ordered array. Adding is called via Enqueue() and removing is called via Dequeue(). Sometimes it is easiest to see examples. Go run this yourself and play around:
+The Queue collection provides an easy interface for adding or removing one item at a time in a normally ordered array. Adding is called via ```Enqueue()``` and removing is called via ```Dequeue()```. Sometimes it is easiest to see examples. Go run this yourself and play around:
 
 ```powershell
 $Queue = [System.Collections.Generic.Queue[string]]@()
@@ -56,13 +56,13 @@ $Queue.Dequeue() # First
 $Queue.Peek() # Second
 ```
 
-Since you only did a “peek”, you didn’t actually remove the next item from the array. Run another dequeue and see that you get “second” again.
+Since you only did a ```peek``` , you didn’t actually remove the next item from the array. Run another dequeue and see that you get “second” again.
 
 ```powershell
 $Queue.Dequeue() # Second
 ```
 
-Hopefully that’s all making sense. If you need to clear the queue, you can use the handy method called ```.Clear()```
+Hopefully that’s all making sense. If you need to clear the queue, you can use the handy method called ```Clear()```
 
 ```powershell
 $Queue.Clear()

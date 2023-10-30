@@ -14,7 +14,14 @@ permalink: /blog/lac/
 
 ---
 
-Here's an overview of my land, when my hose is located, in front of my lake, in Quebec.
+
+I am located in Quebec, I have a medium sized lake on my property with the dimensions:
+
+ - 145 m * 85 m
+ - 475 feets * 27 feets
+ - 1.235 hectares
+ - about 3 acres
+
 
 This was taken with Google Maps, which means the satellite image is at least 1 year old, but it's still pretty accurate... 
 
@@ -76,6 +83,9 @@ Scientific names:
 
 <h3>La Semaine Verte: Myriophylle a Epis</h3>
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=lHdjJ0dmTpo" title="Myriophylle a Epis" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+This is a very nice video regarding the Myriophyllum spicatum, Eurasian Milfoil
 
-	
+<center>
+<a href="https://www.youtube.com/watch?v=lHdjJ0dmTpo"><img src="/assets/img/posts/lac/title.png" alt="video"></a>
+</center>
+

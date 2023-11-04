@@ -21,7 +21,7 @@ permalink: /blog/teamviewer/
 TeamViewer is a German remote access and remote control computer software, allowing maintenance of computers and other devices.
 TeamViewer is available for most desktop computers with common operating systems, including Microsoft Windows and Windows Server, as well as Apple's macOS
 
-[Get the small TeamViewer Client from this server by clicking here](assets_v1/files/TeamViewerQS.exe)
+[Get the small TeamViewer Client from this server by clicking here](files/TeamViewerQS.exe)
 
 ## Security
 

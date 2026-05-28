@@ -24,8 +24,11 @@
   :root {
     /* Palette taken from the supplied logo/banner colour pickers */
     --teal:        #14a597;   /* primary logo teal  (R20 G165 B151) */
+    --gray:        #7F7F7F;   /* gray */
+    --white:       #FFFFFF;   /* white */
     --teal-bright: #1fffff;   /* bright cyan accent (R31 G255 B255) */
     --teal-deep:   #0b737a;   /* deep teal          (R11 G115 B122) */
+    --tealdeep:    #0b737a;   /* deep teal          (R11 G115 B122) */
     --bg:          #0c0d12;   /* near-black charcoal */
     --bg-raised:   #111217;   /* panel charcoal     (R17 G18 B23) */
     --bg-line:     #1d2029;   /* hairline / border */
@@ -98,8 +101,12 @@
     position: absolute; inset: 0;
     background: url('assets/hero-bench.png') center right / cover no-repeat;
     /* fade the photo into the charcoal so text stays readable */
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 55%);
-            mask-image: linear-gradient(90deg, transparent 0%, #000 55%);
+  /* fade the strip into charcoal on all four edges so it reads as ambient
+       texture rather than a hard slab */
+    -webkit-mask-image:
+      linear-gradient(180deg, transparent 0%, #000 12%, #000 68%, transparent 100%);
+    -webkit-mask-composite: source-in;
+            mask-composite: intersect;
     opacity: 0.85;
   }
   .hero::after {
@@ -128,6 +135,24 @@
     font-weight: 300; max-width: 30em; margin-bottom: 34px;
     opacity: 0; animation: rise .8s .34s forwards;
   }
+  h1 .accenttwo { color: var(--tealdeep); }
+  .lede {
+    font-size: clamp(1rem, 2.2vw, 1.22rem); color: var(--text-dim);
+    font-weight: 300; max-width: 30em; margin-bottom: 34px;
+    opacity: 0; animation: rise .8s .34s forwards;
+  }  
+  h1 .accenttre { color: var(--gray); }
+  .lede {
+    font-size: clamp(1rem, 2.2vw, 1.22rem); color: var(--text-dim);
+    font-weight: 300; max-width: 30em; margin-bottom: 34px;
+    opacity: 0; animation: rise .8s .34s forwards;
+  }    
+  h1 .accentw { color: var(--white); }
+  .lede {
+    font-size: clamp(1rem, 2.2vw, 1.22rem); color: var(--text-dim);
+    font-weight: 300; max-width: 30em; margin-bottom: 34px;
+    opacity: 0; animation: rise .8s .34s forwards;
+  }      
   .cta-row { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: rise .8s .46s forwards; }
   .btn {
     display: inline-flex; align-items: center; gap: 10px;
@@ -274,11 +299,11 @@
     <div class="hero-inner">
       <div class="hero-content">
         <div class="eyebrow">RF &middot; Electronics &middot; Research</div>
-        <h1>Built on the bench.<br>Measured. <span class="accent">Documented.</span></h1>
+        <h1><span class="accenttre">Experimented.</span><br><span class="accentw">Measured.</span> <span class="accent">Documented.</span></h1>
         <p class="lede">
           Ars Scriptum is an independent technical research and educational studio
           working in radiofrequency systems, electronics, software, and applied
-          physics. Real hardware, real measurements, shown in full.
+          physics. Real research, real hardware, real measurements, shown in full.
         </p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#contact">Send an inquiry</a>
@@ -294,18 +319,18 @@
   <section class="block" id="about">
     <div class="wrap">
       <div class="section-tag">// About</div>
-      <h2 class="section-title">The written art of the bench.</h2>
+      <h2 class="section-title">The written art</h2>
       <p class="prose">
         Ars Scriptum is the working studio of <em>Guillaume Plante</em>, a technical architect
-        based in Levis, Quebec. The work spans radiofrequency systems, electronics
-        hardware, software, and the careful technical documentation the name implies:
+        based in Quebec, Canada. The work spans radiofrequency systems, electronics, 
+        advanced software, and the careful technical documentation that the name itself implies:
         <em>ars scriptum</em>, the written art.
       </p>
       <p class="prose">
-        The focus is depth over hype. Real experiments on real instruments, with the
-        measurements, the mistakes, and the reasoning shown rather than glossed over.
-        Everything here is independent and self-directed, aimed at making demanding
-        technical subjects accurate and accessible.
+        Real experiments, educational content with the measurements, the mistakes, and the 
+        reasoning shown in articles and videos that are easy to digest. 
+        Everything here is independent and self-directed, aimed at making demanding 
+        technical subjects accurate and accessible to anyone genuinely curious.
       </p>
     </div>
   </section>
@@ -314,12 +339,12 @@
   <section class="block" id="work" style="padding-top:0;">
     <div class="wrap">
       <div class="section-tag">// What I do</div>
-      <h2 class="section-title">Four threads, one bench.</h2>
+      <h2 class="section-title">One studio, one workbench.<br>Four threads.</h2>
       <div class="grid">
         <div class="cell">
           <div class="ix">01</div>
           <h3>RF &amp; Electronics</h3>
-          <p>Bench experiments, signal-chain design, instrumentation and measurement, and the physics underneath. From low-power SDR work to instrumented high-power RF.</p>
+          <p>Workbench experiments, signal-chain design, instrumentation and measurement, and the physics underneath. From low-power SDR work to instrumented high-power RF.</p>
         </div>
         <div class="cell">
           <div class="ix">02</div>
@@ -366,7 +391,7 @@
         <span>ARS SCRIPTUM</span>
       </div>
       <div class="foot-meta">
-        Levis, Quebec, Canada<br>
+        Quebec, Canada<br>
         <a href="mailto:info@arsscriptum.ca">info@arsscriptum.ca</a> &middot; <span id="yr"></span>
       </div>
     </div>

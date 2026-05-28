@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ars Scriptum &middot; RF & Electronics</title>
+<meta name="description" content="Ars Scriptum is an independent RF, electronics, and technical research studio based in Levis, Quebec. RF, electronics, software, and applied physics, documented properly.">
+
+<!-- Open Graph / social preview -->
+<meta property="og:title" content="Ars Scriptum">
+<meta property="og:description" content="Independent RF, electronics, and technical research studio. Built on the bench, measured with instruments, documented in writing.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/hero-bench.png">
+
+<!-- Fonts: distinctive display (Orbitron-free; using a clean technical pairing) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Favicon: set your own file here -->
+<link rel="icon" type="image/png" href="assets/logo-mark.png">
+
+<style>
+  :root {
+    /* Palette taken from the supplied logo/banner colour pickers */
+    --teal:        #14a597;   /* primary logo teal  (R20 G165 B151) */
+    --teal-bright: #1fffff;   /* bright cyan accent (R31 G255 B255) */
+    --teal-deep:   #0b737a;   /* deep teal          (R11 G115 B122) */
+    --bg:          #0c0d12;   /* near-black charcoal */
+    --bg-raised:   #111217;   /* panel charcoal     (R17 G18 B23) */
+    --bg-line:     #1d2029;   /* hairline / border */
+    --text:        #e8eef0;   /* primary text */
+    --text-dim:    #8b97a0;   /* secondary text */
+    --maxw:        1080px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Sora', system-ui, sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* subtle grid texture over the whole page */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--bg-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--bg-line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    opacity: 0.18;
+    z-index: 0;
+    mask-image: radial-gradient(ellipse at 50% 0%, #000 30%, transparent 80%);
+  }
+
+  .wrap { position: relative; z-index: 1; max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- top bar ---------- */
+  header {
+    position: relative; z-index: 2;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 28px;
+    max-width: var(--maxw); margin: 0 auto;
+  }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand img { height: 40px; width: auto; display: block; }
+  .brand-name {
+    font-family: 'Sora', sans-serif; font-weight: 600;
+    letter-spacing: 0.32em; font-size: 0.92rem; text-transform: uppercase;
+    color: var(--text);
+  }
+  nav a {
+    color: var(--text-dim); text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem;
+    letter-spacing: 0.08em; margin-left: 26px; transition: color .2s;
+  }
+  nav a:hover { color: var(--teal-bright); }
+  @media (max-width: 640px){ nav { display:none; } }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 78vh;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: url('assets/hero-bench.png') center right / cover no-repeat;
+    /* fade the photo into the charcoal so text stays readable */
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 55%);
+            mask-image: linear-gradient(90deg, transparent 0%, #000 55%);
+    opacity: 0.85;
+  }
+  .hero::after {
+    /* left-side darkening for legibility */
+    content:""; position:absolute; inset:0;
+    background: linear-gradient(90deg, var(--bg) 18%, rgba(12,13,18,0.55) 48%, transparent 75%);
+  }
+  .hero-inner { position: relative; z-index: 2; max-width: var(--maxw); margin: 0 auto; padding: 0 28px; width: 100%; }
+  .hero-content { max-width: 620px; }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem;
+    letter-spacing: 0.34em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 22px;
+    opacity: 0; animation: rise .8s .1s forwards;
+  }
+  h1 {
+    font-family: 'Sora', sans-serif; font-weight: 700;
+    font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1.05;
+    letter-spacing: -0.01em; margin-bottom: 22px;
+    opacity: 0; animation: rise .8s .22s forwards;
+  }
+  h1 .accent { color: var(--teal); }
+  .lede {
+    font-size: clamp(1rem, 2.2vw, 1.22rem); color: var(--text-dim);
+    font-weight: 300; max-width: 30em; margin-bottom: 34px;
+    opacity: 0; animation: rise .8s .34s forwards;
+  }
+  .cta-row { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: rise .8s .46s forwards; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.86rem;
+    letter-spacing: 0.06em; text-decoration: none; cursor: pointer;
+    padding: 14px 26px; border-radius: 2px; transition: all .22s ease;
+  }
+  .btn-primary { background: var(--teal); color: #04110f; font-weight: 500; border: 1px solid var(--teal); }
+  .btn-primary:hover { background: var(--teal-bright); border-color: var(--teal-bright); box-shadow: 0 0 28px -6px var(--teal-bright); transform: translateY(-2px); }
+  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--bg-line); }
+  .btn-ghost:hover { border-color: var(--teal); color: var(--teal-bright); }
+
+  /* ---------- waveform divider ---------- */
+  .wave-divider {
+    position: relative;
+    width: 100%; height: 150px;
+    margin: 0;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .wave-divider::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: url('assets/wave-banner.png') center / cover no-repeat;
+    opacity: 0.5;
+    /* fade the strip into charcoal on all four edges so it reads as ambient
+       texture rather than a hard slab */
+    -webkit-mask-image:
+      linear-gradient(90deg, transparent 0%, #000 18%, #000 82%, transparent 100%),
+      linear-gradient(180deg, transparent 0%, #000 42%, #000 58%, transparent 100%);
+            mask-image:
+      linear-gradient(90deg, transparent 0%, #000 18%, #000 82%, transparent 100%),
+      linear-gradient(180deg, transparent 0%, #000 42%, #000 58%, transparent 100%);
+    -webkit-mask-composite: source-in;
+            mask-composite: intersect;
+  }
+
+  /* ---------- section base ---------- */
+  section.block { padding: 92px 0; }
+  .section-tag {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--teal-deep);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Sora', sans-serif; font-weight: 600;
+    font-size: clamp(1.6rem, 3.6vw, 2.4rem); letter-spacing: -0.01em;
+    margin-bottom: 26px; max-width: 18em;
+  }
+  .prose { color: var(--text-dim); max-width: 46em; font-size: 1.04rem; }
+  .prose + .prose { margin-top: 18px; }
+  .prose em { color: var(--teal); font-style: normal; }
+
+  /* ---------- capability grid ---------- */
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px; background: var(--bg-line);
+    border: 1px solid var(--bg-line); margin-top: 14px;
+  }
+  .cell {
+    background: var(--bg-raised); padding: 30px 26px;
+    transition: background .25s;
+  }
+  .cell:hover { background: #14161d; }
+  .cell .ix {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+    color: var(--teal-deep); letter-spacing: 0.12em; margin-bottom: 14px;
+  }
+  .cell h3 {
+    font-family: 'Sora', sans-serif; font-weight: 600; font-size: 1.08rem;
+    margin-bottom: 10px; color: var(--text);
+  }
+  .cell p { color: var(--text-dim); font-size: 0.92rem; line-height: 1.55; }
+
+  /* ---------- contact ---------- */
+  .contact {
+    background:
+      radial-gradient(ellipse at 50% 120%, rgba(20,165,151,0.16), transparent 60%),
+      var(--bg-raised);
+    border: 1px solid var(--bg-line); border-radius: 4px;
+    padding: 64px 40px; text-align: center; margin-top: 14px;
+  }
+  .contact h2 {
+    font-family: 'Sora', sans-serif; font-weight: 700;
+    font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 16px; letter-spacing: -0.01em;
+  }
+  .contact p { color: var(--text-dim); max-width: 40em; margin: 0 auto 30px; }
+  .mail {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: 'IBM Plex Mono', monospace; font-size: clamp(1rem, 2.4vw, 1.3rem);
+    color: var(--teal-bright); text-decoration: none;
+    padding: 16px 30px; border: 1px solid var(--teal-deep); border-radius: 3px;
+    transition: all .22s ease; letter-spacing: 0.02em;
+  }
+  .mail:hover { border-color: var(--teal-bright); box-shadow: 0 0 34px -8px var(--teal-bright); transform: translateY(-2px); }
+  .mail svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+
+  /* ---------- footer ---------- */
+  footer {
+    border-top: 1px solid var(--bg-line); padding: 38px 0;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .foot-brand { display: flex; align-items: center; gap: 12px; }
+  .foot-brand img { height: 30px; }
+  .foot-brand span {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem;
+    color: var(--text-dim); letter-spacing: 0.14em;
+  }
+  .foot-meta {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem;
+    color: var(--text-dim); letter-spacing: 0.08em; text-align: right;
+  }
+  .foot-meta a { color: var(--teal); text-decoration: none; }
+  .foot-meta a:hover { color: var(--teal-bright); }
+
+  /* ---------- animation ---------- */
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    .eyebrow,h1,.lede,.cta-row { opacity: 1 !important; }
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <!-- Replace with your AS monogram file -->
+      <img src="assets/logo-mark.png" alt="Ars Scriptum mark">
+      <span class="brand-name">Ars Scriptum</span>
+    </div>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="eyebrow">RF &middot; Electronics &middot; Research</div>
+        <h1>Built on the bench.<br>Measured. <span class="accent">Documented.</span></h1>
+        <p class="lede">
+          Ars Scriptum is an independent technical research and educational studio
+          working in radiofrequency systems, electronics, software, and applied
+          physics. Real hardware, real measurements, shown in full.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contact">Send an inquiry</a>
+          <a class="btn btn-ghost" href="#work">See the work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-divider"></div>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="block" id="about">
+    <div class="wrap">
+      <div class="section-tag">// About</div>
+      <h2 class="section-title">The written art of the bench.</h2>
+      <p class="prose">
+        Ars Scriptum is the working studio of <em>Guillaume Plante</em>, a technical architect
+        based in Levis, Quebec. The work spans radiofrequency systems, electronics
+        hardware, software, and the careful technical documentation the name implies:
+        <em>ars scriptum</em>, the written art.
+      </p>
+      <p class="prose">
+        The focus is depth over hype. Real experiments on real instruments, with the
+        measurements, the mistakes, and the reasoning shown rather than glossed over.
+        Everything here is independent and self-directed, aimed at making demanding
+        technical subjects accurate and accessible.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ WORK / CAPABILITIES ============ -->
+  <section class="block" id="work" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-tag">// What I do</div>
+      <h2 class="section-title">Four threads, one bench.</h2>
+      <div class="grid">
+        <div class="cell">
+          <div class="ix">01</div>
+          <h3>RF &amp; Electronics</h3>
+          <p>Bench experiments, signal-chain design, instrumentation and measurement, and the physics underneath. From low-power SDR work to instrumented high-power RF.</p>
+        </div>
+        <div class="cell">
+          <div class="ix">02</div>
+          <h3>Software</h3>
+          <p>Systems and tooling, primarily in C, C++, and PowerShell. Build automation, instrument control, and data analysis.</p>
+        </div>
+        <div class="cell">
+          <div class="ix">03</div>
+          <h3>Writing &amp; Video</h3>
+          <p>Long-form technical explainers and documented project logs that show the full reasoning, not only the result.</p>
+        </div>
+        <div class="cell">
+          <div class="ix">04</div>
+          <h3>R&amp;D</h3>
+          <p>Self-directed applied research projects, characterised and documented end to end.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="block" id="contact" style="padding-top:0;">
+    <div class="wrap">
+      <div class="contact">
+        <div class="section-tag" style="color:var(--teal);">// Contact</div>
+        <h2>Send Inquiries</h2>
+        <p>
+          For technical collaboration, consulting, or questions about the work,
+          reach out directly. Every message is read.
+        </p>
+        <a class="mail" href="mailto:info@arsscriptum.ca?subject=Inquiry%20via%20arsscriptum.ca">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3 7l9 6 9-6"/></svg>
+          info@arsscriptum.ca
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;width:100%;">
+      <div class="foot-brand">
+        <img src="assets/logo-mark.png" alt="Ars Scriptum">
+        <span>ARS SCRIPTUM</span>
+      </div>
+      <div class="foot-meta">
+        Levis, Quebec, Canada<br>
+        <a href="mailto:info@arsscriptum.ca">info@arsscriptum.ca</a> &middot; <span id="yr"></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
